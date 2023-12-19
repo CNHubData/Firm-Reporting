@@ -1,0 +1,89 @@
+{
+  "config": "{\"version\":\"5.49\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY23SU11\",\"version\":\"5.49\",\"type\":2},\"customTheme\":{\"name\":\"Classroom1368185568972473.json\",\"version\":\"5.49\",\"type\":1}},\"activeSectionIndex\":0,\"modelExtensions\":[{\"name\":\"extension\",\"entities\":[{\"name\":\"_ARWIP\",\"extends\":\"_ARWIP\",\"measures\":[{\"name\":\"Billings Total\",\"dataType\":3,\"expression\":\"\\nVAR amount = CALCULATE( SUM(Billing_Decision_View[bill_amount]), USERELATIONSHIP(_Dates[Date], Billing_Decision_View[invoice__invoice_date]))\\nRETURN\\n\\namount\",\"errorMessage\":null,\"hidden\":false,\"formulaOverride\":null,\"formatInformation\":{\"formatString\":\"G\",\"format\":\"General\",\"thousandSeparator\":false,\"currencyFormat\":null,\"dateTimeCustomFormat\":null}}]}]}],\"defaultDrillFilterOtherVisuals\":true,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"useEnhancedTooltips\":true,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "Background_no_bg25856706121687.png",
+            "path": "Background_no_bg25856706121687.png",
+            "type": 100
+          },
+          {
+            "name": "Classroom1368185568972473.json",
+            "path": "Classroom1368185568972473.json",
+            "type": 201
+          }
+        ],
+        "name": "RegisteredResources",
+        "type": 1
+      }
+    },
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY23SU11",
+            "path": "BaseThemes/CY23SU11.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{\"objects\":{\"background\":[{\"properties\":{\"image\":{\"image\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"'Background no bg.png'\"}}},\"url\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"Background_no_bg25856706121687.png\"}}},\"scaling\":{\"expr\":{\"Literal\":{\"Value\":\"'Fit'\"}}}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":-0.1}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSection",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"22e03f3d54d614aacc7d\",\"layouts\":[{\"id\":0,\"position\":{\"x\":933.1740614334472,\"y\":5.5290102389078495,\"z\":2,\"width\":142.52559726962457,\"height\":58.97610921501707,\"tabOrder\":2}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"_Dates.FY\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Dates\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"FY\"},\"Name\":\"_Dates.FY\",\"NativeReferenceName\":\"FY\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"FY\"}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Dates\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"FY\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"2023L\"}}]]}}}]}}}}],\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"header\":[{\"properties\":{\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Fiscal Year'\"}}}}}],\"items\":[{\"properties\":{\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}}}}],\"selection\":[{\"properties\":{\"strictSingleSelect\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 58.98,
+          "width": 142.53,
+          "x": 933.17,
+          "y": 5.53,
+          "z": 2.00
+        },
+        {
+          "config": "{\"name\":\"3d7ee33b0cdad0c00b5c\",\"layouts\":[{\"id\":0,\"position\":{\"x\":67.36842105263145,\"y\":5.886561062851303,\"z\":0,\"width\":1212.6315789473686,\"height\":58.86561062851303,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"\"}]}]}}]},\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}}}}]}}}",
+          "filters": "[]",
+          "height": 58.87,
+          "width": 1212.63,
+          "x": 67.37,
+          "y": 5.89,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"429896b16c452603d5ed\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1075.6996587030717,\"y\":6.143344709897611,\"z\":1,\"width\":194.74402730375428,\"height\":58.97610921501707,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"_ARE._ARE\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_ARWIP\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"_ARE\"},\"Name\":\"_ARE._ARE\",\"NativeReferenceName\":\"_ARE\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_ARWIP\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"_ARE Fields\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'''Client_View''[partner__description]'\"}}]]}}}]}}}}],\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"header\":[{\"properties\":{\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Select Grouping'\"}}}}}],\"items\":[{\"properties\":{\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}}}}],\"selection\":[{\"properties\":{\"strictSingleSelect\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"cachedFilterDisplayItems\":[{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"_ARWIP\"}},\"Property\":\"_ARE Fields\"}},\"Right\":{\"Literal\":{\"Value\":\"'''Client_View''[partner__description]'\"}}}}},\"displayName\":\"Client Partner\"}]}}",
+          "filters": "[{\"name\":\"Filterad46d07136de2a8bea88\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"_ARWIP\"}},\"Property\":\"_ARE\"}},\"type\":\"Categorical\",\"cachedDisplayNames\":[{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"_ARWIP\"}},\"Property\":\"_ARE Fields\"}},\"Right\":{\"Literal\":{\"Value\":\"'''Staff''[description]'\"}}}}},\"displayName\":\"Staff Name\"},{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"_ARWIP\"}},\"Property\":\"_ARE Fields\"}},\"Right\":{\"Literal\":{\"Value\":\"'''Staff''[department__description]'\"}}}}},\"displayName\":\"Department\"}],\"howCreated\":0,\"objects\":{\"general\":[{\"properties\":{\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"isHiddenInViewMode\":true,\"isLockedInViewMode\":true}]",
+          "height": 58.98,
+          "width": 194.74,
+          "x": 1075.70,
+          "y": 6.14,
+          "z": 1.00
+        },
+        {
+          "config": "{\"name\":\"f65429a0d1e1c2b12a33\",\"layouts\":[{\"id\":0,\"position\":{\"x\":647.0718232044198,\"y\":79.91160220994475,\"z\":3,\"width\":623.0276243093923,\"height\":626.5635359116022,\"tabOrder\":3}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Client_View.partner__description\"},{\"queryRef\":\"_ARWIP.Billings Total\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"Client_View\",\"Type\":0},{\"Name\":\"_\",\"Entity\":\"_ARWIP\",\"Schema\":\"extension\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"partner__description\"},\"Name\":\"Client_View.partner__description\",\"NativeReferenceName\":\"Client Partner\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Billings Total\"},\"Name\":\"_ARWIP.Billings Total\",\"NativeReferenceName\":\"Billings Total1\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Billings Total\"}}}]},\"queryFieldParametersByRole\":{\"Values\":[{\"index\":0,\"length\":1,\"expr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"_ARWIP\"}},\"Property\":\"_ARE\"}}}]},\"columnProperties\":{\"Client_View.partner__description\":{\"displayName\":\"Client Partner\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnHeaders\":[{\"properties\":{\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Center'\"}}}}}],\"grid\":[{\"properties\":{\"gridVertical\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"175.95260235563032D\"}}}},\"selector\":{\"metadata\":\"Client_View.partner__description\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"169.80744261256626D\"}}}},\"selector\":{\"metadata\":\"Staff.description\"}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Analysis of Hours Coded in PCS'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'wf_standard-font, helvetica, arial, sans-serif'\"}}},\"heading\":{\"expr\":{\"Literal\":{\"Value\":\"'Heading3'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}],\"subTitle\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"_ARWIP\"}},\"Property\":\"_Table Subtitle\"}},\"Function\":3}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}],\"spacing\":[{\"properties\":{\"verticalSpacing\":{\"expr\":{\"Literal\":{\"Value\":\"5D\"}}},\"customizeSpacing\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"spaceBelowTitle\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"spaceBelowTitleArea\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}},\"spaceBelowSubTitle\":{\"expr\":{\"Literal\":{\"Value\":\"2D\"}}}}}],\"divider\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0.6}}}}}}}]}}}",
+          "filters": "[]",
+          "height": 626.56,
+          "width": 623.03,
+          "x": 647.07,
+          "y": 79.91,
+          "z": 3.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ],
+  "theme": "Classroom1368185568972473.json"
+}
