@@ -1677,6 +1677,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -1997,7 +2001,7 @@
               }
             ],
             "dataType": "dateTime",
-            "formatString": "General Date",
+            "formatString": "Short Date",
             "lineageTag": "baaa685b-da0b-42de-bdc1-6ba583b8ff05",
             "sourceColumn": "invoice__invoice_date",
             "sourceProviderType": "smalldatetime",
@@ -2509,6 +2513,21 @@
             "sourceColumn": "client_engagement_KEY",
             "sourceProviderType": "nvarchar(max)",
             "summarizeBy": "none"
+          },
+          {
+            "name": "invoice__invoice_month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Short Date",
+            "lineageTag": "6cb276c9-7f8d-4cc1-9073-03cd59e644fd",
+            "sourceColumn": "invoice__invoice_month",
+            "sourceProviderType": "datetime2",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "6e68eeb8-a21a-45f8-b3cb-ecbe549825c7",
@@ -2523,9 +2542,11 @@
                 "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
                 "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
                 "    dbo_Billing_Decision_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Billing_Decision_View\"]}[Data],",
-                "    #\"Added Custom\" = Table.AddColumn(dbo_Billing_Decision_View, \"client_engagement_KEY\", each Text.From([sheet_entry__client_KEY]) & \"_\" & Text.From([sheet_entry__engagement_KEY]))",
+                "    #\"Added Custom\" = Table.AddColumn(dbo_Billing_Decision_View, \"client_engagement_KEY\", each Text.From([sheet_entry__client_KEY]) & \"_\" & Text.From([sheet_entry__engagement_KEY])),",
+                "    // Created the column to use in visualization.  Assigns the row the start of month based on the invoice date.",
+                "    #\"Inserted invoice__invoice_month\" = Table.AddColumn(#\"Added Custom\", \"invoice__invoice_month\", each Date.StartOfMonth([invoice__invoice_date]), type datetime)",
                 "in",
-                "    #\"Added Custom\""
+                "    #\"Inserted invoice__invoice_month\""
               ],
               "type": "m"
             }
@@ -16248,6 +16269,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -17077,6 +17102,34 @@
             "lineageTag": "c579018f-c3ce-45df-8ab9-aea25bab90fb",
             "summarizeBy": "none",
             "type": "calculated"
+          },
+          {
+            "name": "billed__staff_description",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "0b1845a1-ca72-45f4-a48c-a6208388afee",
+            "sourceColumn": "billed__staff_description",
+            "sourceProviderType": "nvarchar(250)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "approved__staff_description",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d4c724c4-a518-4c60-a3e4-495ec837915d",
+            "sourceColumn": "approved__staff_description",
+            "sourceProviderType": "nvarchar(250)",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "effb0838-7c6c-45ff-92b6-001998ed236b",
@@ -17091,9 +17144,13 @@
                 "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
                 "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
                 "    dbo_Invoice_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Invoice_View\"]}[Data],",
-                "    invoice_format_compressed = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Invoice_View\"]}[Data]",
+                "    invoice_format_compressed = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Invoice_View\"]}[Data],",
+                "    #\"Merged Biller\" = Table.NestedJoin(invoice_format_compressed, {\"billed__staff_KEY\"}, Staff, {\"staff_KEY\"}, \"Staff\", JoinKind.LeftOuter),",
+                "    #\"Expanded Staff\" = Table.ExpandTableColumn(#\"Merged Biller\", \"Staff\", {\"description\"}, {\"billed__staff_description\"}),",
+                "    #\"Merged Approver\" = Table.NestedJoin(#\"Expanded Staff\", {\"approved__staff_KEY\"}, Staff, {\"staff_KEY\"}, \"Staff\", JoinKind.LeftOuter),",
+                "    #\"Expanded Staff1\" = Table.ExpandTableColumn(#\"Merged Approver\", \"Staff\", {\"description\"}, {\"approved__staff_description\"})",
                 "in",
-                "    invoice_format_compressed"
+                "    #\"Expanded Staff1\""
               ],
               "type": "m"
             }
