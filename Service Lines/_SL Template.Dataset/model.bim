@@ -12,7 +12,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.123.742.0 (23.11)"
+        "value": "2.124.1052.0 (23.12)"
       },
       {
         "name": "PBI_ProTooling",
@@ -21340,68 +21340,16 @@
         ]
       },
       {
-        "name": "_Sheet_Entry Param",
+        "name": "_Fiscal Years",
         "annotations": [
           {
             "name": "PBI_Id",
-            "value": "8816324b00634c96af3d7dd7ab864544"
+            "value": "f71f1f522bc244b7a53521a88a8de088"
           }
         ],
         "columns": [
           {
-            "name": "_Sheet_Entry Param",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "isDataTypeInferred": true,
-            "isNameInferred": false,
-            "lineageTag": "9c66cc4e-a176-422c-bc20-a0d42c40df28",
-            "relatedColumnDetails": {
-              "groupByColumns": [
-                {
-                  "groupingColumn": "_Sheet_Entry Param Fields"
-                }
-              ]
-            },
-            "sortByColumn": "_Sheet_Entry Param Order",
-            "sourceColumn": "[Value1]",
-            "summarizeBy": "none",
-            "type": "calculatedTableColumn"
-          },
-          {
-            "name": "_Sheet_Entry Param Fields",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "extendedProperties": [
-              {
-                "name": "ParameterMetadata",
-                "type": "json",
-                "value": {
-                  "kind": 2,
-                  "version": 3
-                }
-              }
-            ],
-            "isDataTypeInferred": true,
-            "isHidden": true,
-            "isNameInferred": false,
-            "lineageTag": "6b1bce5b-f4a8-42a5-8155-a97ed5031b60",
-            "sortByColumn": "_Sheet_Entry Param Order",
-            "sourceColumn": "[Value2]",
-            "summarizeBy": "none",
-            "type": "calculatedTableColumn"
-          },
-          {
-            "name": "_Sheet_Entry Param Order",
+            "name": "FY",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -21411,29 +21359,25 @@
             "dataType": "int64",
             "formatString": "0",
             "isDataTypeInferred": true,
-            "isHidden": true,
-            "isNameInferred": false,
-            "lineageTag": "03031419-dd0d-4724-8570-f052eed0d88d",
-            "sourceColumn": "[Value3]",
+            "isNameInferred": true,
+            "lineageTag": "fa210dd2-df28-4b1f-8155-68cfd3cfabd6",
+            "sourceColumn": "[FY]",
             "summarizeBy": "sum",
             "type": "calculatedTableColumn"
           }
         ],
-        "lineageTag": "1fc4bc70-540c-403f-9c89-f2f27a86bfae",
+        "lineageTag": "1aced4cb-3d28-419a-87b2-170596c8bda3",
         "partitions": [
           {
-            "name": "_Sheet_Entry Param",
+            "name": "_Fiscal Years",
             "mode": "import",
             "source": {
               "expression": [
-                "{",
-                "    (\"Activity\", NAMEOF('Sheet_Entry_View'[activity__activity_id]), 0),",
-                "    (\"Engagement\", NAMEOF('Sheet_Entry_View'[engagement__engagement_template__engagement_template_id]), 1),",
-                "    (\"Client\", NAMEOF('Sheet_Entry_View'[client__description]), 2),",
-                "    (\"Project\", NAMEOF('Sheet_Entry_View'[project__description]), 3),",
-                "    (\"Project Template\", NAMEOF('Sheet_Entry_View'[project_template__project_template_id]), 4),",
-                "    (\"Sheet Entry Type\", NAMEOF('Sheet_Entry_View'[sheet_entry_type__description]), 5)",
-                "}"
+                "",
+                "",
+                "CALCULATETABLE( DISTINCT(SELECTCOLUMNS(_Dates, \"FY\", [FY])) )",
+                "",
+                "// Creates a table with one column showing the distinct values in the _Dates FY column"
               ],
               "type": "calculated"
             }
