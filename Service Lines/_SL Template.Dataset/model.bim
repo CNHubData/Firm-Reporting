@@ -21367,6 +21367,24 @@
           }
         ],
         "lineageTag": "1aced4cb-3d28-419a-87b2-170596c8bda3",
+        "measures": [
+          {
+            "name": "_FY Filter",
+            "expression": [
+              "",
+              "VAR max_fy = CALCULATE(MAX(_Dates[FY]), ALL(_Dates))  // The highest FY in the _Dates table.  This will be filtered out as it is nearly always incomplete and the difference amounts will be meaningless until near the end.",
+              "VAR chosen_fy = SELECTEDVALUE(_Dates[FY])  // The FY shown in the slicer on top of the page.",
+              "VAR min_fy = chosen_fy - 4  // The lowest FY we want to go to.  I want to show the previous five, so five below the chosen FY",
+              "",
+              "VAR working_fy = SELECTEDVALUE('_Fiscal Years'[FY])",
+              "RETURN",
+              "",
+              "IF( working_fy = max_fy, 0, IF( working_fy <= chosen_fy && working_fy >= min_fy, 1, 0))"
+            ],
+            "formatString": "0",
+            "lineageTag": "c74d67f3-45bf-43f7-b13e-65d7fd6792f0"
+          }
+        ],
         "partitions": [
           {
             "name": "_Fiscal Years",
