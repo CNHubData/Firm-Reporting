@@ -414,7 +414,7 @@
               "table_arwip.column_units_admin": {
                 "Definition": {
                   "Binding": {
-                    "ConceptualEntity": "_ARWIP",
+                    "ConceptualEntity": "_Client / Staff Param",
                     "ConceptualProperty": "_Units Admin"
                   }
                 },
@@ -435,7 +435,7 @@
               "table_arwip.column_units_billable": {
                 "Definition": {
                   "Binding": {
-                    "ConceptualEntity": "_ARWIP",
+                    "ConceptualEntity": "_Client / Staff Param",
                     "ConceptualProperty": "_Units Billable"
                   }
                 },
@@ -456,7 +456,7 @@
               "table_arwip.column_units_nonbillable": {
                 "Definition": {
                   "Binding": {
-                    "ConceptualEntity": "_ARWIP",
+                    "ConceptualEntity": "_Client / Staff Param",
                     "ConceptualProperty": "_Units Nonbillable"
                   }
                 },
@@ -477,7 +477,7 @@
               "table_arwip.column_units_total1": {
                 "Definition": {
                   "Binding": {
-                    "ConceptualEntity": "_ARWIP",
+                    "ConceptualEntity": "_Client / Staff Param",
                     "ConceptualProperty": "_Units Total"
                   }
                 },
@@ -20987,7 +20987,7 @@
         "showAsVariationsOnly": true
       },
       {
-        "name": "_ARWIP",
+        "name": "_Client / Staff Param",
         "annotations": [
           {
             "name": "PBI_Id",
@@ -20996,7 +20996,7 @@
         ],
         "columns": [
           {
-            "name": "_ARE",
+            "name": "_C/S",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -21010,17 +21010,17 @@
             "relatedColumnDetails": {
               "groupByColumns": [
                 {
-                  "groupingColumn": "_ARE Fields"
+                  "groupingColumn": "_C/S Fields"
                 }
               ]
             },
-            "sortByColumn": "_ARE Order",
+            "sortByColumn": "_C/S Order",
             "sourceColumn": "[Value1]",
             "summarizeBy": "none",
             "type": "calculatedTableColumn"
           },
           {
-            "name": "_ARE Fields",
+            "name": "_C/S Fields",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -21042,13 +21042,13 @@
             "isHidden": true,
             "isNameInferred": false,
             "lineageTag": "a156145b-ec35-4182-aa2c-2e2eed98d0a2",
-            "sortByColumn": "_ARE Order",
+            "sortByColumn": "_C/S Order",
             "sourceColumn": "[Value2]",
             "summarizeBy": "none",
             "type": "calculatedTableColumn"
           },
           {
-            "name": "_ARE Order",
+            "name": "_C/S Order",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -21066,7 +21066,7 @@
             "type": "calculatedTableColumn"
           },
           {
-            "name": "_Table Subtitle",
+            "name": "_C/S Subtitle",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -21076,7 +21076,7 @@
             "dataType": "string",
             "expression": [
               "",
-              "VAR param_swap = '_ARWIP'[_ARE Order]",
+              "VAR param_swap = '_Client / Staff Param'[_C/S Order]",
               "RETURN",
               "",
               "SWITCH( param_swap,",
@@ -21099,7 +21099,7 @@
         "lineageTag": "09058334-53d2-4f8f-816a-745bf540d869",
         "partitions": [
           {
-            "name": "_ARWIP",
+            "name": "_Client / Staff Param",
             "mode": "import",
             "source": {
               "expression": [

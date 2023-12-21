@@ -414,7 +414,7 @@
               "table_arwip.column_units_admin": {
                 "Definition": {
                   "Binding": {
-                    "ConceptualEntity": "_ARWIP",
+                    "ConceptualEntity": "_Client / Staff Param",
                     "ConceptualProperty": "_Units Admin"
                   }
                 },
@@ -435,7 +435,7 @@
               "table_arwip.column_units_billable": {
                 "Definition": {
                   "Binding": {
-                    "ConceptualEntity": "_ARWIP",
+                    "ConceptualEntity": "_Client / Staff Param",
                     "ConceptualProperty": "_Units Billable"
                   }
                 },
@@ -456,7 +456,7 @@
               "table_arwip.column_units_nonbillable": {
                 "Definition": {
                   "Binding": {
-                    "ConceptualEntity": "_ARWIP",
+                    "ConceptualEntity": "_Client / Staff Param",
                     "ConceptualProperty": "_Units Nonbillable"
                   }
                 },
@@ -477,7 +477,7 @@
               "table_arwip.column_units_total1": {
                 "Definition": {
                   "Binding": {
-                    "ConceptualEntity": "_ARWIP",
+                    "ConceptualEntity": "_Client / Staff Param",
                     "ConceptualProperty": "_Units Total"
                   }
                 },
@@ -828,12 +828,11 @@
           "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
           "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
           "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
-          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 57),",
-          "    // Merged to the staff table to obtain the staff key, id, and description of the secondary partner.",
-          "    #\"Merged Staff Table\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__staff_KEY\"}, Staff, {\"staff_KEY\"}, \"Staff\", JoinKind.LeftOuter),",
-          "    #\"Expanded Staff\" = Table.ExpandTableColumn(#\"Merged Staff Table\", \"Staff\", {\"staff_KEY\", \"staff_id\", \"description\"}, {\"secondary_partner_KEY\", \"secondary_partner_id\", \"secondary_partner__description\"})",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 368),",
+          "    #\"Merged Queries\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__custom_grouping_KEY\"}, industry_grouping, {\"custom_grouping_KEY\"}, \"industry_grouping\", JoinKind.LeftOuter),",
+          "    #\"Expanded industry_grouping\" = Table.ExpandTableColumn(#\"Merged Queries\", \"industry_grouping\", {\"custom_grouping_id\", \"description\"}, {\"industry_id\", \"industry__description\"})",
           "in",
-          "    #\"Expanded Staff\""
+          "    #\"Expanded industry_grouping\""
         ],
         "kind": "m",
         "lineageTag": "05da54fa-fbd3-438c-b4a7-9987db852b99",
@@ -855,9 +854,10 @@
           "let",
           "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
           "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
-          "    dbo_Custom_Grouping = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Grouping\"]}[Data]",
+          "    dbo_Custom_Grouping = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Grouping\"]}[Data],",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Grouping, each [custom_field_KEY] = 368)",
           "in",
-          "    dbo_Custom_Grouping"
+          "    #\"Filtered Rows\""
         ],
         "kind": "m",
         "lineageTag": "c1b25f03-932c-475a-80f4-06790d89dd7b",
@@ -2963,6 +2963,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -4263,6 +4267,34 @@
             "sourceColumn": "client_partner_id",
             "sourceProviderType": "nvarchar(max)",
             "summarizeBy": "none"
+          },
+          {
+            "name": "industry_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c653c6bd-dfc9-49ea-ac3e-2aab7460b4c1",
+            "sourceColumn": "industry_id",
+            "sourceProviderType": "nvarchar(11)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "industry__description",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "79e5130e-f87f-482b-a4c7-efd9fa978f71",
+            "sourceColumn": "industry__description",
+            "sourceProviderType": "nvarchar(250)",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "123f41e5-0c84-4fac-8e37-98c143248a34",
@@ -4277,8 +4309,11 @@
                 "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
                 "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
                 "    dbo_Client_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Client_View\"]}[Data],",
+                "    #\"Merged Queries\" = Table.NestedJoin(dbo_Client_View, {\"client_KEY\"}, client_industry, {\"row_KEY\"}, \"client_industry\", JoinKind.LeftOuter),",
+                "    // merging to get the industry custom field assigned to the client",
+                "    #\"Expanded client_industry\" = Table.ExpandTableColumn(#\"Merged Queries\", \"client_industry\", {\"industry_id\", \"industry__description\"}, {\"industry_id\", \"industry__description\"}),",
                 "    // a combination of the Client_KEY and the Partner_Staff_KEY to create a composite KEY that will allow a direct connection to the Invoice_Biller_Checking table.",
-                "    #\"Added client_partner_key\" = Table.AddColumn(dbo_Client_View, \"client_partner_key\", each Text.From([client_KEY]) & \"-\" & Text.From([partner__staff_KEY])),",
+                "    #\"Added client_partner_key\" = Table.AddColumn(#\"Expanded client_industry\", \"client_partner_key\", each Text.From([client_KEY]) & \"-\" & Text.From([partner__staff_KEY])),",
                 "    #\"Added client_partner_id\" = Table.AddColumn(#\"Added client_partner_key\", \"client_partner_id\", each Text.From([client_KEY]) & \"-\" & Text.From([partner__staff__staff_id])),",
                 "    #\"Merged RCG\" = Table.NestedJoin(#\"Added client_partner_id\", {\"client_KEY\"}, RCG, {\"row_KEY\"}, \"RCG\", JoinKind.LeftOuter),",
                 "    // These two steps are merging to custom_value_view where the field_key = 59 (the related client grou).",
@@ -21040,7 +21075,7 @@
         "showAsVariationsOnly": true
       },
       {
-        "name": "_ARWIP",
+        "name": "_Client / Staff Param",
         "annotations": [
           {
             "name": "PBI_Id",
@@ -21129,7 +21164,7 @@
             "dataType": "string",
             "expression": [
               "",
-              "VAR param_swap = '_ARWIP'[_ARE Order]",
+              "VAR param_swap = '_Client / Staff Param'[_ARE Order]",
               "RETURN",
               "",
               "SWITCH( param_swap,",
@@ -21152,7 +21187,7 @@
         "lineageTag": "09058334-53d2-4f8f-816a-745bf540d869",
         "partitions": [
           {
-            "name": "_ARWIP",
+            "name": "_Client / Staff Param",
             "mode": "import",
             "source": {
               "expression": [
@@ -21160,9 +21195,10 @@
                 "    (\"Client Description\", NAMEOF('Client_View'[description]), 0),",
                 "    (\"Client Manager\", NAMEOF('Client_View'[manager_description]), 1),",
                 "    (\"Client Partner\", NAMEOF('Client_View'[partner__description]), 2),",
-                "    (\"Related Client Group\", NAMEOF('Client_View'[related_client_group_id]), 3),",
-                "    (\"Staff Name\", NAMEOF('Staff'[primary_staff_description]), 4),",
-                "    (\"Department\", NAMEOF('Staff'[department__description]), 5)",
+                "    (\"Client Industry\", NAMEOF(Client_View[industry_id]), 3),",
+                "    (\"Related Client Group\", NAMEOF('Client_View'[related_client_group_id]), 4),",
+                "    (\"Staff Name\", NAMEOF('Staff'[primary_staff_description]), 5),",
+                "    (\"Department\", NAMEOF('Staff'[department__description]), 6)",
                 "}"
               ],
               "type": "calculated"

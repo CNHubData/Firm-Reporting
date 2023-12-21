@@ -4,7 +4,7 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 1564.2857142857144,
+        "x": 1490,
         "y": 0
       },
       "nodes": [
@@ -399,18 +399,6 @@
         },
         {
           "location": {
-            "x": 3601.057299642674,
-            "y": 854.78125000000023
-          },
-          "nodeIndex": "_ARWIP",
-          "size": {
-            "height": 152,
-            "width": 234
-          },
-          "zIndex": 2
-        },
-        {
-          "location": {
             "x": 3957.6287282141034,
             "y": 0
           },
@@ -421,6 +409,18 @@
             "width": 234
           },
           "zIndex": 32
+        },
+        {
+          "location": {
+            "x": 3601.057299642674,
+            "y": 854.78125000000023
+          },
+          "nodeIndex": "_Client / Staff Param",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",
