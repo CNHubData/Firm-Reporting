@@ -14611,7 +14611,6 @@
               "",
               "",
               "SWITCH([Value],",
-              "    1, \"Total\",",
               "    2, \"Billable\",",
               "    3, \"Nonbillable\",",
               "    4, \"Admin\",",
