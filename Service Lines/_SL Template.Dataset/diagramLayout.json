@@ -4,14 +4,14 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 1490,
-        "y": 0
+        "x": 0,
+        "y": 75.714285714285722
       },
       "nodes": [
         {
           "location": {
-            "x": 2142.6785714285716,
-            "y": 621.87500000000011
+            "x": 2146.9642857142862,
+            "y": 634.732142857143
           },
           "nodeIndex": "Activity_View",
           "nodeLineageTag": "3e9fa529-3d25-4ee3-aaaa-f69840381a9d",
@@ -19,7 +19,7 @@
             "height": 145,
             "width": 234
           },
-          "zIndex": 12
+          "zIndex": 13
         },
         {
           "location": {
@@ -32,7 +32,7 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 13
+          "zIndex": 14
         },
         {
           "location": {
@@ -45,7 +45,7 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 14
+          "zIndex": 15
         },
         {
           "location": {
@@ -84,7 +84,7 @@
             "height": 145,
             "width": 234
           },
-          "zIndex": 15
+          "zIndex": 16
         },
         {
           "location": {
@@ -97,7 +97,7 @@
             "height": 146.25,
             "width": 234
           },
-          "zIndex": 19
+          "zIndex": 20
         },
         {
           "location": {
@@ -110,7 +110,7 @@
             "height": 177.5,
             "width": 234
           },
-          "zIndex": 18
+          "zIndex": 19
         },
         {
           "location": {
@@ -123,7 +123,7 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 16
+          "zIndex": 17
         },
         {
           "location": {
@@ -136,7 +136,7 @@
             "height": 252.85714285714289,
             "width": 234
           },
-          "zIndex": 17
+          "zIndex": 18
         },
         {
           "location": {
@@ -162,7 +162,7 @@
             "height": 192.5,
             "width": 234
           },
-          "zIndex": 20
+          "zIndex": 21
         },
         {
           "location": {
@@ -175,7 +175,7 @@
             "height": 190,
             "width": 234
           },
-          "zIndex": 21
+          "zIndex": 22
         },
         {
           "location": {
@@ -201,7 +201,7 @@
             "height": 126.85714285714286,
             "width": 234
           },
-          "zIndex": 8
+          "zIndex": 9
         },
         {
           "location": {
@@ -214,7 +214,7 @@
             "height": 128.57142857142858,
             "width": 234
           },
-          "zIndex": 9
+          "zIndex": 10
         },
         {
           "location": {
@@ -227,7 +227,7 @@
             "height": 155.71428571428572,
             "width": 234
           },
-          "zIndex": 10
+          "zIndex": 11
         },
         {
           "location": {
@@ -240,7 +240,7 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 11
+          "zIndex": 12
         },
         {
           "location": {
@@ -253,7 +253,7 @@
             "height": 158.57142857142856,
             "width": 234
           },
-          "zIndex": 23
+          "zIndex": 24
         },
         {
           "location": {
@@ -266,7 +266,7 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 22
+          "zIndex": 23
         },
         {
           "location": {
@@ -279,7 +279,7 @@
             "height": 158.57142857142867,
             "width": 234
           },
-          "zIndex": 24
+          "zIndex": 25
         },
         {
           "location": {
@@ -292,7 +292,7 @@
             "height": 200,
             "width": 234
           },
-          "zIndex": 25
+          "zIndex": 26
         },
         {
           "location": {
@@ -305,25 +305,25 @@
             "height": 152.85714285714283,
             "width": 234
           },
-          "zIndex": 6
-        },
-        {
-          "location": {
-            "x": 1247.4642857142849,
-            "y": 1198.2098214285716
-          },
-          "nodeIndex": "Staff_Email",
-          "nodeLineageTag": "a0519253-289e-4fe1-9732-cc81992bbdc0",
-          "size": {
-            "height": 128,
-            "width": 234
-          },
           "zIndex": 7
         },
         {
           "location": {
-            "x": 333.6519674104664,
-            "y": 1189.737758558115
+            "x": 1241.7499999999991,
+            "y": 1205.3526785714287
+          },
+          "nodeIndex": "Staff_Email",
+          "nodeLineageTag": "a0519253-289e-4fe1-9732-cc81992bbdc0",
+          "size": {
+            "height": 163.71428571428555,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 2605.0805388390377,
+            "y": 952.59490141525737
           },
           "nodeIndex": "Invoice_Biller_Checking",
           "nodeLineageTag": "91e7f5d7-7fd2-4f3e-bddb-d88c3457c8fd",
@@ -331,7 +331,7 @@
             "height": 199.00709219858118,
             "width": 234
           },
-          "zIndex": 26
+          "zIndex": 33
         },
         {
           "location": {
@@ -357,7 +357,7 @@
             "height": 208.57142857142853,
             "width": 234
           },
-          "zIndex": 4
+          "zIndex": 5
         },
         {
           "location": {
@@ -370,7 +370,7 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 5
+          "zIndex": 6
         },
         {
           "location": {
@@ -382,7 +382,7 @@
             "height": 200,
             "width": 234
           },
-          "zIndex": 3
+          "zIndex": 4
         },
         {
           "location": {
@@ -395,7 +395,7 @@
             "height": 156.85714285714289,
             "width": 234
           },
-          "zIndex": 1
+          "zIndex": 3
         },
         {
           "location": {
@@ -420,7 +420,33 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 328.77158535696026,
+            "y": 1155.6383928571431
+          },
+          "nodeIndex": "Staff_Billing_Rate_View",
+          "nodeLineageTag": "9f90bc5d-d10a-427d-85a4-372d1287e600",
+          "size": {
+            "height": 180.28571428571445,
+            "width": 234
+          },
+          "zIndex": 34
+        },
+        {
+          "location": {
+            "x": 737.05729964267448,
+            "y": 1159.0669642857147
+          },
+          "nodeIndex": "Staff_Rate_Table_View",
+          "nodeLineageTag": "66eded1e-e134-4d47-97e9-be7b8317554c",
+          "size": {
+            "height": 177.71428571428578,
+            "width": 234
+          },
+          "zIndex": 1
         }
       ],
       "name": "All tables",
