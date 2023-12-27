@@ -21084,7 +21084,37 @@
         ],
         "columns": [
           {
-            "name": "_ARE",
+            "name": "_C/S Subtitle",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": [
+              "",
+              "VAR param_swap = '_Client / Staff Param'[_C/S Order]",
+              "RETURN",
+              "",
+              "SWITCH( param_swap,",
+              "    0, \"Sum of hours coded to the below clients in PCS.\",",
+              "    1, \"Sum of hours coded (by any staff member) to clients within the AM's Client Base\",",
+              "    2, \"Sum of hours coded (by any staff member) to clients within the AE's Client Base\",",
+              "    3, \"Sum of hours coded (by any staff member) to clients within each Related Client Group\",",
+              "    4, \"All hours entered into PCS by the below staff members\",",
+              "    5, \"Sum of hours coded by staff members assigned to the below department\",",
+              "    \"\")",
+              "",
+              "// A field value to determine the subtitle of the main table.  This is to help with understand-ability of the report."
+            ],
+            "isDataTypeInferred": true,
+            "lineageTag": "0789b62a-8f97-4a70-8ae3-2be872607fb6",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "_C/S",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -21098,17 +21128,17 @@
             "relatedColumnDetails": {
               "groupByColumns": [
                 {
-                  "groupingColumn": "_ARE Fields"
+                  "groupingColumn": "_C/S Fields"
                 }
               ]
             },
-            "sortByColumn": "_ARE Order",
+            "sortByColumn": "_C/S Order",
             "sourceColumn": "[Value1]",
             "summarizeBy": "none",
             "type": "calculatedTableColumn"
           },
           {
-            "name": "_ARE Fields",
+            "name": "_C/S Fields",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -21130,13 +21160,13 @@
             "isHidden": true,
             "isNameInferred": false,
             "lineageTag": "a156145b-ec35-4182-aa2c-2e2eed98d0a2",
-            "sortByColumn": "_ARE Order",
+            "sortByColumn": "_C/S Order",
             "sourceColumn": "[Value2]",
             "summarizeBy": "none",
             "type": "calculatedTableColumn"
           },
           {
-            "name": "_ARE Order",
+            "name": "_C/S Order",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -21152,36 +21182,6 @@
             "sourceColumn": "[Value3]",
             "summarizeBy": "sum",
             "type": "calculatedTableColumn"
-          },
-          {
-            "name": "_Table Subtitle",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "expression": [
-              "",
-              "VAR param_swap = '_Client / Staff Param'[_ARE Order]",
-              "RETURN",
-              "",
-              "SWITCH( param_swap,",
-              "    0, \"Sum of hours coded to the below clients in PCS.\",",
-              "    1, \"Sum of hours coded (by any staff member) to clients within the AM's Client Base\",",
-              "    2, \"Sum of hours coded (by any staff member) to clients within the AE's Client Base\",",
-              "    3, \"Sum of hours coded (by any staff member) to clients within each Related Client Group\",",
-              "    4, \"All hours entered into PCS by the below staff members\",",
-              "    5, \"Sum of hours coded by staff members assigned to the below department\",",
-              "    \"\")",
-              "",
-              "// A field value to determine the subtitle of the main table.  This is to help with understand-ability of the report."
-            ],
-            "isDataTypeInferred": true,
-            "lineageTag": "0789b62a-8f97-4a70-8ae3-2be872607fb6",
-            "summarizeBy": "none",
-            "type": "calculated"
           }
         ],
         "lineageTag": "09058334-53d2-4f8f-816a-745bf540d869",
