@@ -4,7 +4,7 @@
     "annotations": [
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"Activity_View\",\"Billing_Decision_View\",\"Billing_Decision_Collection_View\",\"Client_View\",\"Client_Date_Cache\",\"Contact_View\",\"Contact_Address\",\"Contact_Email\",\"Engagement_View\",\"History_Of_Client_View\",\"Invoice_View (AR)\",\"Invoice_View (Collection)\",\"Invoice_WIP_Pending_Lookup\",\"Ledger_Entry_View (AR)\",\"Ledger_Entry_View (Collection)\",\"Ledger_Entry_Application_View\",\"Project_View\",\"Sheet_Entry_View\",\"Staff\",\"Staff_Email\",\"Task_View\",\"RCG\",\"client_relations\",\"bsc_participants\",\"Custom_Grouping\",\"Custom_Field\",\"Invoice_Biller_Checking\",\"secondary_partner/ae\",\"secondary_partner/ae_date\",\"growth_reporting\",\"possible_fiscals\",\"Billing_Decision_View_fiscal_calc\",\"Engagement_Template\",\"staff_primary_id\",\"Staff_Billing_Rate_View\",\"Staff_Rate_Table_View\"]"
+        "value": "[\"Activity_View\",\"Billing_Decision_View\",\"Billing_Decision_Collection_View\",\"Client_View\",\"Client_Date_Cache\",\"Contact_View\",\"Contact_Address\",\"Contact_Email\",\"Engagement_View\",\"History_Of_Client_View\",\"Invoice_View (AR)\",\"Invoice_View (Collection)\",\"Invoice_WIP_Pending_Lookup\",\"Ledger_Entry_View (AR)\",\"Ledger_Entry_View (Collection)\",\"Ledger_Entry_Application_View\",\"Project_View\",\"Sheet_Entry_View\",\"Staff\",\"Staff_Email\",\"Task_View\",\"RCG\",\"client_relations\",\"bsc_participants\",\"Custom_Grouping\",\"Custom_Field\",\"Invoice_Biller_Checking\",\"secondary_partner/ae\",\"secondary_partner/ae_date\",\"growth_reporting\",\"possible_fiscals\",\"Billing_Decision_View_fiscal_calc\",\"Engagement_Template\",\"staff_primary_id\",\"Staff_Billing_Rate_View\",\"Staff_Rate_Table_View\",\"image_URLs\"]"
       },
       {
         "name": "__PBI_TimeIntelligenceEnabled",
@@ -475,14 +475,14 @@
         ],
         "description": "Related Client Group custom field",
         "expression": [
-          "let\r",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
-          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],\r",
-          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 59),\r",
-          "    #\"Merged Queries\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__custom_grouping_KEY\"}, Custom_Grouping, {\"custom_grouping_KEY\"}, \"RCG_Custom_Grouping\", JoinKind.LeftOuter),\r",
-          "    #\"Expanded RCG_Custom_Grouping\" = Table.ExpandTableColumn(#\"Merged Queries\", \"RCG_Custom_Grouping\", {\"custom_grouping_id\", \"description\"}, {\"related_client_group_id\", \"related_client_group__description\"})\r",
-          "in\r",
+          "let",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
+          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 59),",
+          "    #\"Merged Queries\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__custom_grouping_KEY\"}, Custom_Grouping, {\"custom_grouping_KEY\"}, \"RCG_Custom_Grouping\", JoinKind.LeftOuter),",
+          "    #\"Expanded RCG_Custom_Grouping\" = Table.ExpandTableColumn(#\"Merged Queries\", \"RCG_Custom_Grouping\", {\"custom_grouping_id\", \"description\"}, {\"related_client_group_id\", \"related_client_group__description\"})",
+          "in",
           "    #\"Expanded RCG_Custom_Grouping\""
         ],
         "kind": "m",
@@ -502,11 +502,11 @@
           }
         ],
         "expression": [
-          "let\r",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
-          "    dbo_Custom_Grouping = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Grouping\"]}[Data]\r",
-          "in\r",
+          "let",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
+          "    dbo_Custom_Grouping = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Grouping\"]}[Data]",
+          "in",
           "    dbo_Custom_Grouping"
         ],
         "kind": "m",
@@ -526,11 +526,11 @@
           }
         ],
         "expression": [
-          "let\r",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
-          "    dbo_Custom_Field = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Field\"]}[Data]\r",
-          "in\r",
+          "let",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
+          "    dbo_Custom_Field = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Field\"]}[Data]",
+          "in",
           "    dbo_Custom_Field"
         ],
         "kind": "m",
@@ -551,14 +551,14 @@
         ],
         "description": "Related Client Group custom field",
         "expression": [
-          "let\r",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
-          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],\r",
-          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 353),\r",
-          "    #\"Merged Queries\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__custom_grouping_KEY\"}, Custom_Grouping, {\"custom_grouping_KEY\"}, \"RCG_Custom_Grouping\", JoinKind.LeftOuter),\r",
-          "    #\"Expanded RCG_Custom_Grouping\" = Table.ExpandTableColumn(#\"Merged Queries\", \"RCG_Custom_Grouping\", {\"custom_grouping_id\", \"description\"}, {\"related_client_group_id\", \"related_client_group__description\"})\r",
-          "in\r",
+          "let",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
+          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 353),",
+          "    #\"Merged Queries\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__custom_grouping_KEY\"}, Custom_Grouping, {\"custom_grouping_KEY\"}, \"RCG_Custom_Grouping\", JoinKind.LeftOuter),",
+          "    #\"Expanded RCG_Custom_Grouping\" = Table.ExpandTableColumn(#\"Merged Queries\", \"RCG_Custom_Grouping\", {\"custom_grouping_id\", \"description\"}, {\"related_client_group_id\", \"related_client_group__description\"})",
+          "in",
           "    #\"Expanded RCG_Custom_Grouping\""
         ],
         "kind": "m",
@@ -579,15 +579,15 @@
         ],
         "description": "Related Client Group custom field",
         "expression": [
-          "let\r",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
-          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],\r",
-          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 57),\r",
-          "    // Merged to the staff table to obtain the staff key, id, and description of the secondary partner.\r",
-          "    #\"Merged Staff Table\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__staff_KEY\"}, Staff, {\"staff_KEY\"}, \"Staff\", JoinKind.LeftOuter),\r",
-          "    #\"Expanded Staff\" = Table.ExpandTableColumn(#\"Merged Staff Table\", \"Staff\", {\"staff_KEY\", \"staff_id\", \"description\"}, {\"secondary_partner_KEY\", \"secondary_partner_id\", \"secondary_partner__description\"})\r",
-          "in\r",
+          "let",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
+          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 57),",
+          "    // Merged to the staff table to obtain the staff key, id, and description of the secondary partner.",
+          "    #\"Merged Staff Table\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__staff_KEY\"}, Staff, {\"staff_KEY\"}, \"Staff\", JoinKind.LeftOuter),",
+          "    #\"Expanded Staff\" = Table.ExpandTableColumn(#\"Merged Staff Table\", \"Staff\", {\"staff_KEY\", \"staff_id\", \"description\"}, {\"secondary_partner_KEY\", \"secondary_partner_id\", \"secondary_partner__description\"})",
+          "in",
           "    #\"Expanded Staff\""
         ],
         "kind": "m",
@@ -608,12 +608,12 @@
         ],
         "description": "Related Client Group custom field",
         "expression": [
-          "let\r",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
-          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],\r",
-          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 55)\r",
-          "in\r",
+          "let",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
+          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 55)",
+          "in",
           "    #\"Filtered Rows\""
         ],
         "kind": "m",
@@ -633,32 +633,32 @@
           }
         ],
         "expression": [
-          "let\r",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
-          "    dbo_Client_Date_Cache = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Client_Date_Cache\"]}[Data],\r",
-          "    #\"Removed Other Columns\" = Table.SelectColumns(dbo_Client_Date_Cache,{\"entry_date\"}),\r",
-          "    #\"Grouped Rows\" = Table.Group(#\"Removed Other Columns\", {\"entry_date\"}, {{\"Count\", each Table.RowCount(_), Int64.Type}}),\r",
-          "    #\"Added Custom\" = Table.AddColumn(#\"Grouped Rows\", \"possible_fy\", each if Date.Month([entry_date]) >= 7 then \r",
-          "Date.Year([entry_date]) + 1 else \r",
-          "Date.Year([entry_date])),\r",
-          "    #\"Grouped Rows1\" = Table.Group(#\"Added Custom\", {\"possible_fy\"}, {{\"fy_start\", each List.Min([entry_date]), type date}}),\r",
-          "    // this column is meant to limit the fy rows to the current fy and the previous two fys.  This is because Direct Query hates the \"Keep Top Rows\" command.  This will be a work-around that will allow us to maintain the amount of data.\r",
-          "    #\"Added current_fy_filtering\" = Table.AddColumn(#\"Grouped Rows1\", \"current_fy_filtering\", each if [possible_fy] = \r",
-          "(if Date.Month(Date.From( DateTime.LocalNow()) ) >= 7 then Date.Year(Date.From( DateTime.LocalNow()) ) + 1 else Date.Year(Date.From( DateTime.LocalNow()) ) ) \r",
-          "then 1 else \r",
-          "\r",
-          "if [possible_fy] = \r",
-          "(if Date.Month(Date.From( DateTime.LocalNow()) ) >= 7 then Date.Year(Date.From( DateTime.LocalNow()) ) + 1 else Date.Year(Date.From( DateTime.LocalNow()) ) ) - 1 \r",
-          "then 1 else \r",
-          "\r",
-          "if [possible_fy] = \r",
-          "(if Date.Month(Date.From( DateTime.LocalNow()) ) >= 7 then Date.Year(Date.From( DateTime.LocalNow()) ) + 1 else Date.Year(Date.From( DateTime.LocalNow()) ) ) - 2 \r",
-          "then 1 else null),\r",
-          "    // This table has used a duplicate of the client_date_cache to create a unique list of all fiscal years possible and the minimum date found within them (this SHOULD always be July 1 of each year, but if there are no entries on July 1 it will show a different day).  Creating it this was is to ensure I can join to the Client table and obtain a unqiue list of all clients and all possible fiscal years within direct query.\r",
-          "    #\"Filtered Rows\" = Table.SelectRows(#\"Added current_fy_filtering\", each [current_fy_filtering] <> null),\r",
-          "    #\"Added Custom1\" = Table.AddColumn(#\"Filtered Rows\", \"joining\", each 1)\r",
-          "in\r",
+          "let",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
+          "    dbo_Client_Date_Cache = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Client_Date_Cache\"]}[Data],",
+          "    #\"Removed Other Columns\" = Table.SelectColumns(dbo_Client_Date_Cache,{\"entry_date\"}),",
+          "    #\"Grouped Rows\" = Table.Group(#\"Removed Other Columns\", {\"entry_date\"}, {{\"Count\", each Table.RowCount(_), Int64.Type}}),",
+          "    #\"Added Custom\" = Table.AddColumn(#\"Grouped Rows\", \"possible_fy\", each if Date.Month([entry_date]) >= 7 then ",
+          "Date.Year([entry_date]) + 1 else ",
+          "Date.Year([entry_date])),",
+          "    #\"Grouped Rows1\" = Table.Group(#\"Added Custom\", {\"possible_fy\"}, {{\"fy_start\", each List.Min([entry_date]), type date}}),",
+          "    // this column is meant to limit the fy rows to the current fy and the previous two fys.  This is because Direct Query hates the \"Keep Top Rows\" command.  This will be a work-around that will allow us to maintain the amount of data.",
+          "    #\"Added current_fy_filtering\" = Table.AddColumn(#\"Grouped Rows1\", \"current_fy_filtering\", each if [possible_fy] = ",
+          "(if Date.Month(Date.From( DateTime.LocalNow()) ) >= 7 then Date.Year(Date.From( DateTime.LocalNow()) ) + 1 else Date.Year(Date.From( DateTime.LocalNow()) ) ) ",
+          "then 1 else ",
+          "",
+          "if [possible_fy] = ",
+          "(if Date.Month(Date.From( DateTime.LocalNow()) ) >= 7 then Date.Year(Date.From( DateTime.LocalNow()) ) + 1 else Date.Year(Date.From( DateTime.LocalNow()) ) ) - 1 ",
+          "then 1 else ",
+          "",
+          "if [possible_fy] = ",
+          "(if Date.Month(Date.From( DateTime.LocalNow()) ) >= 7 then Date.Year(Date.From( DateTime.LocalNow()) ) + 1 else Date.Year(Date.From( DateTime.LocalNow()) ) ) - 2 ",
+          "then 1 else null),",
+          "    // This table has used a duplicate of the client_date_cache to create a unique list of all fiscal years possible and the minimum date found within them (this SHOULD always be July 1 of each year, but if there are no entries on July 1 it will show a different day).  Creating it this was is to ensure I can join to the Client table and obtain a unqiue list of all clients and all possible fiscal years within direct query.",
+          "    #\"Filtered Rows\" = Table.SelectRows(#\"Added current_fy_filtering\", each [current_fy_filtering] <> null),",
+          "    #\"Added Custom1\" = Table.AddColumn(#\"Filtered Rows\", \"joining\", each 1)",
+          "in",
           "    #\"Added Custom1\""
         ],
         "kind": "m",
@@ -678,20 +678,20 @@
           }
         ],
         "expression": [
-          "let\r",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
-          "    dbo_Billing_Decision_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Billing_Decision_View\"]}[Data],\r",
-          "    #\"Added Custom\" = Table.AddColumn(dbo_Billing_Decision_View, \"client_engagement_KEY\", each Text.From([sheet_entry__client_KEY]) & \"_\" & Text.From([sheet_entry__engagement_KEY])),\r",
-          "    // I am using the invoice_date as the engine for the fiscal year because - in 99% of calculation regarding billing - PCS used the invoice date found in this table.\r",
-          "    #\"Added invoice_fy\" = Table.AddColumn(#\"Added Custom\", \"invoice_fy\", each if Date.Month([invoice__invoice_date]) >= 7 then \r",
-          "Date.Year([invoice__invoice_date]) + 1 else \r",
-          "Date.Year([invoice__invoice_date]), type number),\r",
-          "    // This column will allow us to merge to the growth_reporting table and determine how much was billed in the selected fiscal year per client.\r",
-          "    #\"Added client_fy\" = Table.AddColumn(#\"Added invoice_fy\", \"client_fy\", each Text.From([sheet_entry__client_KEY]) & \"-\" & Text.From([invoice_fy])),\r",
-          "    #\"Filtered Rows\" = Table.SelectRows(#\"Added client_fy\", each true),\r",
-          "    #\"Grouped Rows\" = Table.Group(#\"Filtered Rows\", {\"client_fy\", \"sheet_entry__client_KEY\", \"invoice_fy\"}, {{\"bill_amount\", each List.Sum([bill_amount]), type number}})\r",
-          "in\r",
+          "let",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
+          "    dbo_Billing_Decision_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Billing_Decision_View\"]}[Data],",
+          "    #\"Added Custom\" = Table.AddColumn(dbo_Billing_Decision_View, \"client_engagement_KEY\", each Text.From([sheet_entry__client_KEY]) & \"_\" & Text.From([sheet_entry__engagement_KEY])),",
+          "    // I am using the invoice_date as the engine for the fiscal year because - in 99% of calculation regarding billing - PCS used the invoice date found in this table.",
+          "    #\"Added invoice_fy\" = Table.AddColumn(#\"Added Custom\", \"invoice_fy\", each if Date.Month([invoice__invoice_date]) >= 7 then ",
+          "Date.Year([invoice__invoice_date]) + 1 else ",
+          "Date.Year([invoice__invoice_date]), type number),",
+          "    // This column will allow us to merge to the growth_reporting table and determine how much was billed in the selected fiscal year per client.",
+          "    #\"Added client_fy\" = Table.AddColumn(#\"Added invoice_fy\", \"client_fy\", each Text.From([sheet_entry__client_KEY]) & \"-\" & Text.From([invoice_fy])),",
+          "    #\"Filtered Rows\" = Table.SelectRows(#\"Added client_fy\", each true),",
+          "    #\"Grouped Rows\" = Table.Group(#\"Filtered Rows\", {\"client_fy\", \"sheet_entry__client_KEY\", \"invoice_fy\"}, {{\"bill_amount\", each List.Sum([bill_amount]), type number}})",
+          "in",
           "    #\"Grouped Rows\""
         ],
         "kind": "m",
@@ -712,14 +712,14 @@
         ],
         "description": "Related Client Group custom field",
         "expression": [
-          "let\r",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
-          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],\r",
-          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 358),\r",
-          "    #\"Merged Queries\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__custom_grouping_KEY\"}, Custom_Grouping, {\"custom_grouping_KEY\"}, \"RCG_Custom_Grouping\", JoinKind.LeftOuter),\r",
-          "    #\"Expanded RCG_Custom_Grouping\" = Table.ExpandTableColumn(#\"Merged Queries\", \"RCG_Custom_Grouping\", {\"custom_grouping_id\", \"description\"}, {\"related_client_group_id\", \"related_client_group__description\"})\r",
-          "in\r",
+          "let",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
+          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 358),",
+          "    #\"Merged Queries\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__custom_grouping_KEY\"}, Custom_Grouping, {\"custom_grouping_KEY\"}, \"RCG_Custom_Grouping\", JoinKind.LeftOuter),",
+          "    #\"Expanded RCG_Custom_Grouping\" = Table.ExpandTableColumn(#\"Merged Queries\", \"RCG_Custom_Grouping\", {\"custom_grouping_id\", \"description\"}, {\"related_client_group_id\", \"related_client_group__description\"})",
+          "in",
           "    #\"Expanded RCG_Custom_Grouping\""
         ],
         "kind": "m",
@@ -740,12 +740,12 @@
         ],
         "description": "Related Client Group custom field",
         "expression": [
-          "let\r",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
-          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],\r",
-          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 359)\r",
-          "in\r",
+          "let",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
+          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 359)",
+          "in",
           "    #\"Filtered Rows\""
         ],
         "kind": "m",
@@ -1081,6 +1081,39 @@
         "fromTable": "Staff_Billing_Rate_View",
         "toColumn": "staff_rate_table_KEY",
         "toTable": "Staff_Rate_Table_View"
+      },
+      {
+        "name": "acbf560e-7d63-4819-8342-71372cc1a40f",
+        "fromColumn": "Date accessed",
+        "fromTable": "image_URLs",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_f6d359c9-1ac1-41e3-ac8b-5953a7381148"
+      },
+      {
+        "name": "2238e25e-3d09-40a1-a9d3-f6a983fe0cc1",
+        "fromColumn": "Date modified",
+        "fromTable": "image_URLs",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_0a55f0cb-d2a0-46e7-bf14-5f5dd9b1eedd"
+      },
+      {
+        "name": "69db2c2b-c210-43bd-8318-71ace9eb76d9",
+        "fromColumn": "Date created",
+        "fromTable": "image_URLs",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_45891b6a-ab27-4a17-a846-480f53076596"
+      },
+      {
+        "name": "b780fa72-362f-4b44-b687-69086da4fc4f",
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "staff_KEY",
+        "fromTable": "image_URLs",
+        "toColumn": "staff_KEY",
+        "toTable": "Staff"
       }
     ],
     "roles": [
@@ -9821,6 +9854,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -10001,7 +10038,7 @@
               }
             ],
             "dataType": "dateTime",
-            "formatString": "General Date",
+            "formatString": "Short Date",
             "lineageTag": "0747f864-202d-4faa-87df-d93f4322ef56",
             "sourceColumn": "date_hired",
             "sourceProviderType": "smalldatetime",
@@ -10374,6 +10411,41 @@
             "sourceColumn": "primary_staff_description",
             "sourceProviderType": "nvarchar(250)",
             "summarizeBy": "none"
+          },
+          {
+            "name": "profile_image_URL",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataCategory": "ImageUrl",
+            "dataType": "string",
+            "lineageTag": "75cdbdfa-efc6-4ce8-a593-239587aac2bf",
+            "sourceColumn": "profile_image_URL",
+            "sourceProviderType": "nvarchar(max)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "image_URL",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataCategory": "ImageUrl",
+            "dataType": "string",
+            "expression": [
+              "",
+              "",
+              "CONCATENATE(\"https://coopernorman.sharepoint.com/sites/CN-DataInformation/Shared%20Documents/Assets/profile-pics/\", [staff_KEY] & \".jpg\")"
+            ],
+            "isDataTypeInferred": true,
+            "lineageTag": "63682d37-40a5-46b8-9b99-85a035cd2fb1",
+            "summarizeBy": "none",
+            "type": "calculated"
           }
         ],
         "lineageTag": "b020efe0-dc88-416a-8b51-5814a081d91f",
@@ -10403,9 +10475,11 @@
                 "    #\"Created staff_primary_id_lookup\" = Table.AddColumn(#\"Expanded staff_primary_id\", \"staff_primary_id_lookup\", each if [staff_primary_id] = null then [staff_id] else [staff_primary_id]),",
                 "    // This will allow us to lookup the description that is most recent for each staff member",
                 "    #\"Merged to Staff to Find Description\" = Table.NestedJoin(#\"Created staff_primary_id_lookup\", {\"staff_primary_id_lookup\"}, #\"Created staff_primary_id_lookup\", {\"staff_id\"}, \"Created staff_primary_id_lookup\", JoinKind.LeftOuter),",
-                "    #\"Expanded Created staff_primary_id_lookup\" = Table.ExpandTableColumn(#\"Merged to Staff to Find Description\", \"Created staff_primary_id_lookup\", {\"staff_KEY\", \"description\"}, {\"primary_staff_KEY\", \"primary_staff_description\"})",
+                "    #\"Expanded Created staff_primary_id_lookup\" = Table.ExpandTableColumn(#\"Merged to Staff to Find Description\", \"Created staff_primary_id_lookup\", {\"staff_KEY\", \"description\"}, {\"primary_staff_KEY\", \"primary_staff_description\"}),",
+                "    // Created a column that will act as an image URL column.  This is referencing a folder that is managed by a power automate flow.  Cooper Norman user profile images are scraped from their Offic 365 profiles and stored in a SharePoint folder.",
+                "    #\"Added profile_image_URL\" = Table.AddColumn(#\"Expanded Created staff_primary_id_lookup\", \"profile_image_URL\", each \"https://coopernorman.sharepoint.com/sites/CN-DataInformation/Shared%20Documents/Assets/profile-pics/\" & Text.From([staff_KEY]) & \".jpg\")",
                 "in",
-                "    #\"Expanded Created staff_primary_id_lookup\""
+                "    #\"Added profile_image_URL\""
               ],
               "type": "m"
             }
@@ -16210,10 +16284,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Exception"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -18610,10 +18680,6 @@
           {
             "name": "PBI_ResultType",
             "value": "Exception"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ],
         "columns": [
@@ -21671,6 +21737,788 @@
             }
           }
         ]
+      },
+      {
+        "name": "image_URLs",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a1dabf48-9407-45c1-b599-2656ea388bea",
+            "sourceColumn": "Name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Extension",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c9969a37-b2bb-440b-9e1d-a5629d1b212a",
+            "sourceColumn": "Extension",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Date accessed",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "265458bb-e555-4926-9854-67028a21f660",
+            "sourceColumn": "Date accessed",
+            "summarizeBy": "none",
+            "variations": [
+              {
+                "name": "Variation",
+                "defaultHierarchy": {
+                  "hierarchy": "Date Hierarchy",
+                  "table": "LocalDateTable_f6d359c9-1ac1-41e3-ac8b-5953a7381148"
+                },
+                "isDefault": true,
+                "relationship": "acbf560e-7d63-4819-8342-71372cc1a40f"
+              }
+            ]
+          },
+          {
+            "name": "Date modified",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "9573e09c-1ab2-45ae-86af-b01842496269",
+            "sourceColumn": "Date modified",
+            "summarizeBy": "none",
+            "variations": [
+              {
+                "name": "Variation",
+                "defaultHierarchy": {
+                  "hierarchy": "Date Hierarchy",
+                  "table": "LocalDateTable_0a55f0cb-d2a0-46e7-bf14-5f5dd9b1eedd"
+                },
+                "isDefault": true,
+                "relationship": "2238e25e-3d09-40a1-a9d3-f6a983fe0cc1"
+              }
+            ]
+          },
+          {
+            "name": "Date created",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "ee9d90ae-9a3e-411b-8dca-e9cedfd36c34",
+            "sourceColumn": "Date created",
+            "summarizeBy": "none",
+            "variations": [
+              {
+                "name": "Variation",
+                "defaultHierarchy": {
+                  "hierarchy": "Date Hierarchy",
+                  "table": "LocalDateTable_45891b6a-ab27-4a17-a846-480f53076596"
+                },
+                "isDefault": true,
+                "relationship": "69db2c2b-c210-43bd-8318-71ace9eb76d9"
+              }
+            ]
+          },
+          {
+            "name": "Folder Path",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataCategory": "ImageUrl",
+            "dataType": "string",
+            "lineageTag": "238b2549-7aac-4066-a4ef-0f4fe6094cc8",
+            "sourceColumn": "Folder Path",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "staff_KEY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "86f69938-bea8-4d01-ad83-35c3a0588eee",
+            "sourceColumn": "staff_KEY",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "File Path",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataCategory": "ImageUrl",
+            "dataType": "string",
+            "lineageTag": "689bf6a6-032a-4027-9e6a-1e46252db78e",
+            "sourceColumn": "File Path",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "64465cf3-fc7f-483f-ab09-2729c16de3bd",
+        "partitions": [
+          {
+            "name": "image_URLs",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = SharePoint.Files(\"https://coopernorman.sharepoint.com/sites/CN-DataInformation/\", [ApiVersion = 15]),",
+                "    #\"Filtered Rows\" = Table.SelectRows(Source, each Text.Contains([Folder Path], \"Assets/profile-pics\")),",
+                "    #\"Duplicated Column\" = Table.DuplicateColumn(#\"Filtered Rows\", \"Name\", \"Name - Copy\"),",
+                "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Duplicated Column\", \"Name - Copy\", Splitter.SplitTextByDelimiter(\".jpg\", QuoteStyle.Csv), {\"staff_KEY\"}),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Split Column by Delimiter\",{{\"staff_KEY\", Int64.Type}}),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Changed Type\", \"File Path\", each [Folder Path] & [Name])",
+                "in",
+                "    #\"Added Custom\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "LocalDateTable_f6d359c9-1ac1-41e3-ac8b-5953a7381148",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "6a8c9b97-d349-4ab8-983a-024b320098bd",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "isHidden": true,
+            "lineageTag": "c1aa1f09-01e9-4056-a356-ef0e15b4277c",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "isHidden": true,
+            "lineageTag": "3c4ac157-4980-4830-8275-825856e6b920",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "15aad4a9-464e-4689-b4bc-9b10d1fc2dea",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "isHidden": true,
+            "lineageTag": "ee08f6db-3cd0-4d69-a6c6-e1ffc0ab70d0",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "e5b3a563-f070-4c9a-868d-b8aa3355ec82",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "isHidden": true,
+            "lineageTag": "75fdb5fc-145e-4105-a115-53fa321223d1",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "328584f5-594d-4572-b36d-0f4c49ef011b",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "8a8c44df-8583-4c46-9c61-38f19e35075c",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "8386fb60-134b-4773-9873-d60e46f08adc",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "ebcdb4fc-624e-4929-b6da-4d534800678e",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "ea9be710-917b-40fe-a3a6-603d62153505"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "6ca7b2e0-6291-4eb1-9565-7f589584544e",
+        "partitions": [
+          {
+            "name": "LocalDateTable_f6d359c9-1ac1-41e3-ac8b-5953a7381148",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('image_URLs'[Date accessed])), 1, 1), Date(Year(MAX('image_URLs'[Date accessed])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
+      },
+      {
+        "name": "LocalDateTable_0a55f0cb-d2a0-46e7-bf14-5f5dd9b1eedd",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "47727be4-b8eb-41a1-b3a0-2216c5484a2b",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "isHidden": true,
+            "lineageTag": "fe527bd8-9cbb-4312-add8-e8880e9ddd31",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "isHidden": true,
+            "lineageTag": "4419a80b-da16-4bf1-8051-704f6d758739",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "78f850cc-4469-49ef-b870-feab1171c165",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "isHidden": true,
+            "lineageTag": "0144b984-2b9e-4564-b53c-38e04758e273",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "1f015d71-bbc6-4f38-b055-5de91a1555a0",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "isHidden": true,
+            "lineageTag": "db8603f8-0f89-4a42-9aef-551fe48db1d9",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "498d5e36-46ad-4b8a-b2a7-f2b81c53153f",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "c9cb1412-f1f2-4cb5-868a-940d1baac3e4",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "95deb93f-83bc-48e3-baa9-6a9d5ebd8f31",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "223dd273-b934-45b0-a605-7129d7879b43",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "f3e0fd75-8c3d-46a2-911a-80cad0376c65"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "a65e20de-2399-46c6-b530-c5b6d08d5c1c",
+        "partitions": [
+          {
+            "name": "LocalDateTable_0a55f0cb-d2a0-46e7-bf14-5f5dd9b1eedd",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('image_URLs'[Date modified])), 1, 1), Date(Year(MAX('image_URLs'[Date modified])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
+      },
+      {
+        "name": "LocalDateTable_45891b6a-ab27-4a17-a846-480f53076596",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "a85600d3-bf35-42e1-9eb7-502b37786a37",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "isHidden": true,
+            "lineageTag": "61887d6e-52f7-4326-8bff-6801411bba4c",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "isHidden": true,
+            "lineageTag": "2abb3eef-cfbd-42bb-8d78-2b82303db3bd",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "ffbf0006-a49c-425b-b139-e472b646dd98",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "isHidden": true,
+            "lineageTag": "eec781a3-75bc-4219-b8d5-65b732a768e1",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "ee2e5479-6991-4173-bfb4-b492dc3a20a6",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "isHidden": true,
+            "lineageTag": "c3ee5ed9-63c2-4af3-bfea-c616444d74d3",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "eceeffe9-0485-485d-96f6-412e66fbba4f",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "327d9d5a-2e6a-49b0-b986-73e153554b90",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "49a90ee5-7abe-4521-8d84-f2d086dacfb4",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "7d3f07f6-268f-4503-a4d0-18e2befc9e57",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "f9735b1c-fdcb-4730-a9c3-31b061791dd4"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "472355f5-976e-4804-8192-0b0e34d193db",
+        "partitions": [
+          {
+            "name": "LocalDateTable_45891b6a-ab27-4a17-a846-480f53076596",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('image_URLs'[Date created])), 1, 1), Date(Year(MAX('image_URLs'[Date created])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
       }
     ]
   }
