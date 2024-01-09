@@ -70,15 +70,6 @@
           "z": 1000.00
         },
         {
-          "config": "{\"name\":\"995d033f9067cc430c9e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":26.71059857221307,\"y\":92.08127402526085,\"z\":4000,\"width\":1215.3322350356948,\"height\":616.452498627128,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Staff.staff_KEY\"},{\"queryRef\":\"Staff.staff_id\"},{\"queryRef\":\"Staff.description\"},{\"queryRef\":\"Staff.date_hired\"},{\"queryRef\":\"Staff.office__description\"},{\"queryRef\":\"Staff.department__description\"},{\"queryRef\":\"image_URLs.File Path\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Staff\",\"Type\":0},{\"Name\":\"i\",\"Entity\":\"Staff_Image_URLs\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"staff_KEY\"},\"Name\":\"Staff.staff_KEY\",\"NativeReferenceName\":\"staff_KEY\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"staff_id\"},\"Name\":\"Staff.staff_id\",\"NativeReferenceName\":\"staff_id\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"description\"},\"Name\":\"Staff.description\",\"NativeReferenceName\":\"description\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"date_hired\"},\"Name\":\"Staff.date_hired\",\"NativeReferenceName\":\"date_hired\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"office__description\"},\"Name\":\"Staff.office__description\",\"NativeReferenceName\":\"office__description\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"department__description\"},\"Name\":\"Staff.department__description\",\"NativeReferenceName\":\"department__description\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"File Path\"},\"Name\":\"image_URLs.File Path\",\"NativeReferenceName\":\"File Path\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"date_hired\"}}}]},\"queryOptions\":{\"keepProjectionOrder\":true},\"showAllRoles\":[\"Values\"],\"drillFilterOtherVisuals\":true,\"objects\":{}}}",
-          "filters": "[]",
-          "height": 616.45,
-          "width": 1215.33,
-          "x": 26.71,
-          "y": 92.08,
-          "z": 4000.00
-        },
-        {
           "config": "{\"name\":\"b180466f0e5a28b96bec\",\"layouts\":[{\"id\":0,\"position\":{\"x\":67.36842105263145,\"y\":5.886561062851303,\"z\":0,\"width\":1212.6315789473686,\"height\":58.86561062851303,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"\"}]}]}}]},\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}}}}]}}}",
           "filters": "[]",
           "height": 58.87,
