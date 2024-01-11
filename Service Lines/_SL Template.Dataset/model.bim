@@ -12,7 +12,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.124.1052.0 (23.12)"
+        "value": "2.124.1554.0 (23.12)"
       },
       {
         "name": "PBI_ProTooling",
@@ -2483,10 +2483,14 @@
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isCustom\":true}"
               }
             ],
             "dataType": "dateTime",
-            "formatString": "Short Date",
+            "formatString": "mm-yy",
             "lineageTag": "6cb276c9-7f8d-4cc1-9073-03cd59e644fd",
             "sourceColumn": "invoice__invoice_month",
             "sourceProviderType": "datetime2",
@@ -8950,10 +8954,14 @@
               {
                 "name": "UnderlyingDateTimeDataType",
                 "value": "Date"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isCustom\":true}"
               }
             ],
             "dataType": "dateTime",
-            "formatString": "Short Date",
+            "formatString": "mm-yy",
             "lineageTag": "0220d4f0-8984-4388-9d52-808ae4e05217",
             "sourceColumn": "sheet_month",
             "sourceProviderType": "datetime2",
@@ -16170,10 +16178,14 @@
               {
                 "name": "UnderlyingDateTimeDataType",
                 "value": "Date"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isCustom\":true}"
               }
             ],
             "dataType": "dateTime",
-            "formatString": "Short Date",
+            "formatString": "mm-yy",
             "lineageTag": "5deb010e-9dc1-4599-ac2c-91e6edfdd5af",
             "sourceColumn": "control_month",
             "sourceProviderType": "datetime2",
@@ -19720,11 +19732,15 @@
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isCustom\":true}"
               }
             ],
             "dataType": "dateTime",
             "expression": "DATE(YEAR([Date]), MONTH([Date]), 1)",
-            "formatString": "General Date",
+            "formatString": "Mm-yy",
             "isDataTypeInferred": true,
             "lineageTag": "e2e470b7-fd85-4fb4-99da-505214ab1e19",
             "summarizeBy": "none",

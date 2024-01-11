@@ -4,7 +4,7 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 3492.022314775324,
+        "x": 0,
         "y": 968
       },
       "nodes": [
@@ -446,6 +446,19 @@
           "nodeLineageTag": "66eded1e-e134-4d47-97e9-be7b8317554c",
           "size": {
             "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 6044.022314775324,
+            "y": 992.4132954940344
+          },
+          "nodeIndex": "Staff_Image_URLs",
+          "nodeLineageTag": "64465cf3-fc7f-483f-ab09-2729c16de3bd",
+          "size": {
+            "height": 128,
             "width": 234
           },
           "zIndex": 0
