@@ -462,6 +462,19 @@
             "width": 234
           },
           "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 6044.022314775324,
+            "y": 968.4132954940344
+          },
+          "nodeIndex": "Staff_Birthdays",
+          "nodeLineageTag": "451e0fea-430e-4a0a-9b06-fbb8162ee887",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",

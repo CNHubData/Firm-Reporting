@@ -15328,6 +15328,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -16225,6 +16229,38 @@
             "sourceColumn": "control_month",
             "sourceProviderType": "datetime2",
             "summarizeBy": "none"
+          },
+          {
+            "name": "invoice_amount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "3f9e0e63-9e24-44d6-af02-9f4262be72bd",
+            "sourceColumn": "invoice_amount",
+            "sourceProviderType": "decimal(17, 2)",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "approved__staff_description",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2277878f-eafe-4651-b0fc-477adcb36e49",
+            "sourceColumn": "approved__staff_description",
+            "sourceProviderType": "nvarchar(250)",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "c65cf15f-e9a6-450b-8c3e-75ce6a76adfa",
@@ -16248,16 +16284,20 @@
                 "    // // This corresponds to the \"Collected Amount\" column of the Collection Summary report.",
                 "    #\"Added collected_amount\" = Table.AddColumn(dbo_Ledger_Entry_View, \"collected_amount\", each if List.Contains({\"CA\", \"CC\", \"CHK\", \"ACH\", \"NSF\", \"CCR\"}, [ledger_entry_type__ledger_entry_type_id]) then ",
                 "[amount] * -1 else ",
-                "0, type number),",
-                "    #\"Added Custom\" = Table.AddColumn(#\"Added collected_amount\", \"FY\", each if Date.Month([control_date]) >= 7 then Date.Year([control_date]) + 1 else Date.Year([control_date])),",
+                "null, type number),",
+                "    // the amount of invoices to offset collections",
+                "    #\"Added invoice_amount\" = Table.AddColumn(#\"Added collected_amount\", \"invoice_amount\", each if [ledger_entry_type__ledger_entry_type_id] = \"INV\" then [amount] else null, type number),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Added invoice_amount\", \"FY\", each if Date.Month([control_date]) >= 7 then Date.Year([control_date]) + 1 else Date.Year([control_date])),",
                 "    #\"Added Custom1\" = Table.AddColumn(#\"Added Custom\", \"client_partner_id\", each Text.From([client_KEY]) & \"-\" & Text.From([client__partner__staff__staff_id])),",
                 "    // This is meant to help with the Collections lookup, to be able to view the related client group collection amounts.",
                 "    #\"Merged Related Client Group\" = Table.NestedJoin(#\"Added Custom1\", {\"client_KEY\"}, RCG, {\"row_KEY\"}, \"RCG\", JoinKind.LeftOuter),",
                 "    #\"Expanded RCG\" = Table.ExpandTableColumn(#\"Merged Related Client Group\", \"RCG\", {\"related_client_group_id\", \"related_client_group__description\"}, {\"related_client_group_id\", \"related_client_group__description\"}),",
                 "    // Meant to show the first day of the month in which the control_date is found.  Helps to create visuals aggregated by month",
-                "    #\"Added control_month\" = Table.AddColumn(#\"Expanded RCG\", \"control_month\", each Date.StartOfMonth([control_date]), type date)",
+                "    #\"Added control_month\" = Table.AddColumn(#\"Expanded RCG\", \"control_month\", each Date.StartOfMonth([control_date]), type date),",
+                "    #\"Merged Queries\" = Table.NestedJoin(#\"Added control_month\", {\"approved__staff_KEY\"}, Staff, {\"staff_KEY\"}, \"Staff\", JoinKind.LeftOuter),",
+                "    #\"Expanded Staff\" = Table.ExpandTableColumn(#\"Merged Queries\", \"Staff\", {\"description\"}, {\"approved__staff_description\"})",
                 "in",
-                "    #\"Added control_month\""
+                "    #\"Expanded Staff\""
               ],
               "type": "m"
             }
