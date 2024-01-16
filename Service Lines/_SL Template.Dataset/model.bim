@@ -21135,6 +21135,29 @@
           }
         ],
         "lineageTag": "09058334-53d2-4f8f-816a-745bf540d869",
+        "measures": [
+          {
+            "name": "_Nav Limiter",
+            "expression": [
+              "",
+              "VAR user = USERPRINCIPALNAME()",
+              "VAR allowed_list = ",
+              "        {",
+              "        \"kyork@coopernorman.com\",",
+              "        // \"hharoldsen@coopernorman.com\",",
+              "        \"estory@coopernorman.com\"",
+              "            }",
+              "RETURN",
+              "",
+              "IF( user in allowed_list, \"totals-only\")",
+              "",
+              "// This measure will be used in the button to access the totals-only page.  ",
+              "// Users must be defined in this list in order for the button to take them to the totals-only page.  Otherwise the button will not do anything.",
+              "// The totals-only page is meant to contain every possible total a user could want on their individual dashboard."
+            ],
+            "lineageTag": "e3b02211-8d3b-4bda-a612-97011062d5d8"
+          }
+        ],
         "partitions": [
           {
             "name": "_Client / Staff Param",

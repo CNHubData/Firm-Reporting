@@ -12,7 +12,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.124.1052.0 (23.12)"
+        "value": "2.124.1554.0 (23.12)"
       },
       {
         "name": "PBI_ProTooling",
@@ -6355,6 +6355,29 @@
         ],
         "dataCategory": "Time",
         "lineageTag": "5a63a071-8d41-4fae-941d-a126662a8121",
+        "measures": [
+          {
+            "name": "_Nav Limiter",
+            "expression": [
+              "",
+              "VAR user = USERPRINCIPALNAME()",
+              "VAR allowed_list = ",
+              "        {",
+              "        \"kyork@coopernorman.com\",",
+              "        \"hharoldsen@coopernorman.com\",",
+              "        \"estory@coopernorman.com\"",
+              "            }",
+              "RETURN",
+              "",
+              "IF( user in allowed_list, \"totals-only\")",
+              "",
+              "// This measure will be used in the button to access the totals-only page.  ",
+              "// Users must be defined in this list in order for the button to take them to the totals-only page.  Otherwise the button will not do anything.",
+              "// The totals-only page is meant to contain every possible total a user could want on their individual dashboard."
+            ],
+            "lineageTag": "7e5e8193-c1a3-4344-8622-70369416da79"
+          }
+        ],
         "partitions": [
           {
             "name": "_Dates",
