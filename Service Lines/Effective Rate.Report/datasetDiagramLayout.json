@@ -462,6 +462,58 @@
             "width": 234
           },
           "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 5343.8280410555335,
+            "y": 1356.8383069419729
+          },
+          "nodeIndex": "Contact_Phone",
+          "nodeLineageTag": "63523be4-78fc-4e90-81a1-9a2ff47c4ceb",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 5627.8280410555335,
+            "y": 1442.8383069419729
+          },
+          "nodeIndex": "Contact_Phone_Type",
+          "nodeLineageTag": "cd30c335-e3b8-438f-820b-a9434f30e221",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 5911.8280410555335,
+            "y": 1418.8383069419729
+          },
+          "nodeIndex": "Staff_Birthdays",
+          "nodeLineageTag": "451e0fea-430e-4a0a-9b06-fbb8162ee887",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 6195.8280410555335,
+            "y": 1370.8383069419729
+          },
+          "nodeIndex": "Staff_Phone",
+          "nodeLineageTag": "a8156c69-bf0c-46be-a30a-39aa8ea34071",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",
