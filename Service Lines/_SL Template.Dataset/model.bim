@@ -4,7 +4,7 @@
     "annotations": [
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"Activity_View\",\"Billing_Decision_View\",\"Billing_Decision_Collection_View\",\"Client_View\",\"Client_Date_Cache\",\"Contact_View\",\"Contact_Address\",\"Contact_Email\",\"Engagement_View\",\"History_Of_Client_View\",\"Invoice_View (AR)\",\"Invoice_View (Collection)\",\"Invoice_WIP_Pending_Lookup\",\"Ledger_Entry_View (AR)\",\"Ledger_Entry_View (Collection)\",\"Ledger_Entry_Application_View\",\"Project_View\",\"Sheet_Entry_View\",\"Staff\",\"Staff_Email\",\"Task_View\",\"RCG\",\"client_relations\",\"bsc_participants\",\"Custom_Grouping\",\"Custom_Field\",\"Invoice_Biller_Checking\",\"secondary_partner/ae\",\"secondary_partner/ae_date\",\"growth_reporting\",\"possible_fiscals\",\"Billing_Decision_View_fiscal_calc\",\"Engagement_Template\",\"staff_primary_id\",\"Staff_Billing_Rate_View\",\"Staff_Rate_Table_View\",\"Staff_Image_URLs\"]"
+        "value": "[\"Activity_View\",\"Billing_Decision_View\",\"Billing_Decision_Collection_View\",\"Client_View\",\"Client_Date_Cache\",\"Contact_Phone\",\"Contact_Phone_Type\",\"Contact_View\",\"Contact_Address\",\"Contact_Email\",\"Engagement_View\",\"History_Of_Client_View\",\"Invoice_View (AR)\",\"Invoice_View (Collection)\",\"Invoice_WIP_Pending_Lookup\",\"Ledger_Entry_View (AR)\",\"Ledger_Entry_View (Collection)\",\"Ledger_Entry_Application_View\",\"Project_View\",\"Sheet_Entry_View\",\"Staff\",\"Staff_Email\",\"Staff_Birthdays\",\"Staff_Phone\",\"Task_View\",\"RCG\",\"client_relations\",\"bsc_participants\",\"Custom_Grouping\",\"Custom_Field\",\"Invoice_Biller_Checking\",\"secondary_partner/ae\",\"secondary_partner/ae_date\",\"growth_reporting\",\"possible_fiscals\",\"Billing_Decision_View_fiscal_calc\",\"Engagement_Template\",\"staff_primary_id\",\"Staff_Billing_Rate_View\",\"Staff_Rate_Table_View\",\"Staff_Image_URLs\",\"birthdays\"]"
       },
       {
         "name": "__PBI_TimeIntelligenceEnabled",
@@ -751,6 +751,32 @@
         "kind": "m",
         "lineageTag": "332945e3-6218-4150-bb9d-25e0c9d7283b",
         "queryGroup": "cutsom_groupings"
+      },
+      {
+        "name": "birthdays",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "description": "Related Client Group custom field",
+        "expression": [
+          "let",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
+          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 48)",
+          "in",
+          "    #\"Filtered Rows\""
+        ],
+        "kind": "m",
+        "lineageTag": "d7cce518-ad47-408a-a71a-125d88ccaddf",
+        "queryGroup": "cutsom_groupings"
       }
     ],
     "queryGroups": [
@@ -1088,6 +1114,15 @@
         "fromCardinality": "one",
         "fromColumn": "staff_KEY",
         "fromTable": "Staff_Image_URLs",
+        "toColumn": "staff_KEY",
+        "toTable": "Staff"
+      },
+      {
+        "name": "cf2d7dc3-aa08-4edd-a1b5-5615d1c5278a",
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "staff_KEY",
+        "fromTable": "Staff_Birthdays",
         "toColumn": "staff_KEY",
         "toTable": "Staff"
       }
@@ -21697,10 +21732,6 @@
         "name": "Staff_Image_URLs",
         "annotations": [
           {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
-          {
             "name": "PBI_ResultType",
             "value": "Table"
           }
@@ -21752,6 +21783,588 @@
                 "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Added Custom\",{\"staff_KEY\", \"File Path\"})",
                 "in",
                 "    #\"Removed Other Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Staff_Birthdays",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "staff_KEY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isNullable": false,
+            "lineageTag": "7b930e4f-2595-430d-b2ef-80985b09bff1",
+            "sourceColumn": "staff_KEY",
+            "sourceProviderType": "int",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "staff_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isNullable": false,
+            "lineageTag": "b5b60c24-9951-4955-8131-331b730d624e",
+            "sourceColumn": "staff_id",
+            "sourceProviderType": "nvarchar(11)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "description",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isNullable": false,
+            "lineageTag": "2f877d7d-5c04-4049-b68f-5b8bfa080bb1",
+            "sourceColumn": "description",
+            "sourceProviderType": "nvarchar(250)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Birthday_Today",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDateTimeCustom\":true}"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "mmmm d",
+            "lineageTag": "1eeb0a4e-dabe-426c-a146-45f6db51deb1",
+            "sourceColumn": "Birthday_Today",
+            "sourceProviderType": "nvarchar(max)",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "451e0fea-430e-4a0a-9b06-fbb8162ee887",
+        "partitions": [
+          {
+            "name": "Staff_Birthdays",
+            "mode": "directQuery",
+            "queryGroup": "PCS Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
+                "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
+                "    dbo_Staff = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Staff\"]}[Data],",
+                "    // This will place the staff member's current active account ID on the previous accounts.  This will allow us to get the current desciption to effectively combine the accounts with on description.",
+                "    #\"Merged staff_primary_id\" = Table.NestedJoin(dbo_Staff, {\"staff_KEY\"}, staff_primary_id, {\"row_KEY\"}, \"staff_primary_id\", JoinKind.LeftOuter),",
+                "    #\"Expanded staff_primary_id\" = Table.ExpandTableColumn(#\"Merged staff_primary_id\", \"staff_primary_id\", {\"custom_value\"}, {\"staff_primary_id\"}),",
+                "    // This column will switch between the primary id (if there is one) and the regular staff id (if there is not primary).  This will allow us to lookup the most recent staff description.",
+                "    #\"Created staff_primary_id_lookup\" = Table.AddColumn(#\"Expanded staff_primary_id\", \"staff_primary_id_lookup\", each if [staff_primary_id] = null then [staff_id] else [staff_primary_id]),",
+                "    // This will allow us to lookup the description that is most recent for each staff member",
+                "    #\"Merged to Staff to Find Description\" = Table.NestedJoin(#\"Created staff_primary_id_lookup\", {\"staff_primary_id_lookup\"}, #\"Created staff_primary_id_lookup\", {\"staff_id\"}, \"Created staff_primary_id_lookup\", JoinKind.LeftOuter),",
+                "    #\"Expanded Created staff_primary_id_lookup\" = Table.ExpandTableColumn(#\"Merged to Staff to Find Description\", \"Created staff_primary_id_lookup\", {\"staff_KEY\", \"description\"}, {\"primary_staff_KEY\", \"primary_staff_description\"}),",
+                "    #\"Merged Queries\" = Table.NestedJoin(#\"Expanded Created staff_primary_id_lookup\", {\"staff_KEY\"}, birthdays, {\"row_KEY\"}, \"birthdays\", JoinKind.LeftOuter),",
+                "    #\"Expanded birthdays\" = Table.ExpandTableColumn(#\"Merged Queries\", \"birthdays\", {\"custom_value_as_date\"}, {\"Birthday\"}),",
+                "    #\"Inserted Month\" = Table.AddColumn(#\"Expanded birthdays\", \"Month\", each Date.Month([Birthday]), Int64.Type),",
+                "    #\"Inserted Day\" = Table.AddColumn(#\"Inserted Month\", \"Day\", each Date.Day([Birthday]), Int64.Type),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Inserted Day\", \"Year\", each if [Month] = null or [Day] = null then null else Date.Year(DateTime.LocalNow())),",
+                "    #\"Added Custom1\" = Table.AddColumn(#\"Added Custom\", \"Birthday_Today\", each if [Year] = null then null else Text.From([Month]) & \"/\" & Text.From([Day]) & \"/\" & Text.From([Year]), type date),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Added Custom1\",{\"staff_KEY\", \"staff_id\", \"description\", \"Birthday_Today\"})",
+                "in",
+                "    #\"Removed Other Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Contact_Phone",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "contact_phone_KEY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isNullable": false,
+            "lineageTag": "451c8dc7-1c18-462e-b729-0d386a62a480",
+            "sourceColumn": "contact_phone_KEY",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "update__staff_KEY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isNullable": false,
+            "lineageTag": "0190194c-6ae5-42d1-90fc-0f561a43ad78",
+            "sourceColumn": "update__staff_KEY",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "update_date_utc",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isNullable": false,
+            "lineageTag": "41f4f34a-4899-4664-960f-b8dd74bb7b6a",
+            "sourceColumn": "update_date_utc",
+            "sourceProviderType": "datetime",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "contact_KEY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isNullable": false,
+            "lineageTag": "2497fba2-5552-4e5a-9d1f-649fbe30587b",
+            "sourceColumn": "contact_KEY",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "contact_phone_type_KEY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isNullable": false,
+            "lineageTag": "c27f90e9-b6b7-46be-854a-9737e12e022f",
+            "sourceColumn": "contact_phone_type_KEY",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "phone",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isNullable": false,
+            "lineageTag": "d82cdf5c-7d23-45b1-8e06-a65e46b77fe5",
+            "sourceColumn": "phone",
+            "sourceProviderType": "nvarchar(30)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "extension",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isNullable": false,
+            "lineageTag": "a5b24577-25ae-41a0-964e-e9615b9a8774",
+            "sourceColumn": "extension",
+            "sourceProviderType": "nvarchar(5)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "create_date_utc",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isNullable": false,
+            "lineageTag": "6d5887a4-d7a0-4a41-a517-8d8a0473e67b",
+            "sourceColumn": "create_date_utc",
+            "sourceProviderType": "datetime",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "create__changeset_KEY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isNullable": false,
+            "lineageTag": "b8143dd2-53a5-4f3d-ad54-60ee2570a715",
+            "sourceColumn": "create__changeset_KEY",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "update__changeset_KEY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isNullable": false,
+            "lineageTag": "cefd2a8e-ec8d-4757-862d-16f4d0c27680",
+            "sourceColumn": "update__changeset_KEY",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "description",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "feb5aa0c-12db-407e-84f0-e95fab6d7dad",
+            "sourceColumn": "description",
+            "sourceProviderType": "nvarchar(250)",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "63523be4-78fc-4e90-81a1-9a2ff47c4ceb",
+        "partitions": [
+          {
+            "name": "Contact_Phone",
+            "mode": "directQuery",
+            "queryGroup": "PCS Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),",
+                "    dbo_Contact_Phone = Source{[Schema=\"dbo\",Item=\"Contact_Phone\"]}[Data],",
+                "    #\"Merged Queries\" = Table.NestedJoin(dbo_Contact_Phone, {\"contact_phone_type_KEY\"}, Contact_Phone_Type, {\"contact_phone_type_KEY\"}, \"Contact_Phone_Type\", JoinKind.LeftOuter),",
+                "    #\"Expanded Contact_Phone_Type\" = Table.ExpandTableColumn(#\"Merged Queries\", \"Contact_Phone_Type\", {\"description\"}, {\"description\"})",
+                "in",
+                "    #\"Expanded Contact_Phone_Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Contact_Phone_Type",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "contact_phone_type_KEY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isNullable": false,
+            "lineageTag": "2b6347f8-bf65-4d0c-90eb-077f34489cd1",
+            "sourceColumn": "contact_phone_type_KEY",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "description",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isNullable": false,
+            "lineageTag": "f0db358d-40ee-43ce-8394-b7470fe636f9",
+            "sourceColumn": "description",
+            "sourceProviderType": "nvarchar(250)",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "cd30c335-e3b8-438f-820b-a9434f30e221",
+        "partitions": [
+          {
+            "name": "Contact_Phone_Type",
+            "mode": "directQuery",
+            "queryGroup": "PCS Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),",
+                "    dbo_Contact_Phone_Type = Source{[Schema=\"dbo\",Item=\"Contact_Phone_Type\"]}[Data]",
+                "in",
+                "    dbo_Contact_Phone_Type"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Staff_Phone",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "staff_KEY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isNullable": false,
+            "lineageTag": "ca5cd6ae-bbbf-496b-b9be-9ec5a10b2f08",
+            "sourceColumn": "staff_KEY",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "contact_KEY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isNullable": false,
+            "lineageTag": "2e0b9f2e-414c-4f7a-afd6-ae1f9c42aa12",
+            "sourceColumn": "contact_KEY",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "staff_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isNullable": false,
+            "lineageTag": "edb17832-1755-4330-9eba-200c830af182",
+            "sourceColumn": "staff_id",
+            "sourceProviderType": "nvarchar(11)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "description",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isNullable": false,
+            "lineageTag": "f79f28df-9e42-44a8-8f85-78192d19b30d",
+            "sourceColumn": "description",
+            "sourceProviderType": "nvarchar(250)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Home",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "21289468-4b3a-4f03-98f5-d92072a08fa4",
+            "sourceColumn": "Home",
+            "sourceProviderType": "nvarchar(30)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Mobile",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2bb208b3-81bb-4233-9e74-03850c11259e",
+            "sourceColumn": "Mobile",
+            "sourceProviderType": "nvarchar(30)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Phone Number",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": [
+              "",
+              "VAR phone_number = [Phone]",
+              "VAR notallowed = {\" \",\"-\",\"(\",\")\",\".\",\"|\",\",\",\"=\",\"a\",\"b\",\"c\",\"d\",\"e\",\"f\",\"g\",\"h\",\"i\",\"j\",\"k\",\"l\",\"m\",\"n\",\"o\",\"p\",\"q\",\"r\",\"s\",\"t\",\"u\",\"v\",\"w\",\"x\",\"y\",\"z\",\"A\",\"B\",\"C\",\"D\",\"E\",\"F\",\"G\",\"H\",\"I\",\"J\",\"K\",\"L\",\"M\",\"N\",\"O\",\"P\",\"Q\",\"R\",\"S\",\"T\",\"U\",\"V\",\"W\",\"X\",\"Y\",\"Z\"}",
+              "",
+              "VAR _1 = IF( LEFT(phone_number, 1) in notallowed, BLANK(), LEFT(phone_number, 1))",
+              "VAR _2 = IF( MID(phone_number, 2, 1) in notallowed, BLANK(), MID(phone_number, 2, 1))",
+              "VAR _3 = IF( MID(phone_number, 3, 1) in notallowed, BLANK(), MID(phone_number, 3, 1))",
+              "VAR _4 = IF( MID(phone_number, 4, 1) in notallowed, BLANK(), MID(phone_number, 4, 1))",
+              "VAR _5 = IF( MID(phone_number, 5, 1) in notallowed, BLANK(), MID(phone_number, 5, 1))",
+              "VAR _6 = IF( MID(phone_number, 6, 1) in notallowed, BLANK(), MID(phone_number, 6, 1))",
+              "VAR _7 = IF( MID(phone_number, 7, 1) in notallowed, BLANK(), MID(phone_number, 7, 1))",
+              "VAR _8 = IF( MID(phone_number, 8, 1) in notallowed, BLANK(), MID(phone_number, 8, 1))",
+              "VAR _9 = IF( MID(phone_number, 9, 1) in notallowed, BLANK(), MID(phone_number, 9, 1))",
+              "VAR _10 = IF( MID(phone_number, 10, 1) in notallowed, BLANK(), MID(phone_number, 10, 1))",
+              "VAR _11 = IF( MID(phone_number, 11, 1) in notallowed, BLANK(), MID(phone_number, 11, 1))",
+              "VAR _12 = IF( MID(phone_number, 12, 1) in notallowed, BLANK(), MID(phone_number, 12, 1))",
+              "VAR _13 = IF( MID(phone_number, 13, 1) in notallowed, BLANK(), MID(phone_number, 13, 1))",
+              "VAR _14 = IF( MID(phone_number, 14, 1) in notallowed, BLANK(), MID(phone_number, 14, 1))",
+              "",
+              "VAR normal_phone_number = _1 & _2 & _3 & _4 & _5 & _6 & _7 & _8 & _9 & _10 & _11 & _12 & _13 & _14",
+              "RETURN",
+              "",
+              "normal_phone_number"
+            ],
+            "isDataTypeInferred": true,
+            "lineageTag": "b425a05c-9822-424d-b4d9-0e44c9a091a8",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Phone",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a5b8639a-0344-4d92-bba8-c5d033029d0b",
+            "sourceColumn": "Phone",
+            "sourceProviderType": "nvarchar(30)",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "a8156c69-bf0c-46be-a30a-39aa8ea34071",
+        "partitions": [
+          {
+            "name": "Staff_Phone",
+            "mode": "directQuery",
+            "queryGroup": "PCS Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
+                "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
+                "    dbo_Staff = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Staff\"]}[Data],",
+                "    // This will place the staff member's current active account ID on the previous accounts.  This will allow us to get the current desciption to effectively combine the accounts with on description.",
+                "    #\"Merged staff_primary_id\" = Table.NestedJoin(dbo_Staff, {\"staff_KEY\"}, staff_primary_id, {\"row_KEY\"}, \"staff_primary_id\", JoinKind.LeftOuter),",
+                "    #\"Expanded staff_primary_id\" = Table.ExpandTableColumn(#\"Merged staff_primary_id\", \"staff_primary_id\", {\"custom_value\"}, {\"staff_primary_id\"}),",
+                "    // This column will switch between the primary id (if there is one) and the regular staff id (if there is not primary).  This will allow us to lookup the most recent staff description.",
+                "    #\"Created staff_primary_id_lookup\" = Table.AddColumn(#\"Expanded staff_primary_id\", \"staff_primary_id_lookup\", each if [staff_primary_id] = null then [staff_id] else [staff_primary_id]),",
+                "    // This will allow us to lookup the description that is most recent for each staff member",
+                "    #\"Merged to Staff to Find Description\" = Table.NestedJoin(#\"Created staff_primary_id_lookup\", {\"staff_primary_id_lookup\"}, #\"Created staff_primary_id_lookup\", {\"staff_id\"}, \"Created staff_primary_id_lookup\", JoinKind.LeftOuter),",
+                "    #\"Expanded Created staff_primary_id_lookup\" = Table.ExpandTableColumn(#\"Merged to Staff to Find Description\", \"Created staff_primary_id_lookup\", {\"staff_KEY\", \"description\"}, {\"primary_staff_KEY\", \"primary_staff_description\"}),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Expanded Created staff_primary_id_lookup\",{\"staff_KEY\", \"contact_KEY\", \"staff_id\", \"description\"}),",
+                "    #\"Merged Queries\" = Table.NestedJoin(#\"Removed Other Columns\", {\"contact_KEY\"}, Contact_Phone, {\"contact_KEY\"}, \"Contact_Phone\", JoinKind.LeftOuter),",
+                "    #\"Expanded Contact_Phone\" = Table.ExpandTableColumn(#\"Merged Queries\", \"Contact_Phone\", {\"description\", \"phone\"}, {\"type_description\", \"phone\"}),",
+                "    #\"Filtered Rows\" = Table.SelectRows(#\"Expanded Contact_Phone\", each ([phone] <> null and [phone] <> \"\")),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Filtered Rows\", \"Home\", each if [type_description] = \"Home\" then [phone] else null),",
+                "    #\"Added Custom1\" = Table.AddColumn(#\"Added Custom\", \"Mobile\", each if [type_description] = \"Mobile\" then [phone] else null),",
+                "    #\"Grouped Rows\" = Table.Group(#\"Added Custom1\", {\"staff_KEY\", \"contact_KEY\", \"staff_id\", \"description\"}, {{\"Home\", each List.Max([Home]), type nullable text}, {\"Mobile\", each List.Max([Mobile]), type nullable text}}),",
+                "    #\"Added Phone\" = Table.AddColumn(#\"Grouped Rows\", \"Phone\", each if [Mobile] = null then [Home] else [Mobile])",
+                "in",
+                "    #\"Added Phone\""
               ],
               "type": "m"
             }

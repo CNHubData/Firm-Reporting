@@ -4,8 +4,8 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 1031.4285714285716,
-        "y": 0
+        "x": 2266.4858710712465,
+        "y": 565.71428571428578
       },
       "nodes": [
         {
@@ -179,8 +179,8 @@
         },
         {
           "location": {
-            "x": 982.60714285714266,
-            "y": 1652.2321428571427
+            "x": 1332.6071428571427,
+            "y": 1969.375
           },
           "nodeIndex": "Ledger_Entry_Application_View",
           "nodeLineageTag": "e1ad86c5-4c78-4588-9c78-e87407726069",
@@ -309,8 +309,8 @@
         },
         {
           "location": {
-            "x": 1241.7499999999991,
-            "y": 1205.3526785714287
+            "x": 737.46428571428476,
+            "y": 1553.9241071428571
           },
           "nodeIndex": "Staff_Email",
           "nodeLineageTag": "a0519253-289e-4fe1-9732-cc81992bbdc0",
@@ -456,6 +456,58 @@
           "nodeIndex": "Staff_Image_URLs",
           "size": {
             "height": 158.28571428571422,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 737.34301392838915,
+            "y": 1743.9732142857142
+          },
+          "nodeIndex": "Staff_Birthdays",
+          "nodeLineageTag": "451e0fea-430e-4a0a-9b06-fbb8162ee887",
+          "size": {
+            "height": 158.57142857142844,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4241.6287282141038,
+            "y": 921.11607142857156
+          },
+          "nodeIndex": "Contact_Phone",
+          "nodeLineageTag": "63523be4-78fc-4e90-81a1-9a2ff47c4ceb",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4525.6287282141038,
+            "y": 1007.1160714285716
+          },
+          "nodeIndex": "Contact_Phone_Type",
+          "nodeLineageTag": "cd30c335-e3b8-438f-820b-a9434f30e221",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4809.6287282141038,
+            "y": 959.11607142857156
+          },
+          "nodeIndex": "Staff_Phone",
+          "nodeLineageTag": "a8156c69-bf0c-46be-a30a-39aa8ea34071",
+          "size": {
+            "height": 224,
             "width": 234
           },
           "zIndex": 0
