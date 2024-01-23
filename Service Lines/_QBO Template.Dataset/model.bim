@@ -6376,6 +6376,19 @@
               "// The totals-only page is meant to contain every possible total a user could want on their individual dashboard."
             ],
             "lineageTag": "7e5e8193-c1a3-4344-8622-70369416da79"
+          },
+          {
+            "name": "_Current Month Filter",
+            "expression": [
+              "",
+              "VAR set_date = DATE(YEAR(TODAY()), MONTH(TODAY()), 1)",
+              "VAR this_date = SELECTEDVALUE(_Dates[Date])",
+              "RETURN",
+              "",
+              "IF( this_date = set_date, 1)"
+            ],
+            "formatString": "0",
+            "lineageTag": "a7d03502-3fb6-400c-9b65-b2c09b242be6"
           }
         ],
         "partitions": [
@@ -11476,6 +11489,9 @@
               "    13, nf_py,",
               "    14, rev_cy,  // Total Revenue for the curreny year.",
               "    15, cost_cy * -1,  // Total cost of sales for the current year.",
+              "    16, labor_cy,  // Labor costs.",
+              "    17, rev_cy - cost_cy,  // Gross Margin CY",
+              "    18, DIVIDE(rev_cy, fte_cy, 0),  // Current Year Total Revenue Per FTE",
               "0)"
             ],
             "formatString": "#,##0;(#,##0)",

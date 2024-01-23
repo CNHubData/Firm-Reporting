@@ -4,7 +4,7 @@
     "annotations": [
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"Activity_View\",\"Billing_Decision_View\",\"Billing_Decision_Collection_View\",\"Client_View\",\"Client_Date_Cache\",\"Contact_Phone\",\"Contact_Phone_Type\",\"Contact_View\",\"Contact_Address\",\"Contact_Email\",\"Engagement_View\",\"History_Of_Client_View\",\"Invoice_View (AR)\",\"Invoice_View (Collection)\",\"Invoice_WIP_Pending_Lookup\",\"Ledger_Entry_View (AR)\",\"Ledger_Entry_View (Collection)\",\"Ledger_Entry_Application_View\",\"Project_View\",\"Sheet_Entry_View\",\"Staff\",\"Staff_Email\",\"Staff_Birthdays\",\"Staff_Phone\",\"Task_View\",\"RCG\",\"client_relations\",\"bsc_participants\",\"Custom_Grouping\",\"Custom_Field\",\"Invoice_Biller_Checking\",\"secondary_partner/ae\",\"secondary_partner/ae_date\",\"growth_reporting\",\"possible_fiscals\",\"Billing_Decision_View_fiscal_calc\",\"Engagement_Template\",\"staff_primary_id\",\"Staff_Billing_Rate_View\",\"Staff_Rate_Table_View\",\"Staff_Image_URLs\",\"birthdays\"]"
+        "value": "[\"Activity_View\",\"Billing_Decision_View\",\"Billing_Decision_Collection_View\",\"Client_View\",\"Client_Date_Cache\",\"Contact_Phone\",\"Contact_Phone_Type\",\"Contact_View\",\"Contact_Address\",\"Contact_Email\",\"Engagement_View\",\"History_Of_Client_View\",\"Invoice_View (AR)\",\"Invoice_View (Collection)\",\"Invoice_WIP_Pending_Lookup\",\"Ledger_Entry_View (AR)\",\"Ledger_Entry_View (Collection)\",\"Ledger_Entry_Application_View\",\"Project_View\",\"Sheet_Entry_View\",\"Staff\",\"Staff_Email\",\"Staff_Birthdays\",\"Staff_Phone\",\"Task_View\",\"RCG\",\"client_relations\",\"bsc_participants\",\"Custom_Grouping\",\"Custom_Field\",\"Invoice_Biller_Checking\",\"secondary_partner/ae\",\"secondary_partner/ae_date\",\"growth_reporting\",\"possible_fiscals\",\"Billing_Decision_View_fiscal_calc\",\"Engagement_Template\",\"staff_primary_id\",\"Staff_Billing_Rate_View\",\"Staff_Rate_Table_View\",\"Staff_Image_URLs\",\"birthdays\",\"Staff_Lookup\"]"
       },
       {
         "name": "__PBI_TimeIntelligenceEnabled",
@@ -777,6 +777,30 @@
         "kind": "m",
         "lineageTag": "d7cce518-ad47-408a-a71a-125d88ccaddf",
         "queryGroup": "cutsom_groupings"
+      },
+      {
+        "name": "Staff_Lookup",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),",
+          "    dbo_Staff = Source{[Schema=\"dbo\",Item=\"Staff\"]}[Data],",
+          "    #\"Expanded Department\" = Table.ExpandRecordColumn(dbo_Staff, \"Department\", {\"department_id\", \"description\"}, {\"department_id\", \"department__description\"})",
+          "in",
+          "    #\"Expanded Department\""
+        ],
+        "kind": "m",
+        "lineageTag": "38367d60-4513-465b-be3a-8950d937c33a",
+        "queryGroup": "Lookup"
       }
     ],
     "queryGroups": [
@@ -797,6 +821,15 @@
           }
         ],
         "folder": "PCS Tables"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "2"
+          }
+        ],
+        "folder": "Lookup"
       }
     ],
     "relationships": [
@@ -870,10 +903,8 @@
       },
       {
         "name": "255235dd-04fc-4ef4-b9be-52328d780feb",
-        "crossFilteringBehavior": "bothDirections",
         "fromColumn": "client_KEY",
         "fromTable": "Engagement_View",
-        "securityFilteringBehavior": "bothDirections",
         "toColumn": "client_KEY",
         "toTable": "Client_View"
       },
@@ -1125,6 +1156,15 @@
         "fromTable": "Staff_Birthdays",
         "toColumn": "staff_KEY",
         "toTable": "Staff"
+      },
+      {
+        "name": "5dee5547-7c72-44f7-984f-9ab885a9bfcc",
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "staff_KEY",
+        "fromTable": "Staff",
+        "toColumn": "staff_KEY",
+        "toTable": "Staff_Phone"
       }
     ],
     "roles": [
@@ -1182,6 +1222,10 @@
           },
           {
             "name": "Engagement_View"
+          },
+          {
+            "name": "Client_View",
+            "filterExpression": "[partner_department_id] == \"TAX\""
           }
         ]
       }
@@ -2912,6 +2956,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -4212,6 +4260,49 @@
             "sourceColumn": "client_partner_id",
             "sourceProviderType": "nvarchar(max)",
             "summarizeBy": "none"
+          },
+          {
+            "name": "partner_department_KEY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "0d922c1a-67ca-43e9-be78-b564faf668a2",
+            "sourceColumn": "partner_department_KEY",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "partner_department_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "03062eb6-72c9-456f-96d7-1b843edf98f8",
+            "sourceColumn": "partner_department_id",
+            "sourceProviderType": "nvarchar(11)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "partner_department__description",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "46b10e49-f6b4-4de1-a626-7cfde9834a09",
+            "sourceColumn": "partner_department__description",
+            "sourceProviderType": "nvarchar(250)",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "123f41e5-0c84-4fac-8e37-98c143248a34",
@@ -4249,9 +4340,12 @@
                 "    #\"Expanded secondary_partner/ae\" = Table.ExpandTableColumn(#\"Merged secondary_partner\", \"secondary_partner/ae\", {\"secondary_partner_KEY\", \"secondary_partner_id\", \"secondary_partner__description\"}, {\"secondary_partner_KEY\", \"secondary_partner_id\", \"secondary_partner__description\"}),",
                 "    // This connects a custom field that shows us when a secondary_partner became effective.  Essentially this field will tell us when the client was transferred from the secondary partner to the current partner.",
                 "    #\"Merged secondary_partner_date\" = Table.NestedJoin(#\"Expanded secondary_partner/ae\", {\"client_KEY\"}, #\"secondary_partner/ae_date\", {\"row_KEY\"}, \"secondary_partner/ae_date\", JoinKind.LeftOuter),",
-                "    #\"Expanded secondary_partner/ae_date\" = Table.ExpandTableColumn(#\"Merged secondary_partner_date\", \"secondary_partner/ae_date\", {\"custom_value_as_date\"}, {\"secondary_partner_effective_date\"})",
+                "    #\"Expanded secondary_partner/ae_date\" = Table.ExpandTableColumn(#\"Merged secondary_partner_date\", \"secondary_partner/ae_date\", {\"custom_value_as_date\"}, {\"secondary_partner_effective_date\"}),",
+                "    // Merged the staff lookup table to find the department of the AEs",
+                "    #\"Merged Staff_Lookup\" = Table.NestedJoin(#\"Expanded secondary_partner/ae_date\", {\"partner__staff_KEY\"}, Staff_Lookup, {\"staff_KEY\"}, \"Staff_Lookup\", JoinKind.LeftOuter),",
+                "    #\"Expanded Staff_Lookup\" = Table.ExpandTableColumn(#\"Merged Staff_Lookup\", \"Staff_Lookup\", {\"department_KEY\", \"department_id\", \"department__description\"}, {\"partner_department_KEY\", \"partner_department_id\", \"partner_department__description\"})",
                 "in",
-                "    #\"Expanded secondary_partner/ae_date\""
+                "    #\"Expanded Staff_Lookup\""
               ],
               "type": "m"
             }
@@ -4264,6 +4358,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -10403,7 +10501,7 @@
             "summarizeBy": "none"
           },
           {
-            "name": "primary_staff_KEY",
+            "name": "staff_primary_KEY",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -10412,13 +10510,13 @@
             ],
             "dataType": "int64",
             "formatString": "0",
-            "lineageTag": "737777d5-8df2-443e-9f8a-ea34298d6cc7",
-            "sourceColumn": "primary_staff_KEY",
+            "lineageTag": "ce1753a7-91bd-4f82-831c-5b0f59fa3099",
+            "sourceColumn": "staff_primary_KEY",
             "sourceProviderType": "int",
             "summarizeBy": "sum"
           },
           {
-            "name": "primary_staff_description",
+            "name": "staff_primary_description",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -10426,9 +10524,24 @@
               }
             ],
             "dataType": "string",
-            "lineageTag": "3f9a5406-05de-4c4a-acd0-b259d6044401",
-            "sourceColumn": "primary_staff_description",
+            "lineageTag": "bbc06c9e-1eb8-4240-abcb-a1c70c61b370",
+            "sourceColumn": "staff_primary_description",
             "sourceProviderType": "nvarchar(250)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "staff_primary_date_hired",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Short Date",
+            "lineageTag": "45daacf3-d9df-40a4-9893-fc30af916481",
+            "sourceColumn": "staff_primary_date_hired",
+            "sourceProviderType": "smalldatetime",
             "summarizeBy": "none"
           }
         ],
@@ -10459,7 +10572,7 @@
                 "    #\"Created staff_primary_id_lookup\" = Table.AddColumn(#\"Expanded staff_primary_id\", \"staff_primary_id_lookup\", each if [staff_primary_id] = null then [staff_id] else [staff_primary_id]),",
                 "    // This will allow us to lookup the description that is most recent for each staff member",
                 "    #\"Merged to Staff to Find Description\" = Table.NestedJoin(#\"Created staff_primary_id_lookup\", {\"staff_primary_id_lookup\"}, #\"Created staff_primary_id_lookup\", {\"staff_id\"}, \"Created staff_primary_id_lookup\", JoinKind.LeftOuter),",
-                "    #\"Expanded Created staff_primary_id_lookup\" = Table.ExpandTableColumn(#\"Merged to Staff to Find Description\", \"Created staff_primary_id_lookup\", {\"staff_KEY\", \"description\"}, {\"primary_staff_KEY\", \"primary_staff_description\"})",
+                "    #\"Expanded Created staff_primary_id_lookup\" = Table.ExpandTableColumn(#\"Merged to Staff to Find Description\", \"Created staff_primary_id_lookup\", {\"staff_KEY\", \"description\", \"date_hired\"}, {\"staff_primary_KEY\", \"staff_primary_description\", \"staff_primary_date_hired\"})",
                 "in",
                 "    #\"Expanded Created staff_primary_id_lookup\""
               ],
@@ -10843,6 +10956,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -11580,8 +11697,8 @@
                 "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
                 "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
                 "    dbo_Engagement_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Engagement_View\"]}[Data],",
-                "    #\"Merged Queries\" = Table.NestedJoin(dbo_Engagement_View, {\"biller__staff_KEY\"}, Staff, {\"staff_KEY\"}, \"Staff\", JoinKind.LeftOuter),",
-                "    #\"Expanded Staff\" = Table.ExpandTableColumn(#\"Merged Queries\", \"Staff\", {\"staff_id\"}, {\"biller__staff_id\"})",
+                "    #\"Merged Queries\" = Table.NestedJoin(dbo_Engagement_View, {\"biller__staff_KEY\"}, Staff_Lookup, {\"staff_KEY\"}, \"Staff_Lookup\", JoinKind.LeftOuter),",
+                "    #\"Expanded Staff\" = Table.ExpandTableColumn(#\"Merged Queries\", \"Staff_Lookup\", {\"staff_id\"}, {\"biller__staff_id\"})",
                 "in",
                 "    #\"Expanded Staff\""
               ],
@@ -14719,7 +14836,7 @@
               "// TOTALS:",
               "    VAR total_wip = CALCULATE( SUM( Sheet_Entry_View[posted_open_amount]))",
               "    VAR total_ar = CALCULATE( SUM( 'Ledger_Entry_View (AR)'[posted_open_amount]))",
-              "    VAR total_hours = CALCULATE( SUM(Sheet_Entry_View[units]), ALLEXCEPT(Sheet_Entry_View, Staff[primary_staff_description], Staff[department__description], Client_View[partner__description], Client_View[manager_description], Client_View[description], Client_View[related_client_group_id], Sheet_Entry_View[sheet_date], Sheet_Entry_View[activity__activity_method_KEY]), USERELATIONSHIP(_Dates[Date], Sheet_Entry_View[sheet_date]))",
+              "    VAR total_hours = CALCULATE( SUM(Sheet_Entry_View[units]), ALLEXCEPT(Sheet_Entry_View, Staff[staff_primary_description], Staff[department__description], Client_View[partner__description], Client_View[manager_description], Client_View[description], Client_View[related_client_group_id], Sheet_Entry_View[sheet_date], Sheet_Entry_View[activity__activity_method_KEY]), USERELATIONSHIP(_Dates[Date], Sheet_Entry_View[sheet_date]))",
               "",
               "// WIP by ENGAGEMENT:",
               "    VAR wip_every_engage = CALCULATE( SUM( Sheet_Entry_View[posted_open_amount]), ALL(Sheet_Entry_View[engagement__engagement_template__engagement_template_id]))",
@@ -16294,8 +16411,8 @@
                 "    #\"Expanded RCG\" = Table.ExpandTableColumn(#\"Merged Related Client Group\", \"RCG\", {\"related_client_group_id\", \"related_client_group__description\"}, {\"related_client_group_id\", \"related_client_group__description\"}),",
                 "    // Meant to show the first day of the month in which the control_date is found.  Helps to create visuals aggregated by month",
                 "    #\"Added control_month\" = Table.AddColumn(#\"Expanded RCG\", \"control_month\", each Date.StartOfMonth([control_date]), type date),",
-                "    #\"Merged Queries\" = Table.NestedJoin(#\"Added control_month\", {\"approved__staff_KEY\"}, Staff, {\"staff_KEY\"}, \"Staff\", JoinKind.LeftOuter),",
-                "    #\"Expanded Staff\" = Table.ExpandTableColumn(#\"Merged Queries\", \"Staff\", {\"description\"}, {\"approved__staff_description\"})",
+                "    #\"Merged Queries\" = Table.NestedJoin(#\"Added control_month\", {\"approved__staff_KEY\"}, Staff_Lookup, {\"staff_KEY\"}, \"Staff_Lookup\", JoinKind.LeftOuter),",
+                "    #\"Expanded Staff\" = Table.ExpandTableColumn(#\"Merged Queries\", \"Staff_Lookup\", {\"description\"}, {\"approved__staff_description\"})",
                 "in",
                 "    #\"Expanded Staff\""
               ],
@@ -16309,7 +16426,11 @@
         "annotations": [
           {
             "name": "PBI_ResultType",
-            "value": "Exception"
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -17184,8 +17305,8 @@
                 "    invoice_format_compressed = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Invoice_View\"]}[Data],",
                 "    #\"Merged Biller\" = Table.NestedJoin(invoice_format_compressed, {\"billed__staff_KEY\"}, Staff, {\"staff_KEY\"}, \"Staff\", JoinKind.LeftOuter),",
                 "    #\"Expanded Staff\" = Table.ExpandTableColumn(#\"Merged Biller\", \"Staff\", {\"description\"}, {\"billed__staff_description\"}),",
-                "    #\"Merged Approver\" = Table.NestedJoin(#\"Expanded Staff\", {\"approved__staff_KEY\"}, Staff, {\"staff_KEY\"}, \"Staff\", JoinKind.LeftOuter),",
-                "    #\"Expanded Staff1\" = Table.ExpandTableColumn(#\"Merged Approver\", \"Staff\", {\"description\"}, {\"approved__staff_description\"})",
+                "    #\"Merged Approver\" = Table.NestedJoin(#\"Expanded Staff\", {\"approved__staff_KEY\"}, Staff_Lookup, {\"staff_KEY\"}, \"Staff_Lookup\", JoinKind.LeftOuter),",
+                "    #\"Expanded Staff1\" = Table.ExpandTableColumn(#\"Merged Approver\", \"Staff_Lookup\", {\"description\"}, {\"approved__staff_description\"})",
                 "in",
                 "    #\"Expanded Staff1\""
               ],
@@ -18705,7 +18826,11 @@
         "annotations": [
           {
             "name": "PBI_ResultType",
-            "value": "Exception"
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -21144,7 +21269,7 @@
               "VAR allowed_list = ",
               "        {",
               "        \"kyork@coopernorman.com\",",
-              "        // \"hharoldsen@coopernorman.com\",",
+              "        \"hharoldsen@coopernorman.com\",",
               "        \"estory@coopernorman.com\"",
               "            }",
               "RETURN",
@@ -21169,7 +21294,7 @@
                 "    (\"Client Manager\", NAMEOF('Client_View'[manager_description]), 1),",
                 "    (\"Client Partner\", NAMEOF('Client_View'[partner__description]), 2),",
                 "    (\"Related Client Group\", NAMEOF('Client_View'[related_client_group_id]), 3),",
-                "    (\"Staff Name\", NAMEOF('Staff'[primary_staff_description]), 4),",
+                "    (\"Staff Name\", NAMEOF('Staff'[staff_primary_description]), 4),",
                 "    (\"Department\", NAMEOF('Staff'[department__description]), 5)",
                 "}"
               ],
@@ -21797,6 +21922,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -21837,7 +21966,7 @@
             "source": {
               "expression": [
                 "let",
-                "    Source = SharePoint.Files(\"https://coopernorman.sharepoint.com/\", [ApiVersion = 15]),",
+                "    Source = SharePoint.Files(\"https://coopernorman.sharepoint.com/sites/CN-Assets2\", [ApiVersion = 15]),",
                 "    #\"Filtered Rows\" = Table.SelectRows(Source, each Text.Contains([Folder Path], \"Shared Documents/images/\")),",
                 "    #\"Duplicated Column\" = Table.DuplicateColumn(#\"Filtered Rows\", \"Name\", \"Name - Copy\"),",
                 "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Duplicated Column\", \"Name - Copy\", Splitter.SplitTextByDelimiter(\".jpeg\", QuoteStyle.Csv), {\"staff_KEY\"}),",
@@ -21855,10 +21984,6 @@
       {
         "name": "Staff_Birthdays",
         "annotations": [
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
           {
             "name": "PBI_ResultType",
             "value": "Table"
@@ -21973,10 +22098,6 @@
       {
         "name": "Contact_Phone",
         "annotations": [
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
           {
             "name": "PBI_ResultType",
             "value": "Table"
@@ -22181,10 +22302,6 @@
         "name": "Contact_Phone_Type",
         "annotations": [
           {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
-          {
             "name": "PBI_ResultType",
             "value": "Table"
           }
@@ -22245,10 +22362,6 @@
         "name": "Staff_Phone",
         "annotations": [
           {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
-          {
             "name": "PBI_ResultType",
             "value": "Table"
           }
@@ -22268,7 +22381,7 @@
             "lineageTag": "ca5cd6ae-bbbf-496b-b9be-9ec5a10b2f08",
             "sourceColumn": "staff_KEY",
             "sourceProviderType": "int",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "contact_KEY",
@@ -22376,7 +22489,7 @@
               "VAR normal_phone_number = _1 & _2 & _3 & _4 & _5 & _6 & _7 & _8 & _9 & _10 & _11 & _12 & _13 & _14",
               "RETURN",
               "",
-              "normal_phone_number"
+              "\"(\" & LEFT(normal_phone_number, 3) & \") \" & MID(normal_phone_number, 4, 3) & \"-\" & RIGHT(normal_phone_number, 4)"
             ],
             "isDataTypeInferred": true,
             "lineageTag": "b425a05c-9822-424d-b4d9-0e44c9a091a8",
@@ -22402,7 +22515,7 @@
         "partitions": [
           {
             "name": "Staff_Phone",
-            "mode": "directQuery",
+            "mode": "import",
             "queryGroup": "PCS Tables",
             "source": {
               "expression": [

@@ -475,6 +475,45 @@
             "width": 234
           },
           "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 5038.414198837947,
+            "y": 1126.18579755457
+          },
+          "nodeIndex": "Contact_Phone",
+          "nodeLineageTag": "63523be4-78fc-4e90-81a1-9a2ff47c4ceb",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 5322.414198837947,
+            "y": 1212.18579755457
+          },
+          "nodeIndex": "Contact_Phone_Type",
+          "nodeLineageTag": "cd30c335-e3b8-438f-820b-a9434f30e221",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 5606.414198837947,
+            "y": 1140.18579755457
+          },
+          "nodeIndex": "Staff_Phone",
+          "nodeLineageTag": "a8156c69-bf0c-46be-a30a-39aa8ea34071",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",

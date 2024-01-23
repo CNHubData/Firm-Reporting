@@ -462,6 +462,19 @@
             "width": 234
           },
           "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 6144.748970521413,
+            "y": 1096.9751897743886
+          },
+          "nodeIndex": "PL_MAPPING",
+          "nodeLineageTag": "cd12bcfc-f2b6-4687-bb13-711ea562105c",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",
