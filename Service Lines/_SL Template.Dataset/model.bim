@@ -21972,9 +21972,10 @@
                 "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Duplicated Column\", \"Name - Copy\", Splitter.SplitTextByDelimiter(\".jpeg\", QuoteStyle.Csv), {\"staff_KEY\"}),",
                 "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Split Column by Delimiter\",{{\"staff_KEY\", Int64.Type}}),",
                 "    #\"Added Custom\" = Table.AddColumn(#\"Changed Type\", \"File Path\", each [Folder Path] & [Name]),",
-                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Added Custom\",{\"staff_KEY\", \"File Path\"})",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Added Custom\",{\"staff_KEY\"}),",
+                "    #\"Added Custom1\" = Table.AddColumn(#\"Removed Other Columns\", \"File Path\", each \"https://raw.githubusercontent.com/CNHubData/Firm-Reporting/main/Assets/\" & Text.From([staff_KEY]) & \".jpeg\")",
                 "in",
-                "    #\"Removed Other Columns\""
+                "    #\"Added Custom1\""
               ],
               "type": "m"
             }
