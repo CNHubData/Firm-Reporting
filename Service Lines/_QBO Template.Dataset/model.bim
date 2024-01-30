@@ -12,7 +12,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.124.1554.0 (23.12)"
+        "value": "2.124.1805.0 (23.12)"
       },
       {
         "name": "PBI_ProTooling",
@@ -11490,7 +11490,7 @@
               "    14, rev_cy,  // Total Revenue for the curreny year.",
               "    15, cost_cy * -1,  // Total cost of sales for the current year.",
               "    16, labor_cy,  // Labor costs.",
-              "    17, rev_cy - cost_cy,  // Gross Margin CY",
+              "    17, rev_cy + cost_cy,  // Gross Margin CY",
               "    18, DIVIDE(rev_cy, fte_cy, 0),  // Current Year Total Revenue Per FTE",
               "0)"
             ],
