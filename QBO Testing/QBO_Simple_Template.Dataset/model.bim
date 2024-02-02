@@ -1,0 +1,2251 @@
+{
+  "compatibilityLevel": 1550,
+  "model": {
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"BALANCE_SHEET\",\"PROFIT_AND_LOSS\",\"GENERAL_LEDGER\",\"EXPENSES_SALES_ENHANCED\",\"ACCOUNT\",\"CLASS\",\"BALANCE_PAYROLL\"]"
+      },
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "1"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.124.2028.0 (23.12)"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "DynamicImprovement": "HighConfidence",
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "queryGroups": [
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "2"
+          }
+        ],
+        "description": "Tables from the regular Cooper Norman QBO database for lookup purposes.",
+        "folder": "Lookup_Tables"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "1"
+          }
+        ],
+        "description": "Tables created from the FiveTran Transformations steps before they are sent to the snowflake warehouse.",
+        "folder": "FiveTran_Transformations"
+      }
+    ],
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "BALANCE_SHEET",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "CALENDAR_DATE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "9cbb37cc-c40d-4cf0-aac1-5294bacbebdd",
+            "sourceColumn": "CALENDAR_DATE",
+            "sourceProviderType": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SOURCE_RELATION",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "3c0f5711-3496-4c00-85ce-59de7384c04b",
+            "sourceColumn": "SOURCE_RELATION",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_CLASS",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "eef15917-da8e-4aff-8b80-bd1ccac81a59",
+            "sourceColumn": "ACCOUNT_CLASS",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CLASS_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2887ef9b-fcf6-479c-9dc4-409b67cbda9b",
+            "sourceColumn": "CLASS_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "IS_SUB_ACCOUNT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "1caafbec-b859-488b-9694-2e6e4ebb3f9c",
+            "sourceColumn": "IS_SUB_ACCOUNT",
+            "sourceProviderType": "bit",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PARENT_ACCOUNT_NUMBER",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "aa9cc49a-2a97-4e38-b57b-6666ab0afb4c",
+            "sourceColumn": "PARENT_ACCOUNT_NUMBER",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PARENT_ACCOUNT_NAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7819b997-17f3-43ae-8672-798587babdcc",
+            "sourceColumn": "PARENT_ACCOUNT_NAME",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_TYPE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "64075bf3-5f6b-4923-bca4-3e2f6ca9d6c6",
+            "sourceColumn": "ACCOUNT_TYPE",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_SUB_TYPE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "047b0aef-25b9-4c67-a144-04429abe5fd6",
+            "sourceColumn": "ACCOUNT_SUB_TYPE",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_NUMBER",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "450c6c1c-524e-4ba5-b564-9c8d5d756526",
+            "sourceColumn": "ACCOUNT_NUMBER",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "25012a92-1a08-4d03-ac9f-9aa5136913fd",
+            "sourceColumn": "ACCOUNT_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_NAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a4ec78aa-a1aa-4864-8c4d-f4b6aed637f1",
+            "sourceColumn": "ACCOUNT_NAME",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AMOUNT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "9cb096aa-fecc-48e9-b3ec-21678f00b546",
+            "sourceColumn": "AMOUNT",
+            "sourceProviderType": "double",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ACCOUNT_ORDINAL",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "b9dac841-4adf-491a-82b5-034a250b34af",
+            "sourceColumn": "ACCOUNT_ORDINAL",
+            "sourceProviderType": "decimal(1, 0)",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "3c3c8db2-d201-4b83-9f34-a413d24aa084",
+        "partitions": [
+          {
+            "name": "BALANCE_SHEET",
+            "mode": "directQuery",
+            "queryGroup": "FiveTran_Transformations",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Snowflake.Databases(\"nt21881.us-central1.gcp.snowflakecomputing.com\",\"FIVETRAN_WAREHOUSE\"),",
+                "    FIVETRAN_DATABASE_Database = Source{[Name=\"FIVETRAN_DATABASE\",Kind=\"Database\"]}[Data],",
+                "    QBO_COOPERNORMAN_QUICKBOOKS_Schema = FIVETRAN_DATABASE_Database{[Name=\"QBO_COOPERNORMAN_QUICKBOOKS\",Kind=\"Schema\"]}[Data],",
+                "    QUICKBOOKS__BALANCE_SHEET_Table = QBO_COOPERNORMAN_QUICKBOOKS_Schema{[Name=\"QUICKBOOKS__BALANCE_SHEET\",Kind=\"Table\"]}[Data]",
+                "in",
+                "    QUICKBOOKS__BALANCE_SHEET_Table"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "PROFIT_AND_LOSS",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "CALENDAR_DATE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "4e561c57-8f38-48ae-8753-678cbd996e29",
+            "sourceColumn": "CALENDAR_DATE",
+            "sourceProviderType": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SOURCE_RELATION",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "0331ba5a-3d6c-4a73-ac9c-9809f80f9e57",
+            "sourceColumn": "SOURCE_RELATION",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_CLASS",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "902ef4bf-53dc-4ea8-978e-b6a89b089ce2",
+            "sourceColumn": "ACCOUNT_CLASS",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CLASS_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b16ea99e-b0ed-4307-9e72-6d64d4128e83",
+            "sourceColumn": "CLASS_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "IS_SUB_ACCOUNT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "419c5e92-ae4a-4875-95c7-a5c228858b13",
+            "sourceColumn": "IS_SUB_ACCOUNT",
+            "sourceProviderType": "bit",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PARENT_ACCOUNT_NUMBER",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5a2cbf5f-cc1d-416a-a3ba-5c746bb1be04",
+            "sourceColumn": "PARENT_ACCOUNT_NUMBER",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PARENT_ACCOUNT_NAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e6a09c07-bf20-4ed7-b014-2e6758cbd3c1",
+            "sourceColumn": "PARENT_ACCOUNT_NAME",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_TYPE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "1e39e8a5-3bde-49f3-a963-32f7c55327df",
+            "sourceColumn": "ACCOUNT_TYPE",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_SUB_TYPE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e2133471-5075-49da-b92d-1e9a6976c5dc",
+            "sourceColumn": "ACCOUNT_SUB_TYPE",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_NUMBER",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "49e6aacc-41ab-4bc9-a292-dff79c1efd18",
+            "sourceColumn": "ACCOUNT_NUMBER",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "fc8dd6cc-579a-4465-a4e6-1847e692552d",
+            "sourceColumn": "ACCOUNT_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_NAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e7c6240f-4394-498c-98e4-cb7b7f622a40",
+            "sourceColumn": "ACCOUNT_NAME",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AMOUNT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "e2b7fbba-30e6-4684-95c3-694628c6320e",
+            "sourceColumn": "AMOUNT",
+            "sourceProviderType": "double",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ACCOUNT_ORDINAL",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "024d81c4-1bee-42a5-969e-6ec6a4828336",
+            "sourceColumn": "ACCOUNT_ORDINAL",
+            "sourceProviderType": "decimal(1, 0)",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "372221d1-9643-4317-8dd1-e9894cd5e0ed",
+        "partitions": [
+          {
+            "name": "PROFIT_AND_LOSS",
+            "mode": "directQuery",
+            "queryGroup": "FiveTran_Transformations",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Snowflake.Databases(\"nt21881.us-central1.gcp.snowflakecomputing.com\",\"FIVETRAN_WAREHOUSE\"),",
+                "    FIVETRAN_DATABASE_Database = Source{[Name=\"FIVETRAN_DATABASE\",Kind=\"Database\"]}[Data],",
+                "    QBO_COOPERNORMAN_QUICKBOOKS_Schema = FIVETRAN_DATABASE_Database{[Name=\"QBO_COOPERNORMAN_QUICKBOOKS\",Kind=\"Schema\"]}[Data],",
+                "    QUICKBOOKS__PROFIT_AND_LOSS_Table = QBO_COOPERNORMAN_QUICKBOOKS_Schema{[Name=\"QUICKBOOKS__PROFIT_AND_LOSS\",Kind=\"Table\"]}[Data]",
+                "in",
+                "    QUICKBOOKS__PROFIT_AND_LOSS_Table"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "GENERAL_LEDGER",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "UNIQUE_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "3341f37a-75c9-4058-ba0c-a92a34f41d5e",
+            "sourceColumn": "UNIQUE_ID",
+            "sourceProviderType": "nvarchar(32)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TRANSACTION_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7e16ed4f-47f6-4554-a4f3-8860216c5419",
+            "sourceColumn": "TRANSACTION_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SOURCE_RELATION",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "4f519c26-d140-4cbe-a190-6e3672169e81",
+            "sourceColumn": "SOURCE_RELATION",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TRANSACTION_INDEX",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "1853ad99-4773-4725-bffb-0fb9b920b1c5",
+            "sourceColumn": "TRANSACTION_INDEX",
+            "sourceProviderType": "decimal(38, 0)",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "TRANSACTION_DATE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "f99a7856-49f1-4f69-a358-2237f01ecfa2",
+            "sourceColumn": "TRANSACTION_DATE",
+            "sourceProviderType": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CUSTOMER_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6ac644c2-7b43-4700-822c-914253dc091a",
+            "sourceColumn": "CUSTOMER_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "VENDOR_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "81c36adc-c71b-45f0-8bd2-54c9c9c2aee5",
+            "sourceColumn": "VENDOR_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AMOUNT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "8f3f7573-1f77-458e-8c83-408d6bad6d05",
+            "sourceColumn": "AMOUNT",
+            "sourceProviderType": "double",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ACCOUNT_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6d43e4f0-62d6-4380-89de-346d3171d7b1",
+            "sourceColumn": "ACCOUNT_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CLASS_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a379766e-3815-4e8f-8695-f137cb72368f",
+            "sourceColumn": "CLASS_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "DEPARTMENT_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "49966863-dcca-48c0-915f-9b8454579399",
+            "sourceColumn": "DEPARTMENT_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_NUMBER",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "634c3c9b-2733-4c31-b7c1-fd3022aaded0",
+            "sourceColumn": "ACCOUNT_NUMBER",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_NAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9de5dda1-9a8e-4523-8410-d99765c234ea",
+            "sourceColumn": "ACCOUNT_NAME",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "IS_SUB_ACCOUNT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "f2e48d93-d45f-43dc-81ac-ca23e81b5e21",
+            "sourceColumn": "IS_SUB_ACCOUNT",
+            "sourceProviderType": "bit",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PARENT_ACCOUNT_NUMBER",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c14818b7-da60-4196-bf43-50216ea700c0",
+            "sourceColumn": "PARENT_ACCOUNT_NUMBER",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PARENT_ACCOUNT_NAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "cf25e40d-3131-4f41-b5e9-08ada8d02214",
+            "sourceColumn": "PARENT_ACCOUNT_NAME",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_TYPE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "121bc0ef-4b8c-49a6-9e0c-2452d85034fa",
+            "sourceColumn": "ACCOUNT_TYPE",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_SUB_TYPE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e18d735d-2177-4628-be97-d7845f97e655",
+            "sourceColumn": "ACCOUNT_SUB_TYPE",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "FINANCIAL_STATEMENT_HELPER",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "121a4da9-1e10-49fe-a046-6955f1b36ac8",
+            "sourceColumn": "FINANCIAL_STATEMENT_HELPER",
+            "sourceProviderType": "nvarchar(16)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_CURRENT_BALANCE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "33d7d795-bbb7-4fb0-a07c-185364197fe1",
+            "sourceColumn": "ACCOUNT_CURRENT_BALANCE",
+            "sourceProviderType": "double",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ACCOUNT_CLASS",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "8f8f3d9d-f1a9-4eb5-946f-c082effa916b",
+            "sourceColumn": "ACCOUNT_CLASS",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TRANSACTION_TYPE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "25b7583a-a5fb-40a0-8e54-1406516b41fa",
+            "sourceColumn": "TRANSACTION_TYPE",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TRANSACTION_SOURCE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b9f53434-c89d-4299-b8bb-8a437fb30c63",
+            "sourceColumn": "TRANSACTION_SOURCE",
+            "sourceProviderType": "nvarchar(13)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_TRANSACTION_TYPE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "19a37cf7-0f0f-43d5-a9e8-81f241ff6dba",
+            "sourceColumn": "ACCOUNT_TRANSACTION_TYPE",
+            "sourceProviderType": "nvarchar(6)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ADJUSTED_AMOUNT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "43a58556-5f75-4a3b-ad84-e3e97603da42",
+            "sourceColumn": "ADJUSTED_AMOUNT",
+            "sourceProviderType": "double",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "RUNNING_BALANCE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "d54aff84-78bc-46c7-807b-a381846fb5fd",
+            "sourceColumn": "RUNNING_BALANCE",
+            "sourceProviderType": "double",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "d47c6077-dec1-4bb1-b997-5e568e6031de",
+        "partitions": [
+          {
+            "name": "GENERAL_LEDGER",
+            "mode": "directQuery",
+            "queryGroup": "FiveTran_Transformations",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Snowflake.Databases(\"nt21881.us-central1.gcp.snowflakecomputing.com\",\"FIVETRAN_WAREHOUSE\"),",
+                "    FIVETRAN_DATABASE_Database = Source{[Name=\"FIVETRAN_DATABASE\",Kind=\"Database\"]}[Data],",
+                "    QBO_COOPERNORMAN_QUICKBOOKS_Schema = FIVETRAN_DATABASE_Database{[Name=\"QBO_COOPERNORMAN_QUICKBOOKS\",Kind=\"Schema\"]}[Data],",
+                "    QUICKBOOKS__GENERAL_LEDGER_Table = QBO_COOPERNORMAN_QUICKBOOKS_Schema{[Name=\"QUICKBOOKS__GENERAL_LEDGER\",Kind=\"Table\"]}[Data]",
+                "in",
+                "    QUICKBOOKS__GENERAL_LEDGER_Table"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "EXPENSES_SALES_ENHANCED",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "TRANSACTION_SOURCE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "00a1c52d-e7a6-4e81-a07f-3dd6b71b8b8a",
+            "sourceColumn": "TRANSACTION_SOURCE",
+            "sourceProviderType": "nvarchar(7)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TRANSACTION_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "4970e18c-315a-4288-aa26-db9482a8900a",
+            "sourceColumn": "TRANSACTION_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SOURCE_RELATION",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ff8490aa-f02d-40e6-89f0-b30b374ce2ba",
+            "sourceColumn": "SOURCE_RELATION",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TRANSACTION_LINE_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "d48806c7-b2b4-4927-b3c3-a48ac51e84cd",
+            "sourceColumn": "TRANSACTION_LINE_ID",
+            "sourceProviderType": "decimal(38, 0)",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "DOC_NUMBER",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a5e30a25-abfa-4f79-b70c-f232cda6cb10",
+            "sourceColumn": "DOC_NUMBER",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TRANSACTION_TYPE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2435d731-0d2f-4122-ba0d-bc30073cf472",
+            "sourceColumn": "TRANSACTION_TYPE",
+            "sourceProviderType": "nvarchar(13)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TRANSACTION_DATE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "ca53f544-5238-40f6-b969-9620f5fa5ea0",
+            "sourceColumn": "TRANSACTION_DATE",
+            "sourceProviderType": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ITEM_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "0f905a42-4f9d-49ff-acdf-c6d8336699cc",
+            "sourceColumn": "ITEM_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ITEM_QUANTITY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "de086b66-6c0f-47ba-96df-38d4a22ff032",
+            "sourceColumn": "ITEM_QUANTITY",
+            "sourceProviderType": "decimal(28, 6)",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ITEM_UNIT_PRICE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "a2c76756-5855-4a86-85fe-8aab452473d9",
+            "sourceColumn": "ITEM_UNIT_PRICE",
+            "sourceProviderType": "decimal(28, 6)",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ACCOUNT_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "88b91936-147d-4517-bd99-87f56630bff7",
+            "sourceColumn": "ACCOUNT_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_NAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "095bfdcd-01b9-439e-b241-44e8b4dbaf5d",
+            "sourceColumn": "ACCOUNT_NAME",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_SUB_TYPE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "8fabdc34-a8af-497b-8a55-9d5980337d77",
+            "sourceColumn": "ACCOUNT_SUB_TYPE",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CLASS_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7949a00f-e9dd-4189-8f35-2274edc49166",
+            "sourceColumn": "CLASS_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "DEPARTMENT_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e86340bd-704b-4eb0-9e67-74ee19bf89ec",
+            "sourceColumn": "DEPARTMENT_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "DEPARTMENT_NAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "319a7b03-acad-4fcd-8be0-78dfc0c0a78e",
+            "sourceColumn": "DEPARTMENT_NAME",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CUSTOMER_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f6462378-5997-4cd5-b0af-0083a4da5ebe",
+            "sourceColumn": "CUSTOMER_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CUSTOMER_NAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "cee8f397-4ea5-4c04-b3d0-6ce264476e30",
+            "sourceColumn": "CUSTOMER_NAME",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CUSTOMER_WEBSITE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2bcfecc6-1d6a-47c6-9978-bd48d206b652",
+            "sourceColumn": "CUSTOMER_WEBSITE",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "VENDOR_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6eb2bb89-eec5-406a-b68b-2440104a2628",
+            "sourceColumn": "VENDOR_ID",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "VENDOR_NAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a8c9e51b-1c85-4347-b84f-cdc0bb1cf657",
+            "sourceColumn": "VENDOR_NAME",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "BILLABLE_STATUS",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "fce7319a-0bcb-4b72-b5cc-7b69e9e8a0ca",
+            "sourceColumn": "BILLABLE_STATUS",
+            "sourceProviderType": "nvarchar(16777216)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "DESCRIPTION",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "287313b8-f031-4932-a759-e1e4a05d2371",
+            "sourceColumn": "DESCRIPTION",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AMOUNT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "aa5c752a-bf03-4ccf-87f4-bb928efd2881",
+            "sourceColumn": "AMOUNT",
+            "sourceProviderType": "double",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "TOTAL_AMOUNT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "604ece49-2bf6-4b58-b8c5-d32b3200c440",
+            "sourceColumn": "TOTAL_AMOUNT",
+            "sourceProviderType": "double",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "61c95084-a03e-49ef-ac35-435c03d51977",
+        "partitions": [
+          {
+            "name": "EXPENSES_SALES_ENHANCED",
+            "mode": "directQuery",
+            "queryGroup": "FiveTran_Transformations",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Snowflake.Databases(\"nt21881.us-central1.gcp.snowflakecomputing.com\",\"FIVETRAN_WAREHOUSE\"),",
+                "    FIVETRAN_DATABASE_Database = Source{[Name=\"FIVETRAN_DATABASE\",Kind=\"Database\"]}[Data],",
+                "    QBO_COOPERNORMAN_QUICKBOOKS_Schema = FIVETRAN_DATABASE_Database{[Name=\"QBO_COOPERNORMAN_QUICKBOOKS\",Kind=\"Schema\"]}[Data],",
+                "    QUICKBOOKS__EXPENSES_SALES_ENHANCED_Table = QBO_COOPERNORMAN_QUICKBOOKS_Schema{[Name=\"QUICKBOOKS__EXPENSES_SALES_ENHANCED\",Kind=\"Table\"]}[Data]",
+                "in",
+                "    QUICKBOOKS__EXPENSES_SALES_ENHANCED_Table"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "ACCOUNT",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isNullable": false,
+            "lineageTag": "b26f1500-ef72-4e29-90b6-8f814b76737f",
+            "sourceColumn": "ID",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CURRENCY_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "07a902fd-7d46-40e1-af6b-bf36644d183d",
+            "sourceColumn": "CURRENCY_ID",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "DESCRIPTION",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "27a493ac-5ced-4640-90c4-007551917c50",
+            "sourceColumn": "DESCRIPTION",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "FULLY_QUALIFIED_NAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e0af6bd0-fd92-4d1c-aef9-48f38b623162",
+            "sourceColumn": "FULLY_QUALIFIED_NAME",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_TYPE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "47616a10-05cb-48f6-a345-6ac7818d2324",
+            "sourceColumn": "ACCOUNT_TYPE",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "NAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2bad698b-1474-407b-9527-8c87595bd1c0",
+            "sourceColumn": "NAME",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACTIVE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "d033a439-a636-4eaa-994b-6bec3ab5330a",
+            "sourceColumn": "ACTIVE",
+            "sourceProviderType": "bit",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CLASSIFICATION",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "15c170e8-629f-4dd0-832b-960ced8375e9",
+            "sourceColumn": "CLASSIFICATION",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SUB_ACCOUNT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "b88dd7e3-902d-4369-b01e-95ef22e8619c",
+            "sourceColumn": "SUB_ACCOUNT",
+            "sourceProviderType": "bit",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_SUB_TYPE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "95cb440a-6a95-4a4a-b4cf-c74a18488042",
+            "sourceColumn": "ACCOUNT_SUB_TYPE",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SYNC_TOKEN",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "098faa1c-0633-4574-ad0e-5f4bc1d5d71a",
+            "sourceColumn": "SYNC_TOKEN",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CREATED_AT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "0ab4141f-e9eb-4b61-899e-94b6fb7d88e6",
+            "sourceColumn": "CREATED_AT",
+            "sourceProviderType": "datetime2",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "UPDATED_AT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "feb46be6-574a-44f6-8d2f-faebe5c06bf4",
+            "sourceColumn": "UPDATED_AT",
+            "sourceProviderType": "datetime2",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "_FIVETRAN_DELETED",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "b59a3847-d359-4be4-8b1f-2b12baaea9fd",
+            "sourceColumn": "_FIVETRAN_DELETED",
+            "sourceProviderType": "bit",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "BALANCE_WITH_SUB_ACCOUNTS",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "f87872f0-f6dc-4944-9423-3bae10617979",
+            "sourceColumn": "BALANCE_WITH_SUB_ACCOUNTS",
+            "sourceProviderType": "double",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "BALANCE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "94eaf40c-51e7-4324-bf8f-0bc1c42ee13d",
+            "sourceColumn": "BALANCE",
+            "sourceProviderType": "double",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ACCOUNT_NUMBER",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6e56dc5b-4b7a-4d28-8941-3bb39e3c4aba",
+            "sourceColumn": "ACCOUNT_NUMBER",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PARENT_ACCOUNT_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "4891c8cf-9d5e-4dd8-bb8e-58f5935eb742",
+            "sourceColumn": "PARENT_ACCOUNT_ID",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TAX_CODE_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "084d304b-4e71-429a-a1e5-050c904d66c1",
+            "sourceColumn": "TAX_CODE_ID",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "_FIVETRAN_SYNCED",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "93b78d66-bb23-4465-ba4c-99604a728424",
+            "sourceColumn": "_FIVETRAN_SYNCED",
+            "sourceProviderType": "datetime2",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "85ad9569-8319-418f-9b1d-5a6cfa5d38cf",
+        "partitions": [
+          {
+            "name": "ACCOUNT",
+            "mode": "directQuery",
+            "queryGroup": "Lookup_Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Snowflake.Databases(\"nt21881.us-central1.gcp.snowflakecomputing.com\",\"FIVETRAN_WAREHOUSE\"),",
+                "    FIVETRAN_DATABASE_Database = Source{[Name=\"FIVETRAN_DATABASE\",Kind=\"Database\"]}[Data],",
+                "    QBO_COOPERNORMAN_Schema = FIVETRAN_DATABASE_Database{[Name=\"QBO_COOPERNORMAN\",Kind=\"Schema\"]}[Data],",
+                "    ACCOUNT_Table = QBO_COOPERNORMAN_Schema{[Name=\"ACCOUNT\",Kind=\"Table\"]}[Data]",
+                "in",
+                "    ACCOUNT_Table"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "CLASS",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isNullable": false,
+            "lineageTag": "237e6851-ea33-45a8-b3f1-62399730dea9",
+            "sourceColumn": "ID",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SUB_CLASS",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "61a07470-d701-44f4-81a2-32c28a90dfa2",
+            "sourceColumn": "SUB_CLASS",
+            "sourceProviderType": "bit",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SYNC_TOKEN",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "05b6fe9f-a661-41e3-8889-9f3eb75e47f8",
+            "sourceColumn": "SYNC_TOKEN",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "FULLY_QUALIFIED_NAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "45b8bca2-b8a9-4492-aa48-cd9eb0fd9579",
+            "sourceColumn": "FULLY_QUALIFIED_NAME",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "NAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6d3b68e4-0bda-42e6-af27-4229b9c4ab5f",
+            "sourceColumn": "NAME",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACTIVE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "4a034d65-0d12-434d-8adb-c703faa59a0b",
+            "sourceColumn": "ACTIVE",
+            "sourceProviderType": "bit",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CREATED_AT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "b276ee1c-97b3-4f83-8025-9e48add52194",
+            "sourceColumn": "CREATED_AT",
+            "sourceProviderType": "datetime2",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "UPDATED_AT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "d205d8c1-12e6-489f-be15-5f87d81aa5e0",
+            "sourceColumn": "UPDATED_AT",
+            "sourceProviderType": "datetime2",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "_FIVETRAN_DELETED",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "b33cb7c4-0bb3-4262-bf3d-815056efb937",
+            "sourceColumn": "_FIVETRAN_DELETED",
+            "sourceProviderType": "bit",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PARENT_CLASS_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a7e0c493-1382-43f3-b15b-a3fb6c4e17f3",
+            "sourceColumn": "PARENT_CLASS_ID",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "_FIVETRAN_SYNCED",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "e52c0926-2a62-4fe1-837a-541cc9466115",
+            "sourceColumn": "_FIVETRAN_SYNCED",
+            "sourceProviderType": "datetime2",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "a1986c0c-1aea-41d5-ba76-ec10ae0f8a67",
+        "partitions": [
+          {
+            "name": "CLASS",
+            "mode": "directQuery",
+            "queryGroup": "Lookup_Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Snowflake.Databases(\"nt21881.us-central1.gcp.snowflakecomputing.com\",\"FIVETRAN_WAREHOUSE\"),",
+                "    FIVETRAN_DATABASE_Database = Source{[Name=\"FIVETRAN_DATABASE\",Kind=\"Database\"]}[Data],",
+                "    QBO_COOPERNORMAN_Schema = FIVETRAN_DATABASE_Database{[Name=\"QBO_COOPERNORMAN\",Kind=\"Schema\"]}[Data],",
+                "    CLASS_Table = QBO_COOPERNORMAN_Schema{[Name=\"CLASS\",Kind=\"Table\"]}[Data]",
+                "in",
+                "    CLASS_Table"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "BALANCE_PAYROLL",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "_ROW",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "isNullable": false,
+            "lineageTag": "a674a6de-9230-4c00-9e0e-729d2ed40b9c",
+            "sourceColumn": "_ROW",
+            "sourceProviderType": "decimal(38, 0)",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ACCOUNT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2a3b8ded-8dfc-4a19-8f22-c23b520fe691",
+            "sourceColumn": "ACCOUNT",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "LAST_MODIFIED_BY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "83aeba77-6637-498c-b415-c57de2d66e7e",
+            "sourceColumn": "LAST_MODIFIED_BY",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ADJ",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c1c95ea5-d4bd-45fb-9403-0fbde9c290c5",
+            "sourceColumn": "ADJ",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "LAST_MODIFIED",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "558c448b-eb5b-4261-8b5f-66c82657dcf0",
+            "sourceColumn": "LAST_MODIFIED",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SOURCE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "04d34ff8-06f2-4b22-b9af-dc3e078f2396",
+            "sourceColumn": "SOURCE",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CLASS_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "7ed90752-55c8-4528-8ac2-4ccd571213a5",
+            "sourceColumn": "CLASS_ID",
+            "sourceProviderType": "decimal(38, 0)",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "DESCRIPTION",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "fc7b60e8-b1e9-418d-9655-4705cc214d43",
+            "sourceColumn": "DESCRIPTION",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AMOUNT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "022c7895-c031-43bb-a471-be0c59a34610",
+            "sourceColumn": "AMOUNT",
+            "sourceProviderType": "double",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "DOCUMENT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "80f94dcd-1a40-401f-b0dd-e97a4d5d8a96",
+            "sourceColumn": "DOCUMENT",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CUSTOMER",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f115f228-6dbc-44ed-87e6-0984fbe24b87",
+            "sourceColumn": "CUSTOMER",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ACCOUNT_NUMBER",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "02b7b6af-229a-4ba2-b17a-fd2984bfc18d",
+            "sourceColumn": "ACCOUNT_NUMBER",
+            "sourceProviderType": "decimal(38, 0)",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ENTITY_NAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d79fd180-f524-4491-bcbc-f9595375bf2e",
+            "sourceColumn": "ENTITY_NAME",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CREATED_BY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7dc7383b-31ab-4178-bad8-628958008781",
+            "sourceColumn": "CREATED_BY",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TRANSACTION_DATE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "3805384e-a071-4117-8961-26298f9dc5df",
+            "sourceColumn": "TRANSACTION_DATE",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "NAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2ad18e40-79b4-4b58-8527-2624474d0179",
+            "sourceColumn": "NAME",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "BALANCE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "a4618833-7a6d-453e-8701-93c155c4f3ca",
+            "sourceColumn": "BALANCE",
+            "sourceProviderType": "double",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CREATE_DATE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "3f4fa868-e673-430b-ad0e-b567ae8a3ca1",
+            "sourceColumn": "CREATE_DATE",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SPLIT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f24368a1-a989-4269-a019-dd31a68884b4",
+            "sourceColumn": "SPLIT",
+            "sourceProviderType": "nvarchar(256)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "_FIVETRAN_SYNCED",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "b5d8072d-1ae5-49f8-828f-4ed1e26ce2fb",
+            "sourceColumn": "_FIVETRAN_SYNCED",
+            "sourceProviderType": "datetime2",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "791148c6-e5f8-46bc-83ea-eeb93f3af216",
+        "partitions": [
+          {
+            "name": "BALANCE_PAYROLL",
+            "mode": "directQuery",
+            "queryGroup": "Lookup_Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Snowflake.Databases(\"nt21881.us-central1.gcp.snowflakecomputing.com\",\"FIVETRAN_WAREHOUSE\"),",
+                "    FIVETRAN_DATABASE_Database = Source{[Name=\"FIVETRAN_DATABASE\",Kind=\"Database\"]}[Data],",
+                "    QBO_COOPERNORMAN_Schema = FIVETRAN_DATABASE_Database{[Name=\"QBO_COOPERNORMAN\",Kind=\"Schema\"]}[Data],",
+                "    BALANCE_PAYROLL_Table = QBO_COOPERNORMAN_Schema{[Name=\"BALANCE_PAYROLL\",Kind=\"Table\"]}[Data]",
+                "in",
+                "    BALANCE_PAYROLL_Table"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -2,7 +2,7 @@
   "version": "1.0",
   "datasetReference": {
     "byPath": {
-      "path": "../BS_Template.Dataset"
+      "path": "../QBO_Simple_Template.Dataset"
     },
     "byConnection": null
   }

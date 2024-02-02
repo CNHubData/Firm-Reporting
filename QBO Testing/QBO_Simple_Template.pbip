@@ -3,7 +3,7 @@
   "artifacts": [
     {
       "report": {
-        "path": "BS_Template.Report"
+        "path": "QBO_Simple_Template.Report"
       }
     }
   ],
