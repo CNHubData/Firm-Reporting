@@ -10,8 +10,8 @@
       "nodes": [
         {
           "location": {
-            "x": 0,
-            "y": 0
+            "x": 815,
+            "y": 468.83333333333326
           },
           "nodeIndex": "ACCOUNT",
           "nodeLineageTag": "85ad9569-8319-418f-9b1d-5a6cfa5d38cf",
@@ -19,12 +19,12 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 2
         },
         {
           "location": {
-            "x": 284,
-            "y": 0
+            "x": 1589,
+            "y": 1230.4999999999998
           },
           "nodeIndex": "BALANCE_PAYROLL",
           "nodeLineageTag": "791148c6-e5f8-46bc-83ea-eeb93f3af216",
@@ -32,12 +32,12 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 13
         },
         {
           "location": {
-            "x": 568,
-            "y": 0
+            "x": 364.66666666666663,
+            "y": 183.83333333333337
           },
           "nodeIndex": "BALANCE_SHEET",
           "nodeLineageTag": "3c3c8db2-d201-4b83-9f34-a413d24aa084",
@@ -45,12 +45,12 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 3
         },
         {
           "location": {
-            "x": 852,
-            "y": 0
+            "x": 1352,
+            "y": 470.50000000000006
           },
           "nodeIndex": "CLASS",
           "nodeLineageTag": "a1986c0c-1aea-41d5-ba76-ec10ae0f8a67",
@@ -58,25 +58,25 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 4
         },
         {
           "location": {
-            "x": 1136,
-            "y": 0
+            "x": 362.66666666666657,
+            "y": 1285.5000000000002
           },
           "nodeIndex": "EXPENSES_SALES_ENHANCED",
           "nodeLineageTag": "61c95084-a03e-49ef-ac35-435c03d51977",
           "size": {
-            "height": 300,
+            "height": 203.33333333333348,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 5
         },
         {
           "location": {
-            "x": 1420,
-            "y": 0
+            "x": 814.99999999999989,
+            "y": 1240.5000000000002
           },
           "nodeIndex": "GENERAL_LEDGER",
           "nodeLineageTag": "d47c6077-dec1-4bb1-b997-5e568e6031de",
@@ -84,12 +84,12 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 6
         },
         {
           "location": {
-            "x": 1704,
-            "y": 0
+            "x": 362.33333333333326,
+            "y": 777.16666666666674
           },
           "nodeIndex": "PROFIT_AND_LOSS",
           "nodeLineageTag": "372221d1-9643-4317-8dd1-e9894cd5e0ed",
@@ -97,11 +97,89 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1372.9999999999998,
+            "y": 0
+          },
+          "nodeIndex": "CALCULATIONS",
+          "nodeLineageTag": "c37d5312-984c-4655-b9b1-b5420f74ba3a",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 196.83333333333334
+          },
+          "nodeIndex": "BS_CN_ACCOUNT_GROUPING",
+          "nodeLineageTag": "b93ef6ac-0ba8-49c0-b2fb-5a190e56dd7e",
+          "size": {
+            "height": 257.33333333333331,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 1081.6666666666667,
+            "y": 488.16666666666657
+          },
+          "nodeIndex": "BS_INTUIT_ACCOUNT_GROUPING",
+          "nodeLineageTag": "236d56d3-158c-438f-a15d-f06985d75401",
+          "size": {
+            "height": 258,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 779.16666666666674
+          },
+          "nodeIndex": "P&L_ACCOUNT_GROUPING",
+          "nodeLineageTag": "dfb8fdb7-9529-44b7-81c8-beafee55b8c7",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 1615.333333333333,
+            "y": 525.25000000000011
+          },
+          "nodeIndex": "_Dates",
+          "nodeLineageTag": "640a0cc6-d067-4e72-a8fc-b0e63d96b68d",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 1322.6666666666663,
+            "y": 1232.916666666667
+          },
+          "nodeIndex": "AR_CALCULATIONS",
+          "nodeLineageTag": "38366f27-d4b7-4e78-ac2d-93e7a9892c30",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 1
         }
       ],
       "name": "All tables",
-      "zoomValue": 100,
+      "zoomValue": 60,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
