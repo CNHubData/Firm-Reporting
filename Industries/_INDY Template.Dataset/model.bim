@@ -12,7 +12,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.124.1052.0 (23.12)"
+        "value": "2.124.2028.0 (23.12)"
       },
       {
         "name": "PBI_ProTooling",
@@ -19862,7 +19862,7 @@
             ],
             "dataType": "dateTime",
             "expression": "DATE(YEAR([Date]), MONTH([Date]), 1)",
-            "formatString": "General Date",
+            "formatString": "Short Date",
             "isDataTypeInferred": true,
             "lineageTag": "e2e470b7-fd85-4fb4-99da-505214ab1e19",
             "summarizeBy": "none",
@@ -21185,6 +21185,29 @@
           }
         ],
         "lineageTag": "09058334-53d2-4f8f-816a-745bf540d869",
+        "measures": [
+          {
+            "name": "_Nav Limiter",
+            "expression": [
+              "",
+              "VAR user = USERPRINCIPALNAME()",
+              "VAR allowed_list = ",
+              "        {",
+              "        \"kyork@coopernorman.com\",",
+              "        \"hharoldsen@coopernorman.com\",",
+              "        \"estory@coopernorman.com\"",
+              "            }",
+              "RETURN",
+              "",
+              "IF( user in allowed_list, \"totals-only\")",
+              "",
+              "// This measure will be used in the button to access the totals-only page.  ",
+              "// Users must be defined in this list in order for the button to take them to the totals-only page.  Otherwise the button will not do anything.",
+              "// The totals-only page is meant to contain every possible total a user could want on their individual dashboard."
+            ],
+            "lineageTag": "f5a96ccd-493f-4a2c-853f-575a89954a7b"
+          }
+        ],
         "partitions": [
           {
             "name": "_Client / Staff Param",

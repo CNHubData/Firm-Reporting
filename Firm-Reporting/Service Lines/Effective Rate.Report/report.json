@@ -1,0 +1,333 @@
+{
+  "config": "{\"version\":\"5.50\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY23SU11\",\"version\":\"5.50\",\"type\":2},\"customTheme\":{\"name\":\"Classroom361392447163704.json\",\"version\":\"5.50\",\"type\":1}},\"activeSectionIndex\":0,\"modelExtensions\":[{\"name\":\"extension\",\"entities\":[{\"name\":\"_Client / Staff Param\",\"extends\":\"_Client / Staff Param\",\"measures\":[{\"name\":\"Billing Adjustment\",\"dataType\":3,\"expression\":\"\\nVAR billing_adjustment = CALCULATE( SUM( Billing_Decision_View[adjustment]), \\n        Sheet_Entry_View[activity__activity_class_KEY] = 1,\\n        USERELATIONSHIP(Billing_Decision_View[invoice__invoice_date], _Dates[Date]))\\nRETURN\\n\\nbilling_adjustment\\n\\n// Represents the amount of adjustments assigned to sheet entries.  These are write ups and write downs to the amount billable being sent to clients.\",\"errorMessage\":null,\"hidden\":false,\"formulaOverride\":null,\"formatInformation\":{\"formatString\":\"#,0\",\"format\":\"NumberDecimal\",\"accuracy\":0,\"thousandSeparator\":true,\"currencyFormat\":null,\"dateTimeCustomFormat\":null}},{\"name\":\"Billing Amount\",\"dataType\":3,\"expression\":\"\\nVAR billing_amount = CALCULATE( SUM( Billing_Decision_View[bill_amount]), \\n        Sheet_Entry_View[activity__activity_class_KEY] = 1,\\n        USERELATIONSHIP(Billing_Decision_View[invoice__invoice_date], _Dates[Date]))\\n\\nVAR progress_amount = CALCULATE( SUM( Billing_Decision_View[progress_amount_billed]), \\n        Sheet_Entry_View[activity__activity_class_KEY] = 1,\\n        USERELATIONSHIP(Billing_Decision_View[invoice__invoice_date], _Dates[Date]))\\n\\nVAR total = billing_amount - progress_amount\\nRETURN\\n\\ntotal\\n\\n// Recreation of the 'Billed Amount (D=B+C)' column in the PCS Billing Analysis report. \\n// billing_amount represents the 'Total Billed (F=D+E)' column in the PCS Billing Analysis report.  By adding progress_amount (the Progress Bill Amount (E)) column we can back into the Billed Amount Column.\\n\",\"errorMessage\":null,\"hidden\":false,\"formulaOverride\":null,\"formatInformation\":{\"formatString\":\"#,0\",\"format\":\"NumberDecimal\",\"accuracy\":0,\"thousandSeparator\":true,\"currencyFormat\":null,\"dateTimeCustomFormat\":null}},{\"name\":\"Hrs/Units\",\"dataType\":3,\"expression\":\"\\nVAR billing_units = CALCULATE( SUM( Billing_Decision_View[units_closed]), \\n        Sheet_Entry_View[activity__activity_class_KEY] = 1,\\n        USERELATIONSHIP(Billing_Decision_View[invoice__invoice_date], _Dates[Date]))\\nRETURN\\n\\nbilling_units\",\"errorMessage\":null,\"hidden\":false,\"formulaOverride\":null,\"formatInformation\":{\"formatString\":\"#,0\",\"format\":\"NumberDecimal\",\"accuracy\":0,\"thousandSeparator\":true,\"currencyFormat\":null,\"dateTimeCustomFormat\":null}},{\"name\":\"Effective Rate\",\"dataType\":3,\"expression\":\"\\n\\nDIVIDE([Billing Amount], [Hrs/Units], 0)\\n\\n// Returns the hourly charge rate of the Billing Amount calculation.  Estimates how much we are billing per hour worked.\",\"errorMessage\":null,\"hidden\":false,\"references\":{\"unrecognizedReferences\":false,\"measures\":[{\"schema\":\"extension\",\"entity\":\"_Client / Staff Param\",\"name\":\"Billing Amount\"},{\"schema\":\"extension\",\"entity\":\"_Client / Staff Param\",\"name\":\"Hrs/Units\"}]},\"formulaOverride\":null,\"formatInformation\":{\"formatString\":\"#,0.0\",\"format\":\"NumberDecimal\",\"accuracy\":1,\"thousandSeparator\":true,\"currencyFormat\":null,\"dateTimeCustomFormat\":null}},{\"name\":\"Billing Adjustment PY\",\"dataType\":3,\"expression\":\"\\nVAR prev_fy = SELECTEDVALUE(_Dates[FY]) - 1\\n\\nVAR billing_adjustment = CALCULATE( SUM( Billing_Decision_View[adjustment]), \\n        SAMEPERIODLASTYEAR(_Dates[Date]),\\n        Sheet_Entry_View[activity__activity_class_KEY] = 1,\\n        USERELATIONSHIP(Billing_Decision_View[invoice__invoice_date], _Dates[Date]), _Dates[FY] = prev_fy)\\nRETURN\\n\\nbilling_adjustment\\n\\n// Represents the amount of adjustments assigned to sheet entries.  These are write ups and write downs to the amount billable being sent to clients.\",\"errorMessage\":null,\"hidden\":false,\"formulaOverride\":null,\"formatInformation\":{\"formatString\":\"G\",\"format\":\"General\",\"thousandSeparator\":false,\"currencyFormat\":null,\"dateTimeCustomFormat\":null}},{\"name\":\"Billing Amount PY\",\"dataType\":3,\"expression\":\"\\nVAR prev_fy = SELECTEDVALUE(_Dates[FY]) - 1\\n\\nVAR billing_amount = CALCULATE( SUM( Billing_Decision_View[bill_amount]), \\n        SAMEPERIODLASTYEAR(_Dates[Date]),\\n        Sheet_Entry_View[activity__activity_class_KEY] = 1,\\n        USERELATIONSHIP(Billing_Decision_View[invoice__invoice_date], _Dates[Date]), _Dates[FY] = prev_fy)\\n\\nVAR progress_amount = CALCULATE( SUM( Billing_Decision_View[progress_amount_billed]), \\n        SAMEPERIODLASTYEAR(_Dates[Date]),\\n        Sheet_Entry_View[activity__activity_class_KEY] = 1,\\n        USERELATIONSHIP(Billing_Decision_View[invoice__invoice_date], _Dates[Date]), _Dates[FY] = prev_fy)\\n\\nVAR total = billing_amount - progress_amount\\nRETURN\\n\\ntotal\",\"errorMessage\":null,\"hidden\":false,\"formulaOverride\":null,\"formatInformation\":{\"formatString\":\"#,0\",\"format\":\"NumberDecimal\",\"thousandSeparator\":true,\"currencyFormat\":null,\"dateTimeCustomFormat\":null,\"accuracy\":0}},{\"name\":\"Hrs/Units PY\",\"dataType\":3,\"expression\":\"\\nVAR prev_fy = SELECTEDVALUE(_Dates[FY]) - 1\\n\\nVAR billing_units = CALCULATE( SUM( Billing_Decision_View[units_closed]), \\n        SAMEPERIODLASTYEAR(_Dates[Date]),\\n        Sheet_Entry_View[activity__activity_class_KEY] = 1,\\n        USERELATIONSHIP(Billing_Decision_View[invoice__invoice_date], _Dates[Date]), _Dates[FY] = prev_fy)\\nRETURN\\n\\nbilling_units\\n\\n// The closed units where the corresponding sheet entries are marked billable.\",\"errorMessage\":null,\"hidden\":false,\"formulaOverride\":null,\"formatInformation\":{\"formatString\":\"#,0\",\"format\":\"NumberDecimal\",\"thousandSeparator\":true,\"currencyFormat\":null,\"dateTimeCustomFormat\":null,\"accuracy\":0}},{\"name\":\"Effective Rate PY\",\"dataType\":3,\"expression\":\"\\n\\nDIVIDE([Billing Amount PY], [Hrs/Units PY], 0)\\n\\n// Returns the hourly charge rate of the Billing Amount calculation.  Estimates how much we are billing per hour worked.\",\"errorMessage\":null,\"hidden\":false,\"references\":{\"unrecognizedReferences\":false,\"measures\":[{\"schema\":\"extension\",\"entity\":\"_Client / Staff Param\",\"name\":\"Billing Amount PY\"},{\"schema\":\"extension\",\"entity\":\"_Client / Staff Param\",\"name\":\"Hrs/Units PY\"}]},\"formulaOverride\":null,\"formatInformation\":{\"formatString\":\"#,0.0\",\"format\":\"NumberDecimal\",\"thousandSeparator\":true,\"currencyFormat\":null,\"dateTimeCustomFormat\":null,\"accuracy\":1}},{\"name\":\"Effective Rate Diff\",\"dataType\":3,\"expression\":\"\\n\\n[Effective Rate] - [Effective Rate PY]\\n\\n// The difference between the effective rate in the current year, and the rate in the previous year.\",\"errorMessage\":null,\"hidden\":false,\"references\":{\"unrecognizedReferences\":false,\"measures\":[{\"schema\":\"extension\",\"entity\":\"_Client / Staff Param\",\"name\":\"Effective Rate\"},{\"schema\":\"extension\",\"entity\":\"_Client / Staff Param\",\"name\":\"Effective Rate PY\"}]},\"formulaOverride\":null,\"formatInformation\":{\"formatString\":\"#,0.0\",\"format\":\"NumberDecimal\",\"thousandSeparator\":true,\"currencyFormat\":null,\"dateTimeCustomFormat\":null,\"accuracy\":1}}]}]}],\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":0,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"useEnhancedTooltips\":true,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "pods": [
+    {
+      "boundSection": "ReportSection7e7c11349a67989dc5a4",
+      "config": "{}",
+      "name": "Pod",
+      "parameters": "[{\"name\":\"Param_Filtera741318f36e04a3a7d6b\",\"boundFilter\":\"Filtera741318f36e04a3a7d6b\",\"fieldExpr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Invoice_View (Collection)\"}},\"Property\":\"client__description\"}}}]",
+      "type": 1
+    },
+    {
+      "boundSection": "ReportSection477bf0fbebd5194c1377",
+      "config": "{}",
+      "name": "Pod1",
+      "parameters": "[{\"name\":\"Param_Filter1d5f38d5c5a7e12e524b\",\"boundFilter\":\"Filter1d5f38d5c5a7e12e524b\",\"fieldExpr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Staff\"}},\"Property\":\"department__description\"}}},{\"name\":\"Param_Filterc4ec8d42831120c8600b\",\"boundFilter\":\"Filterc4ec8d42831120c8600b\",\"fieldExpr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Staff\"}},\"Property\":\"primary_staff_description\"}}},{\"name\":\"Param_Filtere4477fcc594850565ab8\",\"boundFilter\":\"Filtere4477fcc594850565ab8\",\"fieldExpr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Client_View\"}},\"Property\":\"partner__description\"}}},{\"name\":\"Param_Filterc32503b7e2de650c79b9\",\"boundFilter\":\"Filterc32503b7e2de650c79b9\",\"fieldExpr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Client_View\"}},\"Property\":\"manager_description\"}}},{\"name\":\"Param_Filterf855a34717559be3c211\",\"boundFilter\":\"Filterf855a34717559be3c211\",\"fieldExpr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Client_View\"}},\"Property\":\"related_client_group_id\"}}}]",
+      "type": 1
+    },
+    {
+      "boundSection": "ReportSection9925be15daee1de91a3d",
+      "config": "{}",
+      "name": "Pod2",
+      "parameters": "[{\"name\":\"Param_Filtera741318f36e04a3a7d6b\",\"boundFilter\":\"Filtera741318f36e04a3a7d6b\",\"fieldExpr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Invoice_View (Collection)\"}},\"Property\":\"client__description\"}}}]",
+      "type": 1
+    }
+  ],
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "Background_Drill_Through_no_bg23135553829852284.png",
+            "path": "Background_Drill_Through_no_bg23135553829852284.png",
+            "type": 100
+          },
+          {
+            "name": "Background_no_bg46416285523533274.png",
+            "path": "Background_no_bg46416285523533274.png",
+            "type": 100
+          },
+          {
+            "name": "Classroom361392447163704.json",
+            "path": "Classroom361392447163704.json",
+            "type": 201
+          }
+        ],
+        "name": "RegisteredResources",
+        "type": 1
+      }
+    },
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY23SU11",
+            "path": "BaseThemes/CY23SU11.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{\"relationships\":[{\"source\":\"58ad12106e8266900ab9\",\"target\":\"e9a8caf6506c29b202e8\",\"type\":3}],\"objects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":-0.1}}}}},\"image\":{\"image\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"'Background no bg.png'\"}}},\"url\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"Background_no_bg46416285523533274.png\"}}},\"scaling\":{\"expr\":{\"Literal\":{\"Value\":\"'Fit'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}",
+      "displayName": "Dashboard",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSection",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"30edede65ba6c97a7007\",\"layouts\":[{\"id\":0,\"position\":{\"x\":631.5325248070562,\"y\":79.0297684674752,\"z\":3000,\"width\":638.5887541345094,\"height\":632.2381477398015,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Client_View.partner__description\"},{\"queryRef\":\"_Client / Staff Param.Billing Progress\"},{\"queryRef\":\"_Client / Staff Param.Billing Total\"},{\"queryRef\":\"_Client / Staff Param.Effective Rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Client / Staff Param\",\"Schema\":\"extension\",\"Type\":0},{\"Name\":\"c\",\"Entity\":\"Client_View\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Billing Amount\"},\"Name\":\"_Client / Staff Param.Billing Total\",\"NativeReferenceName\":\"Billing Amount\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Hrs/Units\"},\"Name\":\"_Client / Staff Param.Billing Progress\",\"NativeReferenceName\":\"Hrs/Units\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Effective Rate\"},\"Name\":\"_Client / Staff Param.Effective Rate\",\"NativeReferenceName\":\"Effective Rate\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"partner__description\"},\"Name\":\"Client_View.partner__description\",\"NativeReferenceName\":\"Client Partner\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Billing Amount\"}}}]},\"queryFieldParametersByRole\":{\"Values\":[{\"index\":0,\"length\":1,\"expr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"_Client / Staff Param\"}},\"Property\":\"_C/S\"}}}]},\"columnProperties\":{\"Client_View.partner__description\":{\"displayName\":\"Client Partner\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnHeaders\":[{\"properties\":{\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Center'\"}}}}}],\"grid\":[{\"properties\":{\"gridVertical\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"171.0361805829185D\"}}}},\"selector\":{\"metadata\":\"Client_View.partner__description\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"169.80744261256626D\"}}}},\"selector\":{\"metadata\":\"Staff.description\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"200.06143891930552D\"}}}},\"selector\":{\"metadata\":\"Client_View.description\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"147.14006760353328D\"}}}},\"selector\":{\"metadata\":\"Client_View.manager_description\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"183.76108503336164D\"}}}},\"selector\":{\"metadata\":\"Client_View.related_client_group_id\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"88.15703015508795D\"}}}},\"selector\":{\"metadata\":\"_Client / Staff Param.Billing Progress\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"115.79473885043731D\"}}}},\"selector\":{\"metadata\":\"_Client / Staff Param.Billing Total\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"95.0330219851626D\"}}}},\"selector\":{\"metadata\":\"_Client / Staff Param.Effective Rate\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"219.93972272453286D\"}}}},\"selector\":{\"metadata\":\"Staff.department__description\"}}],\"values\":[{\"properties\":{\"wordWrap\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Analysis of Effective Rate in PCS'\"}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'wf_standard-font, helvetica, arial, sans-serif'\"}}},\"heading\":{\"expr\":{\"Literal\":{\"Value\":\"'Heading3'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}],\"subTitle\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Use the Slicer on the Top Right of the Page to Change Grouping'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}],\"spacing\":[{\"properties\":{\"verticalSpacing\":{\"expr\":{\"Literal\":{\"Value\":\"5D\"}}},\"customizeSpacing\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"spaceBelowTitle\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"spaceBelowTitleArea\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}},\"spaceBelowSubTitle\":{\"expr\":{\"Literal\":{\"Value\":\"2D\"}}}}}],\"divider\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0.6}}}}}}}]}}}",
+          "filters": "[]",
+          "height": 632.24,
+          "width": 638.59,
+          "x": 631.53,
+          "y": 79.03,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"397532a486cacc39e605\",\"layouts\":[{\"id\":0,\"position\":{\"x\":19.53051643192488,\"y\":79.6244131455399,\"z\":4000,\"width\":605.4460093896713,\"height\":289.95305164319245,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"areaChart\",\"projections\":{\"Category\":[{\"queryRef\":\"_Dates.Month\",\"active\":true}],\"Y\":[{\"queryRef\":\"_Client / Staff Param.Effective Rate\"},{\"queryRef\":\"_Client / Staff Param.Effective Rate PY\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Dates\",\"Type\":0},{\"Name\":\"_1\",\"Entity\":\"_Client / Staff Param\",\"Schema\":\"extension\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Month\"},\"Name\":\"_Dates.Month\",\"NativeReferenceName\":\"Month\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_1\"}},\"Property\":\"Effective Rate\"},\"Name\":\"_Client / Staff Param.Effective Rate\",\"NativeReferenceName\":\"Effective Rate\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_1\"}},\"Property\":\"Effective Rate PY\"},\"Name\":\"_Client / Staff Param.Effective Rate PY\",\"NativeReferenceName\":\"Effective Rate PY\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Month\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"valueAxis\":[{\"properties\":{\"titleText\":{\"expr\":{\"Literal\":{\"Value\":\"'Effective Rate'\"}}},\"start\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"legend\":[{\"properties\":{\"titleText\":{\"expr\":{\"Literal\":{\"Value\":\"'Hourly Type'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}},\"position\":{\"expr\":{\"Literal\":{\"Value\":\"'TopCenter'\"}}},\"showTitle\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}],\"spacing\":[{\"properties\":{\"customizeSpacing\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"spaceBelowTitle\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 289.95,
+          "width": 605.45,
+          "x": 19.53,
+          "y": 79.62,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"58ad12106e8266900ab9\",\"layouts\":[{\"id\":0,\"position\":{\"x\":933.1740614334472,\"y\":5.5290102389078495,\"z\":2000,\"width\":142.52559726962457,\"height\":58.97610921501707,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"_Dates.FY\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Dates\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"FY\"},\"Name\":\"_Dates.FY\",\"NativeReferenceName\":\"FY\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"FY\"}}}]},\"syncGroup\":{\"groupName\":\"FY\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Dates\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"FY\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"2024L\"}}]]}}}]}}}}],\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"header\":[{\"properties\":{\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Fiscal Year'\"}}}}}],\"items\":[{\"properties\":{\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}}}}],\"selection\":[{\"properties\":{\"strictSingleSelect\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 58.98,
+          "width": 142.53,
+          "x": 933.17,
+          "y": 5.53,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"76dc9e826a10bb1535b4\",\"layouts\":[{\"id\":0,\"position\":{\"x\":67.36842105263145,\"y\":5.886561062851303,\"z\":0,\"width\":1212.6315789473686,\"height\":58.86561062851303,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"\"}]}]}}]},\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}}}}]}}}",
+          "filters": "[]",
+          "height": 58.87,
+          "width": 1212.63,
+          "x": 67.37,
+          "y": 5.89,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"a032bfb775c3ed8d1041\",\"layouts\":[{\"id\":0,\"position\":{\"x\":7.727771679473107,\"y\":4.9176728869374315,\"z\":8000,\"width\":59.7145993413831,\"height\":59.7145993413831,\"tabOrder\":8000}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'blank'\"}}}},\"selector\":{\"id\":\"default\"}},{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"outline\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'PageNavigation'\"}}},\"navigationSection\":{\"expr\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"_Client / Staff Param\"}},\"Property\":\"_Nav Limiter\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 59.71,
+          "width": 59.71,
+          "x": 7.73,
+          "y": 4.92,
+          "z": 8000.00
+        },
+        {
+          "config": "{\"name\":\"c72ac75cd2861a50789b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":816.1203007518797,\"y\":28.872180451127818,\"z\":7000,\"width\":107.14786967418546,\"height\":25.664160401002505,\"tabOrder\":7000}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'blank'\"}}}},\"selector\":{\"id\":\"default\"}}],\"outline\":[{\"properties\":{\"weight\":{\"expr\":{\"Literal\":{\"Value\":\"1.5D\"}}}},\"selector\":{\"id\":\"default\"}}],\"fill\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}},{\"properties\":{\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"80D\"}}},\"fillColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":6,\"Percent\":0}}}}}},\"selector\":{\"id\":\"default\"}},{\"properties\":{\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"70D\"}}}},\"selector\":{\"id\":\"hover\"}},{\"properties\":{\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"60D\"}}}},\"selector\":{\"id\":\"selected\"}}],\"text\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}},{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'View Clients'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Drillthrough'\"}}},\"drillthroughSection\":{\"expr\":{\"Literal\":{\"Value\":\"'ReportSection477bf0fbebd5194c1377'\"}}}}}],\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 25.66,
+          "width": 107.15,
+          "x": 816.12,
+          "y": 28.87,
+          "z": 7000.00
+        },
+        {
+          "config": "{\"name\":\"e4499fdb1c262d034803\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1075.6996587030717,\"y\":6.143344709897611,\"z\":1000,\"width\":194.74402730375428,\"height\":58.97610921501707,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"_ARE._ARE\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Client / Staff Param\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"_C/S\"},\"Name\":\"_ARE._ARE\",\"NativeReferenceName\":\"_C/S\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Client / Staff Param\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"_C/S Fields\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'''Client_View''[partner__description]'\"}}]]}}}]}}}}],\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"header\":[{\"properties\":{\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Select Grouping'\"}}}}}],\"items\":[{\"properties\":{\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}}}}],\"selection\":[{\"properties\":{\"strictSingleSelect\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"cachedFilterDisplayItems\":[{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"_Client / Staff Param\"}},\"Property\":\"_C/S Fields\"}},\"Right\":{\"Literal\":{\"Value\":\"'''Client_View''[partner__description]'\"}}}}},\"displayName\":\"Client Partner\"}]}}",
+          "filters": "[{\"name\":\"Filterad46d07136de2a8bea88\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"_Client / Staff Param\"}},\"Property\":\"_C/S\"}},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{\"general\":[{\"properties\":{}}]},\"isHiddenInViewMode\":true,\"isLockedInViewMode\":true}]",
+          "height": 58.98,
+          "width": 194.74,
+          "x": 1075.70,
+          "y": 6.14,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"e9a8caf6506c29b202e8\",\"layouts\":[{\"id\":0,\"position\":{\"x\":19.82575024201355,\"y\":375.4501452081317,\"z\":6000,\"width\":298.62536302032913,\"height\":330.8422071636012,\"tabOrder\":6000}}],\"singleVisual\":{\"visualType\":\"waterfallChart\",\"projections\":{\"Y\":[{\"queryRef\":\"_Client / Staff Param.Effective Rate Diff\"}],\"Tooltips\":[{\"queryRef\":\"_Client / Staff Param.Effective Rate\"}],\"Category\":[{\"queryRef\":\"_Dates.FY\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_1\",\"Entity\":\"_Client / Staff Param\",\"Schema\":\"extension\",\"Type\":0},{\"Name\":\"_\",\"Entity\":\"_Dates\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_1\"}},\"Property\":\"Effective Rate Diff\"},\"Name\":\"_Client / Staff Param.Effective Rate Diff\",\"NativeReferenceName\":\"Effective Rate Diff\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_1\"}},\"Property\":\"Effective Rate\"},\"Name\":\"_Client / Staff Param.Effective Rate\",\"NativeReferenceName\":\"Effective Rate\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"FY\"},\"Name\":\"_Dates.FY\",\"NativeReferenceName\":\"FY\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"FY\"}}}]},\"drillFilterOtherVisuals\":true,\"filterSortOrder\":3,\"objects\":{\"legend\":[{\"properties\":{\"position\":{\"expr\":{\"Literal\":{\"Value\":\"'BottomCenter'\"}}}}}],\"categoryAxis\":[{\"properties\":{\"showAxisTitle\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"valueAxis\":[{\"properties\":{\"showAxisTitle\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"titleText\":{\"expr\":{\"Literal\":{\"Value\":\"'Change in Rate'\"}}}}}]},\"vcObjects\":{\"subTitle\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Five Most Recent Years from Current FY'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}}}}],\"spacing\":[{\"properties\":{\"verticalSpacing\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"customizeSpacing\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"spaceBelowSubTitle\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Change in Effective Rate Year Over Year'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}}}}]}}}",
+          "filters": "[{\"name\":\"Filter52fbd428e13a515cd180\",\"expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Schema\":\"extension\",\"Entity\":\"_Client / Staff Param\"}},\"Property\":\"Effective Rate Diff\"}},\"type\":\"Advanced\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":0},{\"name\":\"Filtera738cc6767c1e6d9d000\",\"expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Schema\":\"extension\",\"Entity\":\"_Client / Staff Param\"}},\"Property\":\"Effective Rate\"}},\"type\":\"Advanced\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":1},{\"name\":\"Filter5810ce8a1de5c00e0051\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"_Dates\"}},\"Property\":\"FY\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"subquery\",\"Expression\":{\"Subquery\":{\"Query\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Dates\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"FY\"},\"Name\":\"field\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Date\"}},\"Function\":4}}}],\"Top\":5}}},\"Type\":2},{\"Name\":\"_\",\"Entity\":\"_Dates\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"FY\"}}],\"Table\":{\"SourceRef\":{\"Source\":\"subquery\"}}}}}]},\"type\":\"TopN\",\"howCreated\":0,\"isHiddenInViewMode\":true,\"isLockedInViewMode\":true,\"ordinal\":2},{\"name\":\"Filter16dc9ed00890a364bc94\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"_Dates\"}},\"Property\":\"FY filtering\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Dates\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"FY filtering\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"null\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{},\"isHiddenInViewMode\":true,\"isLockedInViewMode\":true,\"ordinal\":3}]",
+          "height": 330.84,
+          "width": 298.63,
+          "x": 19.83,
+          "y": 375.45,
+          "z": 6000.00
+        },
+        {
+          "config": "{\"name\":\"feb2daf009d939dc6340\",\"layouts\":[{\"id\":0,\"position\":{\"x\":326.0093896713615,\"y\":375.5868544600939,\"z\":5000,\"width\":298.96713615023475,\"height\":330.5164319248826,\"tabOrder\":5000}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Sheet_Entry_View.engagement__engagement_template__engagement_template_id\"},{\"queryRef\":\"_Client / Staff Param.Hrs/Units\"},{\"queryRef\":\"_Client / Staff Param.Effective Rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Sheet_Entry_View\",\"Type\":0},{\"Name\":\"_\",\"Entity\":\"_Client / Staff Param\",\"Schema\":\"extension\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"engagement__engagement_template__engagement_template_id\"},\"Name\":\"Sheet_Entry_View.engagement__engagement_template__engagement_template_id\",\"NativeReferenceName\":\"Engagement\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Effective Rate\"},\"Name\":\"_Client / Staff Param.Effective Rate\",\"NativeReferenceName\":\"Effective Rate\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Hrs/Units\"},\"Name\":\"_Client / Staff Param.Hrs/Units\",\"NativeReferenceName\":\"Hrs/Units\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Effective Rate\"}}}]},\"columnProperties\":{\"Sheet_Entry_View.engagement__engagement_template__engagement_template_id\":{\"displayName\":\"Engagement\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"117.08572799962526D\"}}}},\"selector\":{\"metadata\":\"Sheet_Entry_View.engagement__engagement_template__engagement_template_id\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"69.97515308752939D\"}}}},\"selector\":{\"metadata\":\"_Client / Staff Param.Hrs/Units\"}}]},\"vcObjects\":{\"subTitle\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"''\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}],\"spacing\":[{\"properties\":{\"verticalSpacing\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"customizeSpacing\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"spaceBelowSubTitle\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Effective Rate by Engagement'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}},\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 330.52,
+          "width": 298.97,
+          "x": 326.01,
+          "y": 375.59,
+          "z": 5000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{\"objects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":-0.1}}}}},\"image\":{\"image\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"'Background Drill Through no bg.png'\"}}},\"url\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"Background_Drill_Through_no_bg23135553829852284.png\"}}},\"scaling\":{\"expr\":{\"Literal\":{\"Value\":\"'Fit'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]},\"visibility\":1,\"type\":2}",
+      "displayName": "Clients",
+      "displayOption": 1,
+      "filters": "[{\"name\":\"Filter1d5f38d5c5a7e12e524b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Staff\"}},\"Property\":\"department__description\"}},\"type\":\"Categorical\",\"howCreated\":5,\"isLockedInViewMode\":true},{\"name\":\"Filterc4ec8d42831120c8600b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Staff\"}},\"Property\":\"primary_staff_description\"}},\"type\":\"Categorical\",\"howCreated\":5,\"isLockedInViewMode\":true},{\"name\":\"Filtere4477fcc594850565ab8\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Client_View\"}},\"Property\":\"partner__description\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"Client_View\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"partner__description\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Williams, Kolten'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":5},{\"name\":\"Filterc32503b7e2de650c79b9\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Client_View\"}},\"Property\":\"manager_description\"}},\"type\":\"Categorical\",\"howCreated\":5},{\"name\":\"Filterf855a34717559be3c211\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Client_View\"}},\"Property\":\"related_client_group_id\"}},\"type\":\"Categorical\",\"howCreated\":5}]",
+      "height": 720.00,
+      "name": "ReportSection477bf0fbebd5194c1377",
+      "ordinal": 1,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"441f20aa0a0b97ee4768\",\"layouts\":[{\"id\":0,\"position\":{\"x\":7.848748083801738,\"y\":5.886561062851303,\"z\":0,\"width\":62.13592233009709,\"height\":59.519672968829845,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'back'\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Back'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 59.52,
+          "width": 62.14,
+          "x": 7.85,
+          "y": 5.89,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"615a1500e69c79210a14\",\"layouts\":[{\"id\":0,\"position\":{\"x\":13.515358361774744,\"y\":92.15017064846417,\"z\":3000,\"width\":257.4061433447099,\"height\":618.0204778156997,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Rows\":[{\"queryRef\":\"Billing_Decision_View.invoice__invoice_month\",\"active\":true}],\"Values\":[{\"queryRef\":\"_Client / Staff Param.Effective Rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"b\",\"Entity\":\"Billing_Decision_View\",\"Type\":0},{\"Name\":\"_\",\"Entity\":\"_Client / Staff Param\",\"Schema\":\"extension\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"b\"}},\"Property\":\"invoice__invoice_month\"},\"Name\":\"Billing_Decision_View.invoice__invoice_month\",\"NativeReferenceName\":\"Invoice Month\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Effective Rate\"},\"Name\":\"_Client / Staff Param.Effective Rate\",\"NativeReferenceName\":\"Effective Rate\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"b\"}},\"Property\":\"invoice__invoice_month\"}}}]},\"columnProperties\":{\"Billing_Decision_View.invoice__invoice_month\":{\"displayName\":\"Invoice Month\"}},\"drillFilterOtherVisuals\":true,\"objects\":{},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Effect Rate by Month'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}}}}],\"divider\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"spacing\":[{\"properties\":{\"customizeSpacing\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"spaceBelowTitle\":{\"expr\":{\"Literal\":{\"Value\":\"2D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 618.02,
+          "width": 257.41,
+          "x": 13.52,
+          "y": 92.15,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"6702c2a44dcae87005aa\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1163.1304347826087,\"y\":22.956521739130434,\"z\":4000,\"width\":107.1304347826087,\"height\":25.043478260869566,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'blank'\"}}}},\"selector\":{\"id\":\"default\"}}],\"outline\":[{\"properties\":{\"weight\":{\"expr\":{\"Literal\":{\"Value\":\"1.5D\"}}}},\"selector\":{\"id\":\"default\"}}],\"fill\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}},{\"properties\":{\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"80D\"}}},\"fillColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":6,\"Percent\":0}}}}}},\"selector\":{\"id\":\"default\"}},{\"properties\":{\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"70D\"}}}},\"selector\":{\"id\":\"hover\"}},{\"properties\":{\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"60D\"}}}},\"selector\":{\"id\":\"selected\"}}],\"text\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}},{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'View Invoices'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Drillthrough'\"}}},\"drillthroughSection\":{\"expr\":{\"Literal\":{\"Value\":\"'ReportSection7e7c11349a67989dc5a4'\"}}}}}],\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 25.04,
+          "width": 107.13,
+          "x": 1163.13,
+          "y": 22.96,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"7bea5e8ad7cb4c650b75\",\"layouts\":[{\"id\":0,\"position\":{\"x\":67.36842105263145,\"y\":6.540623403168115,\"z\":1000,\"width\":1212.6315789473686,\"height\":58.86561062851303,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"\"}]}]}}]},\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}}}}]}}}",
+          "filters": "[]",
+          "height": 58.87,
+          "width": 1212.63,
+          "x": 67.37,
+          "y": 6.54,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"c665dbec11c6901544ac\",\"layouts\":[{\"id\":0,\"position\":{\"x\":276.474428726877,\"y\":91.92600652883569,\"z\":2000,\"width\":993.7758433079433,\"height\":618.4113166485309,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Invoice_View (Collection).client__description\"},{\"queryRef\":\"_Client / Staff Param.Hrs/Units\"},{\"queryRef\":\"_Client / Staff Param.Billing Amount\"},{\"queryRef\":\"_Client / Staff Param.Effective Rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Invoice_View (Collection)\",\"Type\":0},{\"Name\":\"_\",\"Entity\":\"_Client / Staff Param\",\"Schema\":\"extension\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Effective Rate\"},\"Name\":\"_Client / Staff Param.Effective Rate\",\"NativeReferenceName\":\"Effective Rate\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"client__description\"},\"Name\":\"Invoice_View (Collection).client__description\",\"NativeReferenceName\":\"Client\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Billing Amount\"},\"Name\":\"_Client / Staff Param.Billing Amount\",\"NativeReferenceName\":\"Billing Amount\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Hrs/Units\"},\"Name\":\"_Client / Staff Param.Hrs/Units\",\"NativeReferenceName\":\"Hrs/Units\"}]},\"columnProperties\":{\"Invoice_View (Collection).client__description\":{\"displayName\":\"Client\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"grid\":[{\"properties\":{\"gridVertical\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Effective Rate by Client Detail'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}}}}],\"divider\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"spacing\":[{\"properties\":{\"customizeSpacing\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"verticalSpacing\":{\"expr\":{\"Literal\":{\"Value\":\"2D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 618.41,
+          "width": 993.78,
+          "x": 276.47,
+          "y": 91.93,
+          "z": 2000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{\"objects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":-0.1}}}}},\"image\":{\"image\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"'Background Drill Through no bg.png'\"}}},\"url\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"Background_Drill_Through_no_bg23135553829852284.png\"}}},\"scaling\":{\"expr\":{\"Literal\":{\"Value\":\"'Fit'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]},\"visibility\":1,\"type\":2}",
+      "displayName": "Invoices",
+      "displayOption": 1,
+      "filters": "[{\"name\":\"Filtera741318f36e04a3a7d6b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Invoice_View (Collection)\"}},\"Property\":\"client__description\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Invoice_View (Collection)\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"client__description\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'850 ENERGY LLC'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":5,\"isLockedInViewMode\":true}]",
+      "height": 720.00,
+      "name": "ReportSection7e7c11349a67989dc5a4",
+      "ordinal": 2,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"79ddf39ca1b8e12c73cd\",\"layouts\":[{\"id\":0,\"position\":{\"x\":67.36842105263145,\"y\":6.540623403168115,\"z\":1000,\"width\":1212.6315789473686,\"height\":58.86561062851303,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"\"}]}]}}]},\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}}}}]}}}",
+          "filters": "[]",
+          "height": 58.87,
+          "width": 1212.63,
+          "x": 67.37,
+          "y": 6.54,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"8147fed571c352952b89\",\"layouts\":[{\"id\":0,\"position\":{\"x\":13.515358361774744,\"y\":92.15017064846417,\"z\":3000,\"width\":257.4061433447099,\"height\":618.0204778156997,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Rows\":[{\"queryRef\":\"Billing_Decision_View.invoice__invoice_month\",\"active\":true}],\"Values\":[{\"queryRef\":\"_Client / Staff Param.Effective Rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"b\",\"Entity\":\"Billing_Decision_View\",\"Type\":0},{\"Name\":\"_\",\"Entity\":\"_Client / Staff Param\",\"Schema\":\"extension\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"b\"}},\"Property\":\"invoice__invoice_month\"},\"Name\":\"Billing_Decision_View.invoice__invoice_month\",\"NativeReferenceName\":\"Invoice Month\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Effective Rate\"},\"Name\":\"_Client / Staff Param.Effective Rate\",\"NativeReferenceName\":\"Effective Rate\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"b\"}},\"Property\":\"invoice__invoice_month\"}}}]},\"columnProperties\":{\"Billing_Decision_View.invoice__invoice_month\":{\"displayName\":\"Invoice Month\"}},\"drillFilterOtherVisuals\":true,\"objects\":{},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Effective Rate by Month'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}],\"divider\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"spacing\":[{\"properties\":{\"customizeSpacing\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"spaceBelowTitle\":{\"expr\":{\"Literal\":{\"Value\":\"2D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 618.02,
+          "width": 257.41,
+          "x": 13.52,
+          "y": 92.15,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"bfe7e03e1e484e415e09\",\"layouts\":[{\"id\":0,\"position\":{\"x\":276.474428726877,\"y\":91.92600652883569,\"z\":2000,\"width\":993.7758433079433,\"height\":618.4113166485309,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Billing_Decision_View.invoice__invoice_date\"},{\"queryRef\":\"Invoice_View (Collection).invoice_number\"},{\"queryRef\":\"_Client / Staff Param.Hrs/Units\"},{\"queryRef\":\"_Client / Staff Param.Billing Amount\"},{\"queryRef\":\"_Client / Staff Param.Effective Rate\"},{\"queryRef\":\"Invoice_View (Collection).billed__staff_description\"},{\"queryRef\":\"Invoice_View (Collection).approved__staff_description\"},{\"queryRef\":\"Invoice_View (Collection).comments\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"i\",\"Entity\":\"Invoice_View (Collection)\",\"Type\":0},{\"Name\":\"b\",\"Entity\":\"Billing_Decision_View\",\"Type\":0},{\"Name\":\"_\",\"Entity\":\"_Client / Staff Param\",\"Schema\":\"extension\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"invoice_number\"},\"Name\":\"Invoice_View (Collection).invoice_number\",\"NativeReferenceName\":\"Invoice #\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"comments\"},\"Name\":\"Invoice_View (Collection).comments\",\"NativeReferenceName\":\"Comment\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"approved__staff_description\"},\"Name\":\"Invoice_View (Collection).approved__staff_description\",\"NativeReferenceName\":\"Approved By\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"i\"}},\"Property\":\"billed__staff_description\"},\"Name\":\"Invoice_View (Collection).billed__staff_description\",\"NativeReferenceName\":\"Billed By\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"b\"}},\"Property\":\"invoice__invoice_date\"},\"Name\":\"Billing_Decision_View.invoice__invoice_date\",\"NativeReferenceName\":\"Invoice Date\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Effective Rate\"},\"Name\":\"_Client / Staff Param.Effective Rate\",\"NativeReferenceName\":\"Effective Rate\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Billing Amount\"},\"Name\":\"_Client / Staff Param.Billing Amount\",\"NativeReferenceName\":\"Billing Amount\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Hrs/Units\"},\"Name\":\"_Client / Staff Param.Hrs/Units\",\"NativeReferenceName\":\"Hrs/Units\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"b\"}},\"Property\":\"invoice__invoice_date\"}}}]},\"columnProperties\":{\"Invoice_View (Collection).approved__staff_description\":{\"displayName\":\"Approved By\"},\"Invoice_View (Collection).billed__staff_description\":{\"displayName\":\"Billed By\"},\"Invoice_View (Collection).invoice_number\":{\"displayName\":\"Invoice #\"},\"Invoice_View (Collection).comments\":{\"displayName\":\"Comment\"},\"Billing_Decision_View.invoice__invoice_date\":{\"displayName\":\"Invoice Date\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"553.3224043715848D\"}}}},\"selector\":{\"metadata\":\"Invoice_View (Collection).comments\"}}],\"grid\":[{\"properties\":{\"gridVertical\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Transaction Detail - Hours & Invoices'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"12D\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}],\"divider\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"spacing\":[{\"properties\":{\"customizeSpacing\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"spaceBelowTitle\":{\"expr\":{\"Literal\":{\"Value\":\"2D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 618.41,
+          "width": 993.78,
+          "x": 276.47,
+          "y": 91.93,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"fc77ef7a6dc3b3da4904\",\"layouts\":[{\"id\":0,\"position\":{\"x\":7.848748083801738,\"y\":5.886561062851303,\"z\":0,\"width\":62.13592233009709,\"height\":59.519672968829845,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'back'\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Back'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 59.52,
+          "width": 62.14,
+          "x": 7.85,
+          "y": 5.89,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{\"objects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":-0.1}}}}},\"image\":{\"image\":{\"name\":{\"expr\":{\"Literal\":{\"Value\":\"'Background Drill Through no bg.png'\"}}},\"url\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"Background_Drill_Through_no_bg23135553829852284.png\"}}},\"scaling\":{\"expr\":{\"Literal\":{\"Value\":\"'Fit'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]},\"visibility\":1,\"type\":2}",
+      "displayName": "totals-only",
+      "displayOption": 1,
+      "filters": "[{\"name\":\"Filtera741318f36e04a3a7d6b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Invoice_View (Collection)\"}},\"Property\":\"client__description\"}},\"type\":\"Categorical\",\"howCreated\":5,\"isLockedInViewMode\":true}]",
+      "height": 720.00,
+      "name": "ReportSection9925be15daee1de91a3d",
+      "ordinal": 3,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"09de8c611dc317e1dab6\",\"layouts\":[{\"id\":0,\"position\":{\"x\":67.36842105263145,\"y\":6.540623403168115,\"z\":1000,\"width\":1212.6315789473686,\"height\":58.86561062851303,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"\"}]}]}}]},\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}}}}]}}}",
+          "filters": "[]",
+          "height": 58.87,
+          "width": 1212.63,
+          "x": 67.37,
+          "y": 6.54,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"231c44834dfd76707d98\",\"layouts\":[{\"id\":0,\"position\":{\"x\":206.92002268859898,\"y\":84.22007941009642,\"z\":5000,\"width\":179.3306863301191,\"height\":101.64492342597843,\"tabOrder\":5000}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"_Client / Staff Param.Hrs/Units\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Client / Staff Param\",\"Schema\":\"extension\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Hrs/Units\"},\"Name\":\"_Client / Staff Param.Hrs/Units\",\"NativeReferenceName\":\"Hrs/Units\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Hrs/Units\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"shapeCustomRectangle\":[{\"properties\":{\"tileShape\":{\"expr\":{\"Literal\":{\"Value\":\"'rectangle'\"}}}},\"selector\":{\"id\":\"default\"}}],\"value\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"25D\"}}},\"labelDisplayUnits\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":-0.5}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0.2}}}}},\"radius\":{\"expr\":{\"Literal\":{\"Value\":\"6D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 101.64,
+          "width": 179.33,
+          "x": 206.92,
+          "y": 84.22,
+          "z": 5000.00
+        },
+        {
+          "config": "{\"name\":\"3b3c407cbc4e24d6d9c7\",\"layouts\":[{\"id\":0,\"position\":{\"x\":7.848748083801738,\"y\":5.886561062851303,\"z\":0,\"width\":62.13592233009709,\"height\":59.519672968829845,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'back'\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Back'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 59.52,
+          "width": 62.14,
+          "x": 7.85,
+          "y": 5.89,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"3f36612801639ab4b0ad\",\"layouts\":[{\"id\":0,\"position\":{\"x\":22.712294043092545,\"y\":84.35994930291506,\"z\":3000,\"width\":178.45373891001267,\"height\":101.39416983523446,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"_Client / Staff Param.Billing Amount\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Client / Staff Param\",\"Schema\":\"extension\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Billing Amount\"},\"Name\":\"_Client / Staff Param.Billing Amount\",\"NativeReferenceName\":\"Billing Amount\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Billing Amount\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"shapeCustomRectangle\":[{\"properties\":{\"tileShape\":{\"expr\":{\"Literal\":{\"Value\":\"'rectangle'\"}}}},\"selector\":{\"id\":\"default\"}}],\"value\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"25D\"}}},\"labelDisplayUnits\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":-0.5}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0.2}}}}},\"radius\":{\"expr\":{\"Literal\":{\"Value\":\"6D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 101.39,
+          "width": 178.45,
+          "x": 22.71,
+          "y": 84.36,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"63ee095983d95d443492\",\"layouts\":[{\"id\":0,\"position\":{\"x\":392.7850255246738,\"y\":84.22007941009642,\"z\":4000,\"width\":179.3306863301191,\"height\":101.64492342597843,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"_Client / Staff Param.Effective Rate\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Client / Staff Param\",\"Schema\":\"extension\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Effective Rate\"},\"Name\":\"_Client / Staff Param.Effective Rate\",\"NativeReferenceName\":\"Effective Rate\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Effective Rate\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"shapeCustomRectangle\":[{\"properties\":{\"tileShape\":{\"expr\":{\"Literal\":{\"Value\":\"'rectangle'\"}}}},\"selector\":{\"id\":\"default\"}}],\"value\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"25D\"}}},\"labelDisplayUnits\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":-0.5}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0.2}}}}},\"radius\":{\"expr\":{\"Literal\":{\"Value\":\"6D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 101.64,
+          "width": 179.33,
+          "x": 392.79,
+          "y": 84.22,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"edbb412353172cf8f0c6\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1137.5559022360894,\"y\":6.656266250650026,\"z\":2000,\"width\":142.44409776391055,\"height\":59.24076963078523,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"_Dates.FY\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Dates\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"FY\"},\"Name\":\"_Dates.FY\",\"NativeReferenceName\":\"FY\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"FY\"}}}]},\"syncGroup\":{\"groupName\":\"FY\",\"fieldChanges\":true,\"filterChanges\":true},\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Dates\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"FY\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"2024L\"}}]]}}}]}}}}],\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"header\":[{\"properties\":{\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Fiscal Year'\"}}}}}],\"items\":[{\"properties\":{\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}}}}],\"selection\":[{\"properties\":{\"strictSingleSelect\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 59.24,
+          "width": 142.44,
+          "x": 1137.56,
+          "y": 6.66,
+          "z": 2000.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ],
+  "theme": "Classroom361392447163704.json"
+}
