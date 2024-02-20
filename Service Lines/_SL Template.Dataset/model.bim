@@ -4,7 +4,7 @@
     "annotations": [
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"Activity_View\",\"Billing_Decision_View\",\"Billing_Decision_Collection_View\",\"Client_View\",\"Client_Date_Cache\",\"Contact_Phone\",\"Contact_Phone_Type\",\"Contact_View\",\"Contact_Address\",\"Contact_Email\",\"Engagement_View\",\"History_Of_Client_View\",\"Invoice_View (AR)\",\"Invoice_View (Collection)\",\"Invoice_WIP_Pending_Lookup\",\"Ledger_Entry_View (AR)\",\"Ledger_Entry_View (Collection)\",\"Ledger_Entry_Application_View\",\"Project_View\",\"Sheet_Entry_View\",\"Staff\",\"Staff_Email\",\"Staff_Birthdays\",\"Staff_Phone\",\"Task_View\",\"RCG\",\"client_relations\",\"bsc_participants\",\"Custom_Grouping\",\"Custom_Field\",\"Invoice_Biller_Checking\",\"secondary_partner/ae\",\"secondary_partner/ae_date\",\"growth_reporting\",\"possible_fiscals\",\"Billing_Decision_View_fiscal_calc\",\"Engagement_Template\",\"staff_primary_id\",\"Staff_Billing_Rate_View\",\"Staff_Rate_Table_View\",\"Staff_Image_URLs\",\"birthdays\",\"Staff_Lookup\"]"
+        "value": "[\"Activity_View\",\"Billing_Decision_View\",\"Billing_Decision_Collection_View\",\"Client_View\",\"Client_Date_Cache\",\"Contact_Phone\",\"Contact_Phone_Type\",\"Contact_View\",\"Contact_Address\",\"Contact_Email\",\"Engagement_View\",\"History_Of_Client_View\",\"Invoice_View (AR)\",\"Invoice_View (Collection)\",\"Invoice_WIP_Pending_Lookup\",\"Ledger_Entry_View (AR)\",\"Ledger_Entry_View (Collection)\",\"Ledger_Entry_Application_View\",\"Project_View\",\"Sheet_Entry_View\",\"Staff\",\"Staff_Email\",\"Staff_Birthdays\",\"Staff_Phone\",\"Task_View\",\"RCG\",\"client_relations\",\"bsc_participants\",\"Custom_Grouping\",\"Custom_Field\",\"Invoice_Biller_Checking\",\"secondary_partner/ae\",\"secondary_partner/ae_date\",\"growth_reporting\",\"possible_fiscals\",\"Billing_Decision_View_fiscal_calc\",\"Engagement_Template\",\"staff_primary_id\",\"Staff_Billing_Rate_View\",\"Staff_Rate_Table_View\",\"Staff_Image_URLs\",\"birthdays\",\"Staff_Lookup\",\"Engagement_Type\"]"
       },
       {
         "name": "__PBI_TimeIntelligenceEnabled",
@@ -12,7 +12,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.124.1554.0 (23.12)"
+        "value": "2.124.2028.0 (23.12)"
       },
       {
         "name": "PBI_ProTooling",
@@ -475,14 +475,14 @@
         ],
         "description": "Related Client Group custom field",
         "expression": [
-          "let",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
-          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
-          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 59),",
-          "    #\"Merged Queries\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__custom_grouping_KEY\"}, Custom_Grouping, {\"custom_grouping_KEY\"}, \"RCG_Custom_Grouping\", JoinKind.LeftOuter),",
-          "    #\"Expanded RCG_Custom_Grouping\" = Table.ExpandTableColumn(#\"Merged Queries\", \"RCG_Custom_Grouping\", {\"custom_grouping_id\", \"description\"}, {\"related_client_group_id\", \"related_client_group__description\"})",
-          "in",
+          "let\r",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
+          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],\r",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 59),\r",
+          "    #\"Merged Queries\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__custom_grouping_KEY\"}, Custom_Grouping, {\"custom_grouping_KEY\"}, \"RCG_Custom_Grouping\", JoinKind.LeftOuter),\r",
+          "    #\"Expanded RCG_Custom_Grouping\" = Table.ExpandTableColumn(#\"Merged Queries\", \"RCG_Custom_Grouping\", {\"custom_grouping_id\", \"description\"}, {\"related_client_group_id\", \"related_client_group__description\"})\r",
+          "in\r",
           "    #\"Expanded RCG_Custom_Grouping\""
         ],
         "kind": "m",
@@ -502,11 +502,11 @@
           }
         ],
         "expression": [
-          "let",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
-          "    dbo_Custom_Grouping = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Grouping\"]}[Data]",
-          "in",
+          "let\r",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
+          "    dbo_Custom_Grouping = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Grouping\"]}[Data]\r",
+          "in\r",
           "    dbo_Custom_Grouping"
         ],
         "kind": "m",
@@ -526,11 +526,11 @@
           }
         ],
         "expression": [
-          "let",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
-          "    dbo_Custom_Field = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Field\"]}[Data]",
-          "in",
+          "let\r",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
+          "    dbo_Custom_Field = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Field\"]}[Data]\r",
+          "in\r",
           "    dbo_Custom_Field"
         ],
         "kind": "m",
@@ -551,14 +551,14 @@
         ],
         "description": "Related Client Group custom field",
         "expression": [
-          "let",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
-          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
-          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 353),",
-          "    #\"Merged Queries\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__custom_grouping_KEY\"}, Custom_Grouping, {\"custom_grouping_KEY\"}, \"RCG_Custom_Grouping\", JoinKind.LeftOuter),",
-          "    #\"Expanded RCG_Custom_Grouping\" = Table.ExpandTableColumn(#\"Merged Queries\", \"RCG_Custom_Grouping\", {\"custom_grouping_id\", \"description\"}, {\"related_client_group_id\", \"related_client_group__description\"})",
-          "in",
+          "let\r",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
+          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],\r",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 353),\r",
+          "    #\"Merged Queries\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__custom_grouping_KEY\"}, Custom_Grouping, {\"custom_grouping_KEY\"}, \"RCG_Custom_Grouping\", JoinKind.LeftOuter),\r",
+          "    #\"Expanded RCG_Custom_Grouping\" = Table.ExpandTableColumn(#\"Merged Queries\", \"RCG_Custom_Grouping\", {\"custom_grouping_id\", \"description\"}, {\"related_client_group_id\", \"related_client_group__description\"})\r",
+          "in\r",
           "    #\"Expanded RCG_Custom_Grouping\""
         ],
         "kind": "m",
@@ -579,15 +579,15 @@
         ],
         "description": "Related Client Group custom field",
         "expression": [
-          "let",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
-          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
-          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 57),",
-          "    // Merged to the staff table to obtain the staff key, id, and description of the secondary partner.",
-          "    #\"Merged Staff Table\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__staff_KEY\"}, Staff, {\"staff_KEY\"}, \"Staff\", JoinKind.LeftOuter),",
-          "    #\"Expanded Staff\" = Table.ExpandTableColumn(#\"Merged Staff Table\", \"Staff\", {\"staff_KEY\", \"staff_id\", \"description\"}, {\"secondary_partner_KEY\", \"secondary_partner_id\", \"secondary_partner__description\"})",
-          "in",
+          "let\r",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
+          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],\r",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 57),\r",
+          "    // Merged to the staff table to obtain the staff key, id, and description of the secondary partner.\r",
+          "    #\"Merged Staff Table\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__staff_KEY\"}, Staff, {\"staff_KEY\"}, \"Staff\", JoinKind.LeftOuter),\r",
+          "    #\"Expanded Staff\" = Table.ExpandTableColumn(#\"Merged Staff Table\", \"Staff\", {\"staff_KEY\", \"staff_id\", \"description\"}, {\"secondary_partner_KEY\", \"secondary_partner_id\", \"secondary_partner__description\"})\r",
+          "in\r",
           "    #\"Expanded Staff\""
         ],
         "kind": "m",
@@ -608,12 +608,12 @@
         ],
         "description": "Related Client Group custom field",
         "expression": [
-          "let",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
-          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
-          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 55)",
-          "in",
+          "let\r",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
+          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],\r",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 55)\r",
+          "in\r",
           "    #\"Filtered Rows\""
         ],
         "kind": "m",
@@ -633,32 +633,32 @@
           }
         ],
         "expression": [
-          "let",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
-          "    dbo_Client_Date_Cache = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Client_Date_Cache\"]}[Data],",
-          "    #\"Removed Other Columns\" = Table.SelectColumns(dbo_Client_Date_Cache,{\"entry_date\"}),",
-          "    #\"Grouped Rows\" = Table.Group(#\"Removed Other Columns\", {\"entry_date\"}, {{\"Count\", each Table.RowCount(_), Int64.Type}}),",
-          "    #\"Added Custom\" = Table.AddColumn(#\"Grouped Rows\", \"possible_fy\", each if Date.Month([entry_date]) >= 7 then ",
-          "Date.Year([entry_date]) + 1 else ",
-          "Date.Year([entry_date])),",
-          "    #\"Grouped Rows1\" = Table.Group(#\"Added Custom\", {\"possible_fy\"}, {{\"fy_start\", each List.Min([entry_date]), type date}}),",
-          "    // this column is meant to limit the fy rows to the current fy and the previous two fys.  This is because Direct Query hates the \"Keep Top Rows\" command.  This will be a work-around that will allow us to maintain the amount of data.",
-          "    #\"Added current_fy_filtering\" = Table.AddColumn(#\"Grouped Rows1\", \"current_fy_filtering\", each if [possible_fy] = ",
-          "(if Date.Month(Date.From( DateTime.LocalNow()) ) >= 7 then Date.Year(Date.From( DateTime.LocalNow()) ) + 1 else Date.Year(Date.From( DateTime.LocalNow()) ) ) ",
-          "then 1 else ",
-          "",
-          "if [possible_fy] = ",
-          "(if Date.Month(Date.From( DateTime.LocalNow()) ) >= 7 then Date.Year(Date.From( DateTime.LocalNow()) ) + 1 else Date.Year(Date.From( DateTime.LocalNow()) ) ) - 1 ",
-          "then 1 else ",
-          "",
-          "if [possible_fy] = ",
-          "(if Date.Month(Date.From( DateTime.LocalNow()) ) >= 7 then Date.Year(Date.From( DateTime.LocalNow()) ) + 1 else Date.Year(Date.From( DateTime.LocalNow()) ) ) - 2 ",
-          "then 1 else null),",
-          "    // This table has used a duplicate of the client_date_cache to create a unique list of all fiscal years possible and the minimum date found within them (this SHOULD always be July 1 of each year, but if there are no entries on July 1 it will show a different day).  Creating it this was is to ensure I can join to the Client table and obtain a unqiue list of all clients and all possible fiscal years within direct query.",
-          "    #\"Filtered Rows\" = Table.SelectRows(#\"Added current_fy_filtering\", each [current_fy_filtering] <> null),",
-          "    #\"Added Custom1\" = Table.AddColumn(#\"Filtered Rows\", \"joining\", each 1)",
-          "in",
+          "let\r",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
+          "    dbo_Client_Date_Cache = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Client_Date_Cache\"]}[Data],\r",
+          "    #\"Removed Other Columns\" = Table.SelectColumns(dbo_Client_Date_Cache,{\"entry_date\"}),\r",
+          "    #\"Grouped Rows\" = Table.Group(#\"Removed Other Columns\", {\"entry_date\"}, {{\"Count\", each Table.RowCount(_), Int64.Type}}),\r",
+          "    #\"Added Custom\" = Table.AddColumn(#\"Grouped Rows\", \"possible_fy\", each if Date.Month([entry_date]) >= 7 then \r",
+          "Date.Year([entry_date]) + 1 else \r",
+          "Date.Year([entry_date])),\r",
+          "    #\"Grouped Rows1\" = Table.Group(#\"Added Custom\", {\"possible_fy\"}, {{\"fy_start\", each List.Min([entry_date]), type date}}),\r",
+          "    // this column is meant to limit the fy rows to the current fy and the previous two fys.  This is because Direct Query hates the \"Keep Top Rows\" command.  This will be a work-around that will allow us to maintain the amount of data.\r",
+          "    #\"Added current_fy_filtering\" = Table.AddColumn(#\"Grouped Rows1\", \"current_fy_filtering\", each if [possible_fy] = \r",
+          "(if Date.Month(Date.From( DateTime.LocalNow()) ) >= 7 then Date.Year(Date.From( DateTime.LocalNow()) ) + 1 else Date.Year(Date.From( DateTime.LocalNow()) ) ) \r",
+          "then 1 else \r",
+          "\r",
+          "if [possible_fy] = \r",
+          "(if Date.Month(Date.From( DateTime.LocalNow()) ) >= 7 then Date.Year(Date.From( DateTime.LocalNow()) ) + 1 else Date.Year(Date.From( DateTime.LocalNow()) ) ) - 1 \r",
+          "then 1 else \r",
+          "\r",
+          "if [possible_fy] = \r",
+          "(if Date.Month(Date.From( DateTime.LocalNow()) ) >= 7 then Date.Year(Date.From( DateTime.LocalNow()) ) + 1 else Date.Year(Date.From( DateTime.LocalNow()) ) ) - 2 \r",
+          "then 1 else null),\r",
+          "    // This table has used a duplicate of the client_date_cache to create a unique list of all fiscal years possible and the minimum date found within them (this SHOULD always be July 1 of each year, but if there are no entries on July 1 it will show a different day).  Creating it this was is to ensure I can join to the Client table and obtain a unqiue list of all clients and all possible fiscal years within direct query.\r",
+          "    #\"Filtered Rows\" = Table.SelectRows(#\"Added current_fy_filtering\", each [current_fy_filtering] <> null),\r",
+          "    #\"Added Custom1\" = Table.AddColumn(#\"Filtered Rows\", \"joining\", each 1)\r",
+          "in\r",
           "    #\"Added Custom1\""
         ],
         "kind": "m",
@@ -678,20 +678,20 @@
           }
         ],
         "expression": [
-          "let",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
-          "    dbo_Billing_Decision_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Billing_Decision_View\"]}[Data],",
-          "    #\"Added Custom\" = Table.AddColumn(dbo_Billing_Decision_View, \"client_engagement_KEY\", each Text.From([sheet_entry__client_KEY]) & \"_\" & Text.From([sheet_entry__engagement_KEY])),",
-          "    // I am using the invoice_date as the engine for the fiscal year because - in 99% of calculation regarding billing - PCS used the invoice date found in this table.",
-          "    #\"Added invoice_fy\" = Table.AddColumn(#\"Added Custom\", \"invoice_fy\", each if Date.Month([invoice__invoice_date]) >= 7 then ",
-          "Date.Year([invoice__invoice_date]) + 1 else ",
-          "Date.Year([invoice__invoice_date]), type number),",
-          "    // This column will allow us to merge to the growth_reporting table and determine how much was billed in the selected fiscal year per client.",
-          "    #\"Added client_fy\" = Table.AddColumn(#\"Added invoice_fy\", \"client_fy\", each Text.From([sheet_entry__client_KEY]) & \"-\" & Text.From([invoice_fy])),",
-          "    #\"Filtered Rows\" = Table.SelectRows(#\"Added client_fy\", each true),",
-          "    #\"Grouped Rows\" = Table.Group(#\"Filtered Rows\", {\"client_fy\", \"sheet_entry__client_KEY\", \"invoice_fy\"}, {{\"bill_amount\", each List.Sum([bill_amount]), type number}})",
-          "in",
+          "let\r",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
+          "    dbo_Billing_Decision_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Billing_Decision_View\"]}[Data],\r",
+          "    #\"Added Custom\" = Table.AddColumn(dbo_Billing_Decision_View, \"client_engagement_KEY\", each Text.From([sheet_entry__client_KEY]) & \"_\" & Text.From([sheet_entry__engagement_KEY])),\r",
+          "    // I am using the invoice_date as the engine for the fiscal year because - in 99% of calculation regarding billing - PCS used the invoice date found in this table.\r",
+          "    #\"Added invoice_fy\" = Table.AddColumn(#\"Added Custom\", \"invoice_fy\", each if Date.Month([invoice__invoice_date]) >= 7 then \r",
+          "Date.Year([invoice__invoice_date]) + 1 else \r",
+          "Date.Year([invoice__invoice_date]), type number),\r",
+          "    // This column will allow us to merge to the growth_reporting table and determine how much was billed in the selected fiscal year per client.\r",
+          "    #\"Added client_fy\" = Table.AddColumn(#\"Added invoice_fy\", \"client_fy\", each Text.From([sheet_entry__client_KEY]) & \"-\" & Text.From([invoice_fy])),\r",
+          "    #\"Filtered Rows\" = Table.SelectRows(#\"Added client_fy\", each true),\r",
+          "    #\"Grouped Rows\" = Table.Group(#\"Filtered Rows\", {\"client_fy\", \"sheet_entry__client_KEY\", \"invoice_fy\"}, {{\"bill_amount\", each List.Sum([bill_amount]), type number}})\r",
+          "in\r",
           "    #\"Grouped Rows\""
         ],
         "kind": "m",
@@ -712,14 +712,14 @@
         ],
         "description": "Related Client Group custom field",
         "expression": [
-          "let",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
-          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
-          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 358),",
-          "    #\"Merged Queries\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__custom_grouping_KEY\"}, Custom_Grouping, {\"custom_grouping_KEY\"}, \"RCG_Custom_Grouping\", JoinKind.LeftOuter),",
-          "    #\"Expanded RCG_Custom_Grouping\" = Table.ExpandTableColumn(#\"Merged Queries\", \"RCG_Custom_Grouping\", {\"custom_grouping_id\", \"description\"}, {\"related_client_group_id\", \"related_client_group__description\"})",
-          "in",
+          "let\r",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
+          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],\r",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 358),\r",
+          "    #\"Merged Queries\" = Table.NestedJoin(#\"Filtered Rows\", {\"custom_value__custom_grouping_KEY\"}, Custom_Grouping, {\"custom_grouping_KEY\"}, \"RCG_Custom_Grouping\", JoinKind.LeftOuter),\r",
+          "    #\"Expanded RCG_Custom_Grouping\" = Table.ExpandTableColumn(#\"Merged Queries\", \"RCG_Custom_Grouping\", {\"custom_grouping_id\", \"description\"}, {\"related_client_group_id\", \"related_client_group__description\"})\r",
+          "in\r",
           "    #\"Expanded RCG_Custom_Grouping\""
         ],
         "kind": "m",
@@ -740,12 +740,12 @@
         ],
         "description": "Related Client Group custom field",
         "expression": [
-          "let",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
-          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
-          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 359)",
-          "in",
+          "let\r",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
+          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],\r",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 359)\r",
+          "in\r",
           "    #\"Filtered Rows\""
         ],
         "kind": "m",
@@ -766,12 +766,12 @@
         ],
         "description": "Related Client Group custom field",
         "expression": [
-          "let",
-          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),",
-          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],",
-          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
-          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 48)",
-          "in",
+          "let\r",
+          "    Source = Sql.Databases(\"cn-apps2\\cnapps2\"),\r",
+          "    CSP_7952_CooperCS = Source{[Name=\"CSP_7952_CooperCS\"]}[Data],\r",
+          "    dbo_Custom_Value_View = CSP_7952_CooperCS{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],\r",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 48)\r",
+          "in\r",
           "    #\"Filtered Rows\""
         ],
         "kind": "m",
@@ -791,11 +791,11 @@
           }
         ],
         "expression": [
-          "let",
-          "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),",
-          "    dbo_Staff = Source{[Schema=\"dbo\",Item=\"Staff\"]}[Data],",
-          "    #\"Expanded Department\" = Table.ExpandRecordColumn(dbo_Staff, \"Department\", {\"department_id\", \"description\"}, {\"department_id\", \"department__description\"})",
-          "in",
+          "let\r",
+          "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),\r",
+          "    dbo_Staff = Source{[Schema=\"dbo\",Item=\"Staff\"]}[Data],\r",
+          "    #\"Expanded Department\" = Table.ExpandRecordColumn(dbo_Staff, \"Department\", {\"department_id\", \"description\"}, {\"department_id\", \"department__description\"})\r",
+          "in\r",
           "    #\"Expanded Department\""
         ],
         "kind": "m",
@@ -1165,6 +1165,13 @@
         "fromTable": "Staff",
         "toColumn": "staff_KEY",
         "toTable": "Staff_Phone"
+      },
+      {
+        "name": "18a8853d-c05f-4482-a5fa-bcb0758e7e80",
+        "fromColumn": "engagement__engagement_type_KEY",
+        "fromTable": "Sheet_Entry_View",
+        "toColumn": "engagement_type_KEY",
+        "toTable": "Engagement_Type"
       }
     ],
     "roles": [
@@ -7773,7 +7780,7 @@
             "lineageTag": "b3ea80c0-e7d5-4a7b-a377-f92aeffb3cef",
             "sourceColumn": "engagement__engagement_type_KEY",
             "sourceProviderType": "int",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "engagement__office_KEY",
@@ -22542,6 +22549,163 @@
                 "    #\"Added Phone\" = Table.AddColumn(#\"Grouped Rows\", \"Phone\", each if [Mobile] = null then [Home] else [Mobile])",
                 "in",
                 "    #\"Added Phone\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Engagement_Type",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "engagement_type_KEY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isNullable": false,
+            "lineageTag": "4ed2a3da-e556-43dd-a910-790702bd7f29",
+            "sourceColumn": "engagement_type_KEY",
+            "sourceProviderType": "int",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "update__staff_KEY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isNullable": false,
+            "lineageTag": "54ea5c8b-d4a2-402e-a9e4-0fe571d30e69",
+            "sourceColumn": "update__staff_KEY",
+            "sourceProviderType": "int",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "update_date_utc",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isNullable": false,
+            "lineageTag": "9c3e9fe7-d075-47fc-b752-ce251d8da310",
+            "sourceColumn": "update_date_utc",
+            "sourceProviderType": "datetime",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "engagement_type_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isNullable": false,
+            "lineageTag": "b5afd8c4-ea4f-4e0a-8951-c53a47aba292",
+            "sourceColumn": "engagement_type_id",
+            "sourceProviderType": "nvarchar(11)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "description",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isNullable": false,
+            "lineageTag": "bbb84073-978a-45c8-9192-85d2cbdfeb98",
+            "sourceColumn": "description",
+            "sourceProviderType": "nvarchar(250)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "create_date_utc",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isNullable": false,
+            "lineageTag": "24946f20-3a81-4504-9037-912d05fd997f",
+            "sourceColumn": "create_date_utc",
+            "sourceProviderType": "datetime",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "engagement_type_id_sortable",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isNullable": false,
+            "lineageTag": "97b745e9-7b1d-43a9-b946-dbe3def86ff5",
+            "sourceColumn": "engagement_type_id_sortable",
+            "sourceProviderType": "varchar(48)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "long_description",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isNullable": false,
+            "lineageTag": "53edb2a6-69d1-484c-9f71-b58e41424f45",
+            "sourceColumn": "long_description",
+            "sourceProviderType": "nvarchar(max)",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "3a2f9dcb-b1a6-4606-baa9-eddf68acad25",
+        "partitions": [
+          {
+            "name": "Engagement_Type",
+            "mode": "directQuery",
+            "queryGroup": "PCS Tables",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),",
+                "    dbo_Engagement_Type = Source{[Schema=\"dbo\",Item=\"Engagement_Type\"]}[Data]",
+                "in",
+                "    dbo_Engagement_Type"
               ],
               "type": "m"
             }

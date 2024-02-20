@@ -11492,6 +11492,7 @@
               "    16, labor_cy,  // Labor costs.",
               "    17, rev_cy + cost_cy,  // Gross Margin CY",
               "    18, DIVIDE(rev_cy, fte_cy, 0),  // Current Year Total Revenue Per FTE",
+              "    19, fte_py,",
               "0)"
             ],
             "formatString": "#,##0;(#,##0)",
