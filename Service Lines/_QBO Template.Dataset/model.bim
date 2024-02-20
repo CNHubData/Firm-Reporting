@@ -12,7 +12,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.124.1805.0 (23.12)"
+        "value": "2.124.2028.0 (23.12)"
       },
       {
         "name": "PBI_ProTooling",
@@ -211,11 +211,11 @@
         ],
         "description": "DQ Used to connect to the Write UP / Write DOWN column of the custom value table",
         "expression": [
-          "let",
-          "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),",
-          "    dbo_Custom_Value_View = Source{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
-          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 348)",
-          "in",
+          "let\r",
+          "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),\r",
+          "    dbo_Custom_Value_View = Source{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],\r",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 348)\r",
+          "in\r",
           "    #\"Filtered Rows\""
         ],
         "kind": "m",
@@ -232,11 +232,11 @@
         ],
         "description": "DQ Used to connect to the GL_Reserve column of the custom value table",
         "expression": [
-          "let",
-          "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),",
-          "    dbo_Custom_Value_View = Source{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],",
-          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 349)",
-          "in",
+          "let\r",
+          "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),\r",
+          "    dbo_Custom_Value_View = Source{[Schema=\"dbo\",Item=\"Custom_Value_View\"]}[Data],\r",
+          "    #\"Filtered Rows\" = Table.SelectRows(dbo_Custom_Value_View, each [custom_field_KEY] = 349)\r",
+          "in\r",
           "    #\"Filtered Rows\""
         ],
         "kind": "m",
@@ -256,10 +256,10 @@
           }
         ],
         "expression": [
-          "let",
-          "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),",
-          "    dbo_Sheet_Entry_View = Source{[Schema=\"dbo\",Item=\"Sheet_Entry_View\"]}[Data]",
-          "in",
+          "let\r",
+          "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),\r",
+          "    dbo_Sheet_Entry_View = Source{[Schema=\"dbo\",Item=\"Sheet_Entry_View\"]}[Data]\r",
+          "in\r",
           "    dbo_Sheet_Entry_View"
         ],
         "kind": "m",
@@ -279,17 +279,17 @@
           }
         ],
         "expression": [
-          "let",
-          "    Source = Snowflake.Databases(\"nt21881.us-central1.gcp.snowflakecomputing.com\",\"FIVETRAN_WAREHOUSE\"),",
-          "    FIVETRAN_DATABASE_Database = Source{[Name=\"FIVETRAN_DATABASE\",Kind=\"Database\"]}[Data],",
-          "    QBO_COOPERNORMAN_QUICKBOOKS_Schema = FIVETRAN_DATABASE_Database{[Name=\"QBO_COOPERNORMAN_QUICKBOOKS\",Kind=\"Schema\"]}[Data],",
-          "    QUICKBOOKS__PROFIT_AND_LOSS_Table = QBO_COOPERNORMAN_QUICKBOOKS_Schema{[Name=\"QUICKBOOKS__PROFIT_AND_LOSS\",Kind=\"Table\"]}[Data],",
-          "    #\"Added New Calendar Date\" = Table.AddColumn(QUICKBOOKS__PROFIT_AND_LOSS_Table, \"CALENDAR_DATE_NEW\", each Date.AddYears([CALENDAR_DATE], 1)),",
-          "    #\"Added AMOUNT +-\" = Table.AddColumn(#\"Added New Calendar Date\", \"AMOUNT +-\", each if [ACCOUNT_CLASS] = \"Expense\" then [AMOUNT] * -1 else [AMOUNT]),",
-          "    #\"Grouped Rows\" = Table.Group(#\"Added AMOUNT +-\", {\"CALENDAR_DATE_NEW\", \"ACCOUNT_ID\", \"CLASS_ID\", \"ACCOUNT_NUMBER\", \"ACCOUNT_CLASS\", \"ACCOUNT_TYPE\"}, {{\"AMOUNT_PY\", each List.Sum([#\"AMOUNT +-\"]), type number}}),",
-          "    // Added column meant to link based on Year, Month, and Account ID.",
-          "    #\"Added LINKING\" = Table.AddColumn(#\"Grouped Rows\", \"LINKING\", each Text.From(Date.Year([CALENDAR_DATE_NEW])) & \"_\" & Text.From(Date.Month([CALENDAR_DATE_NEW])) & \"_\" & [ACCOUNT_ID] & \"_\" & (if [CLASS_ID] = null then \"NULL\" else [CLASS_ID]))",
-          "in",
+          "let\r",
+          "    Source = Snowflake.Databases(\"nt21881.us-central1.gcp.snowflakecomputing.com\",\"FIVETRAN_WAREHOUSE\"),\r",
+          "    FIVETRAN_DATABASE_Database = Source{[Name=\"FIVETRAN_DATABASE\",Kind=\"Database\"]}[Data],\r",
+          "    QBO_COOPERNORMAN_QUICKBOOKS_Schema = FIVETRAN_DATABASE_Database{[Name=\"QBO_COOPERNORMAN_QUICKBOOKS\",Kind=\"Schema\"]}[Data],\r",
+          "    QUICKBOOKS__PROFIT_AND_LOSS_Table = QBO_COOPERNORMAN_QUICKBOOKS_Schema{[Name=\"QUICKBOOKS__PROFIT_AND_LOSS\",Kind=\"Table\"]}[Data],\r",
+          "    #\"Added New Calendar Date\" = Table.AddColumn(QUICKBOOKS__PROFIT_AND_LOSS_Table, \"CALENDAR_DATE_NEW\", each Date.AddYears([CALENDAR_DATE], 1)),\r",
+          "    #\"Added AMOUNT +-\" = Table.AddColumn(#\"Added New Calendar Date\", \"AMOUNT +-\", each if [ACCOUNT_CLASS] = \"Expense\" then [AMOUNT] * -1 else [AMOUNT]),\r",
+          "    #\"Grouped Rows\" = Table.Group(#\"Added AMOUNT +-\", {\"CALENDAR_DATE_NEW\", \"ACCOUNT_ID\", \"CLASS_ID\", \"ACCOUNT_NUMBER\", \"ACCOUNT_CLASS\", \"ACCOUNT_TYPE\"}, {{\"AMOUNT_PY\", each List.Sum([#\"AMOUNT +-\"]), type number}}),\r",
+          "    // Added column meant to link based on Year, Month, and Account ID.\r",
+          "    #\"Added LINKING\" = Table.AddColumn(#\"Grouped Rows\", \"LINKING\", each Text.From(Date.Year([CALENDAR_DATE_NEW])) & \"_\" & Text.From(Date.Month([CALENDAR_DATE_NEW])) & \"_\" & [ACCOUNT_ID] & \"_\" & (if [CLASS_ID] = null then \"NULL\" else [CLASS_ID]))\r",
+          "in\r",
           "    #\"Added LINKING\""
         ],
         "kind": "m",
@@ -308,12 +308,12 @@
           }
         ],
         "expression": [
-          "let",
-          "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),",
-          "    dbo_Sheet_Entry_View = Source{[Schema=\"dbo\",Item=\"Sheet_Entry_View\"]}[Data],",
-          "    #\"Inserted Start of Month\" = Table.AddColumn(dbo_Sheet_Entry_View, \"Start of Month\", each Date.StartOfMonth([sheet_date]), type datetime),",
-          "    #\"Grouped Rows\" = Table.Group(#\"Inserted Start of Month\", {\"Start of Month\"}, {{\"Count\", each Table.RowCount(_), Int64.Type}})",
-          "in",
+          "let\r",
+          "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),\r",
+          "    dbo_Sheet_Entry_View = Source{[Schema=\"dbo\",Item=\"Sheet_Entry_View\"]}[Data],\r",
+          "    #\"Inserted Start of Month\" = Table.AddColumn(dbo_Sheet_Entry_View, \"Start of Month\", each Date.StartOfMonth([sheet_date]), type datetime),\r",
+          "    #\"Grouped Rows\" = Table.Group(#\"Inserted Start of Month\", {\"Start of Month\"}, {{\"Count\", each Table.RowCount(_), Int64.Type}})\r",
+          "in\r",
           "    #\"Grouped Rows\""
         ],
         "kind": "m",
