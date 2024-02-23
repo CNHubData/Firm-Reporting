@@ -1,9 +1,0 @@
-{
-  "version": "1.0",
-  "datasetReference": {
-    "byPath": {
-      "path": "../QBO_Simple_Template.Dataset"
-    },
-    "byConnection": null
-  }
-}
