@@ -12,7 +12,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.124.2028.0 (23.12)"
+        "value": "2.126.927.0 (24.02)"
       },
       {
         "name": "PBI_ProTooling",
@@ -12579,6 +12579,8 @@
               "                // If they ARE full time but left part way through the month divide the number of days before they left by total days in the month.",
               "                IF( month_left = month_chosen, ",
               "                    ( ( [date_left] - month_chosen + 1) / days_num) * max_result, // Determines the percentage of days in the month that the employee worked and then multiplies that by the max result to see what percentage of the max result should be assigned to that month.",
+              "                    // If they are a PARTER or PRINCIPAL then set them to the max result",
+              "                    IF( [staff_level_id] in {\"PARTNER\", \"PRINCIPAL\"}, max_result,",
               "                    // If they ARE full time, weren't hired or left this month, but we are calculating for an incomplete month, divide days worked by total days in fiscal year.",
               "                    IF( month_chosen = month_today, ",
               "                        ( [Fiscal Days] / days_num) * max_result,",
@@ -12586,7 +12588,7 @@
               "                            IF( month_chosen <> month_today && [Hours] < full_time_month, ",
               "                            IF( ([Hours] / hours_possible) * max_result /* Determines the full_time_month */ > max_result, max_result, ([Hours] / hours_possible) * max_result),",
               "                            // If this is for a previous month and they worked the whole month as a full-time, then make it the max result.",
-              "                            max_result)))))))"
+              "                            max_result))))))))"
             ],
             "isDataTypeInferred": true,
             "lineageTag": "34ebc49d-4bec-4cc9-ae69-68ab8a1e36ed",
