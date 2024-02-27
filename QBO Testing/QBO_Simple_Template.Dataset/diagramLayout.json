@@ -23,8 +23,8 @@
         },
         {
           "location": {
-            "x": 1589,
-            "y": 1230.4999999999998
+            "x": 1795.6666666666667,
+            "y": 1233.833333333333
           },
           "nodeIndex": "BALANCE_PAYROLL",
           "nodeLineageTag": "791148c6-e5f8-46bc-83ea-eeb93f3af216",
@@ -153,8 +153,8 @@
         },
         {
           "location": {
-            "x": 1615.333333333333,
-            "y": 525.25000000000011
+            "x": 1633.6666666666665,
+            "y": 518.58333333333348
           },
           "nodeIndex": "_Dates",
           "nodeLineageTag": "640a0cc6-d067-4e72-a8fc-b0e63d96b68d",
@@ -176,6 +176,19 @@
             "width": 234
           },
           "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 2221.3333333333335,
+            "y": 476.25000000000006
+          },
+          "nodeIndex": "Staff_FTE",
+          "nodeLineageTag": "69e444ca-ab25-4c46-969d-539aa8de60c0",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",

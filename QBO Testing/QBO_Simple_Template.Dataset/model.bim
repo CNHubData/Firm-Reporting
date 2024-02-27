@@ -4,7 +4,7 @@
     "annotations": [
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"BALANCE_SHEET\",\"PROFIT_AND_LOSS\",\"GENERAL_LEDGER\",\"EXPENSES_SALES_ENHANCED\",\"ACCOUNT\",\"CLASS\",\"BALANCE_PAYROLL\",\"AR_CALCULATIONS\",\"CALCULATIONS\",\"BS_INTUIT_ACCOUNT_GROUPING\",\"BS_CN_ACCOUNT_GROUPING\",\"P&L_ACCOUNT_GROUPING\"]"
+        "value": "[\"BALANCE_SHEET\",\"PROFIT_AND_LOSS\",\"GENERAL_LEDGER\",\"EXPENSES_SALES_ENHANCED\",\"ACCOUNT\",\"CLASS\",\"BALANCE_PAYROLL\",\"AR_CALCULATIONS\",\"CALCULATIONS\",\"BS_INTUIT_ACCOUNT_GROUPING\",\"BS_CN_ACCOUNT_GROUPING\",\"P&L_ACCOUNT_GROUPING\",\"Staff_FTE\",\"Sheet_Entry_Hour_Lookup\",\"Valid_Date\"]"
       },
       {
         "name": "__PBI_TimeIntelligenceEnabled",
@@ -12,7 +12,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.124.2028.0 (23.12)"
+        "value": "2.126.927.0 (24.02)"
       },
       {
         "name": "PBI_ProTooling",
@@ -38,6 +38,68 @@
       "returnErrorValuesAsNull": true
     },
     "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "expressions": [
+      {
+        "name": "Sheet_Entry_Hour_Lookup",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),",
+          "    dbo_Sheet_Entry_View = Source{[Schema=\"dbo\",Item=\"Sheet_Entry_View\"]}[Data],",
+          "    #\"Removed Other Columns\" = Table.SelectColumns(dbo_Sheet_Entry_View,{\"staff_KEY\", \"sheet_date\", \"activity__activity_method_KEY\", \"units\", \"amount\"}),",
+          "    #\"Filtered to Time Only\" = Table.SelectRows(#\"Removed Other Columns\", each ([activity__activity_method_KEY] = 1)),",
+          "    #\"Inserted Start of Month\" = Table.AddColumn(#\"Filtered to Time Only\", \"start_of_month\", each Date.StartOfMonth(Date.From([sheet_date])), type date),",
+          "    #\"Grouped Rows\" = Table.Group(#\"Inserted Start of Month\", {\"staff_KEY\", \"start_of_month\"}, {{\"units\", each List.Sum([units]), type nullable number}, {\"amount\", each List.Sum([amount]), type nullable number}})",
+          "in",
+          "    #\"Grouped Rows\""
+        ],
+        "kind": "m",
+        "lineageTag": "4a3f9b77-34b6-4d01-aa6b-a8a5be716db1",
+        "queryGroup": "FTE_Calculations"
+      },
+      {
+        "name": "Valid_Date",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),",
+          "    dbo_Valid_Date = Source{[Schema=\"dbo\",Item=\"Valid_Date\"]}[Data],",
+          "    #\"Created Start of Month\" = Table.AddColumn(dbo_Valid_Date, \"start_of_month\", each Date.StartOfMonth(Date.From([valid_date])), type date),",
+          "    // This is because 2014 was the first year the firm was using PCS",
+          "    #\"After 2013\" = Table.SelectRows(#\"Created Start of Month\", each [start_of_month] >= #date(2014, 1, 1)),",
+          "    // the dates must be less than or equal to the year of the current fiscal year.",
+          "    #\"Fiscal Year Filter\" = Table.SelectRows(#\"After 2013\", each Date.Year([start_of_month]) <= (if Date.Month(DateTime.LocalNow()) >= 7 then Date.Year(DateTime.LocalNow()) + 1 else Date.Year(DateTime.LocalNow()))),",
+          "    // This column checks if the day of the week is between 1 and 5 and - if yes - then place a 1 in the row",
+          "    #\"[weekday]\" = Table.AddColumn(#\"Fiscal Year Filter\", \"weekday\", each if Date.DayOfWeek([valid_date]) <= 5 then 1 else null, Int64.Type),",
+          "    #\"Grouped by Month\" = Table.Group(#\"[weekday]\", {\"start_of_month\"}, {{\"weekdays\", each List.Sum([weekday]), type number}}),",
+          "    // this column will be used to create a cartesian product in the staff table.  The result will be a list of all staff matched with every month from this table",
+          "    #\"Added quick_link\" = Table.AddColumn(#\"Grouped by Month\", \"quick_link\", each \"link\", type text)",
+          "in",
+          "    #\"Added quick_link\""
+        ],
+        "kind": "m",
+        "lineageTag": "371df083-fadf-4df6-8a64-3981cb1eab81",
+        "queryGroup": "FTE_Calculations"
+      }
+    ],
     "queryGroups": [
       {
         "annotations": [
@@ -68,6 +130,15 @@
         ],
         "description": "Tables from online Excel spreadsheets that dictate where accounts are grouped together.",
         "folder": "Grouping_Tables"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "3"
+          }
+        ],
+        "folder": "FTE_Calculations"
       }
     ],
     "relationships": [
@@ -188,6 +259,13 @@
         "name": "d0cf54a1-0e23-4de6-9ff2-48b42c04e03d",
         "fromColumn": "Start of Month",
         "fromTable": "AR_CALCULATIONS",
+        "toColumn": "Date",
+        "toTable": "_Dates"
+      },
+      {
+        "name": "ae3b5db2-45b8-441b-891f-cda218542b2e",
+        "fromColumn": "start_of_month",
+        "fromTable": "Staff_FTE",
         "toColumn": "Date",
         "toTable": "_Dates"
       }
@@ -1574,10 +1652,6 @@
         "name": "ACCOUNT",
         "annotations": [
           {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
-          {
             "name": "PBI_ResultType",
             "value": "Table"
           }
@@ -1879,6 +1953,7 @@
             "summarizeBy": "none"
           }
         ],
+        "description": "Connection to Accounts",
         "lineageTag": "85ad9569-8319-418f-9b1d-5a6cfa5d38cf",
         "partitions": [
           {
@@ -1906,6 +1981,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -2071,6 +2150,7 @@
             "summarizeBy": "none"
           }
         ],
+        "description": "Connections to Classes",
         "lineageTag": "a1986c0c-1aea-41d5-ba76-ec10ae0f8a67",
         "partitions": [
           {
@@ -2506,6 +2586,7 @@
             "summarizeBy": "none"
           }
         ],
+        "description": "The static amount exported from the QBO Payroll system Cooper Norman used to use.  This is not being pulled through by FiveTran.  This table is stored in a Google Sheets file.",
         "lineageTag": "791148c6-e5f8-46bc-83ea-eeb93f3af216",
         "partitions": [
           {
@@ -2541,8 +2622,13 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
+        "description": "A table meant to house all measures for the report",
         "lineageTag": "c37d5312-984c-4655-b9b1-b5420f74ba3a",
         "measures": [
           {
@@ -2658,7 +2744,6 @@
             ],
             "dataCategory": "PaddedDateTableDates",
             "dataType": "dateTime",
-            "formatString": "General Date",
             "isHidden": true,
             "isNameInferred": true,
             "lineageTag": "ddd91cbf-03c5-4ae7-853b-5d065b73a010",
@@ -2681,7 +2766,6 @@
             "dataCategory": "Years",
             "dataType": "int64",
             "expression": "YEAR([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "f047f22a-69b5-4cc6-b8ea-35692cb7a63a",
             "summarizeBy": "none",
@@ -2702,7 +2786,6 @@
             "dataCategory": "MonthOfYear",
             "dataType": "int64",
             "expression": "MONTH([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "243c4ddd-573f-40e1-9cc4-557bd7664b66",
             "summarizeBy": "none",
@@ -2744,7 +2827,6 @@
             "dataCategory": "QuarterOfYear",
             "dataType": "int64",
             "expression": "INT(([MonthNo] + 2) / 3)",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "5760906e-9707-46dd-9359-e7a308aa5c05",
             "summarizeBy": "none",
@@ -2786,7 +2868,6 @@
             "dataCategory": "DayOfMonth",
             "dataType": "int64",
             "expression": "DAY([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "f649b8b5-974b-4caa-88ff-3a74e86df01e",
             "summarizeBy": "none",
@@ -2958,6 +3039,7 @@
             "summarizeBy": "sum"
           }
         ],
+        "description": "Balance sheet accounts grouped how Intuit groups them on balance sheet reports",
         "lineageTag": "236d56d3-158c-438f-a15d-f06985d75401",
         "partitions": [
           {
@@ -3075,6 +3157,7 @@
             "summarizeBy": "none"
           }
         ],
+        "description": "Balance sheet accounts grouped the way Remington and his team would like to see them.",
         "lineageTag": "b93ef6ac-0ba8-49c0-b2fb-5a190e56dd7e",
         "partitions": [
           {
@@ -3099,10 +3182,6 @@
       {
         "name": "P&L_ACCOUNT_GROUPING",
         "annotations": [
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
           {
             "name": "PBI_ResultType",
             "value": "Table"
@@ -3235,6 +3314,7 @@
             "summarizeBy": "none"
           }
         ],
+        "description": "Profit and Loss accounts grouped the way Remington and his team would like to see them.",
         "lineageTag": "dfb8fdb7-9529-44b7-81c8-beafee55b8c7",
         "partitions": [
           {
@@ -3386,7 +3466,6 @@
             ],
             "dataCategory": "PaddedDateTableDates",
             "dataType": "dateTime",
-            "formatString": "General Date",
             "isHidden": true,
             "isNameInferred": true,
             "lineageTag": "081bbfc4-535f-4c9e-830a-22b7e671e772",
@@ -3409,7 +3488,6 @@
             "dataCategory": "Years",
             "dataType": "int64",
             "expression": "YEAR([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "d3c83cdb-f557-4de8-8ff6-8d7ebe6dd8b2",
             "summarizeBy": "none",
@@ -3430,7 +3508,6 @@
             "dataCategory": "MonthOfYear",
             "dataType": "int64",
             "expression": "MONTH([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "29312026-b6b1-4cd3-9b1d-7c8a3a74b1c0",
             "summarizeBy": "none",
@@ -3472,7 +3549,6 @@
             "dataCategory": "QuarterOfYear",
             "dataType": "int64",
             "expression": "INT(([MonthNo] + 2) / 3)",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "34614626-dc0a-4eab-be9b-b4bb250c97e4",
             "summarizeBy": "none",
@@ -3514,7 +3590,6 @@
             "dataCategory": "DayOfMonth",
             "dataType": "int64",
             "expression": "DAY([Date])",
-            "formatString": "0",
             "isHidden": true,
             "lineageTag": "1ce55d79-f86b-4c74-886b-ca8dc3a650de",
             "summarizeBy": "none",
@@ -3704,6 +3779,7 @@
             "summarizeBy": "sum"
           }
         ],
+        "description": "This table is meant to adjust the accounts receivable amounts by using the amounts found in the ledger table.",
         "lineageTag": "38366f27-d4b7-4e78-ac2d-93e7a9892c30",
         "partitions": [
           {
@@ -3724,6 +3800,378 @@
                 "    #\"Added Custom\" = Table.AddColumn(#\"Grouped Rows\", \"AMOUNT\", each [debit_no_payment] - [credit_no_payment], type number)",
                 "in",
                 "    #\"Added Custom\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Staff_FTE",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "staff_KEY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isNullable": false,
+            "lineageTag": "4c1654c7-028b-4be2-b614-9f03c5aa20c3",
+            "sourceColumn": "staff_KEY",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "staff_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isNullable": false,
+            "lineageTag": "c3b8fd32-18a9-4672-9ac3-6599e7b95ea8",
+            "sourceColumn": "staff_id",
+            "sourceProviderType": "nvarchar(11)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "description",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isNullable": false,
+            "lineageTag": "e9cb3b91-f6c3-4de7-a7f6-a7fe1adde4ed",
+            "sourceColumn": "description",
+            "sourceProviderType": "nvarchar(250)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "date_hired",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "d6ae5250-d694-416f-8663-fd001caa056b",
+            "sourceColumn": "date_hired",
+            "sourceProviderType": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "date_left",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "55b87751-9fbd-4fcf-ae41-1b5c5907e91d",
+            "sourceColumn": "date_left",
+            "sourceProviderType": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "staff_status_KEY",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isNullable": false,
+            "lineageTag": "2b71a769-2a06-4d26-a800-66356003db5c",
+            "sourceColumn": "staff_status_KEY",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "staff_level_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "3a4a11e2-cdb1-4385-9ffb-f3580e6d3179",
+            "sourceColumn": "staff_level_id",
+            "sourceProviderType": "nvarchar(11)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "department_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "96b4c1c0-fb06-434d-9917-889db65439c0",
+            "sourceColumn": "department_id",
+            "sourceProviderType": "nvarchar(11)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "month_hired",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "9881dca7-c75e-44a0-af38-2f91ee3414b7",
+            "sourceColumn": "month_hired",
+            "sourceProviderType": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "month_left",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "a2e09498-df6c-4319-8cac-f4341755886b",
+            "sourceColumn": "month_left",
+            "sourceProviderType": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "quick_link",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isNullable": false,
+            "lineageTag": "54899ab7-9cf9-425b-a7f3-3ff0274a88f5",
+            "sourceColumn": "quick_link",
+            "sourceProviderType": "varchar(4)",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "start_of_month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "93b262fb-5a30-4aa6-814a-77ddd54fa73a",
+            "sourceColumn": "start_of_month",
+            "sourceProviderType": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "units",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "8bec08b9-b4a6-4741-b6df-e69951ef7e24",
+            "sourceColumn": "units",
+            "sourceProviderType": "decimal(38, 2)",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "FTE",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "expression": [
+              "",
+              "// Determines (as a number) the year from the selected FY.",
+              "//    VAR year_chosen = VALUE( RIGHT([FY], 4))",
+              "// Determines the number of hours (Full-Time) to be worked in a month.  2080 / 12 to find per month.",
+              "    VAR full_time_month = 160",
+              "// Determines the max result per month. Full time per year should be capped at 1, so per month it should be represented by 1 / 12.",
+              "    VAR max_result = 1 / 12",
+              "",
+              "// Determines the Start of Month of when the employee was hired.",
+              "    VAR month_hired = [month_hired]",
+              "// Determines the Start of Month of when the employee left.",
+              "    VAR month_left = [month_left]",
+              "// Determines the Start of Month for the row selected.",
+              "    VAR month_chosen = [start_of_month]",
+              "// Determines the Start of Month of today.",
+              "    VAR month_today = DATE(YEAR(TODAY()), MONTH(TODAY()), 1)",
+              "// Determines the last day of the selected month.",
+              "    VAR month_end = DATE(YEAR(month_chosen), MONTH(month_chosen) + 1, 1) - 1",
+              "// Finds the number of days in the current month.",
+              "    VAR days_num = (month_end - month_chosen) + 1",
+              "// Determines what day the selected fiscal year should end on.  If the current fiscal year it should end on today. Used for calculating hours in the selected period.",
+              "    VAR hours_year_end = IF( month_chosen = month_today, TODAY(), month_end)",
+              "// Finds the number of weekdays in the selected month year. Used to determine if there are more than 2080 workable hours in a year.  If there are more it will be capped at 2080, if there are less the actual workable hours will be used.",
+              "    VAR fiscal_weekdays = [Weekdays]",
+              "// Finds the number of hours possible in the current month (Weekdays * 8)",
+              "    VAR hours_possible = IF( fiscal_weekdays * 8 > full_time_month, full_time_month, fiscal_weekdays * 8)",
+              "RETURN",
+              "",
+              "// Filter out if they weren't working that year",
+              "    IF( ISBLANK([Fiscal Days]),",
+              "    BLANK(),",
+              "    // If they are NOT full time and it is in the current month, divide the number of hours they worked by total hours allowed (weekdays * 8), cap at max_result.",
+              "    IF( [fte_level] <> \"1\" && month_chosen = month_today,",
+              "        IF( ([units] / hours_possible) * max_result /* Determines the full_time_month */ > max_result, max_result, ([units] / hours_possible) * max_result),",
+              "        // Check if the employee is NOT full time and it is not in the current month.  If yes, divide their worked hours by full_time_month.",
+              "        IF( [fte_level] <> \"1\" && month_chosen <> month_today, ",
+              "            IF( ([units] / full_time_month) * max_result > max_result, max_result, ([units] / full_time_month) * max_result),",
+              "            // If they ARE full time but started this month, divide the days since their hire by total days in the month.",
+              "            IF( month_hired = month_chosen, ",
+              "                ( ( [End of Month] - [date_hired] + 1) / days_num) * max_result, // Determines the percentage of days in the month that the employee worked and then multiplies that by the max result to see what percentage of the max result should be assigned to that month.",
+              "                // If they ARE full time but left part way through the month divide the number of days before they left by total days in the month.",
+              "                IF( month_left = month_chosen, ",
+              "                    ( ( [date_left] - month_chosen + 1) / days_num) * max_result, // Determines the percentage of days in the month that the employee worked and then multiplies that by the max result to see what percentage of the max result should be assigned to that month.",
+              "                    // If they are a PARTER or PRINCIPAL then set them to the max result",
+              "                    IF( [staff_level_id] in {\"PARTNER\", \"PRINCIPAL\"}, max_result,",
+              "                    // If they ARE full time, weren't hired or left this month, but we are calculating for an incomplete month, divide days worked by total days in fiscal year.",
+              "                    IF( month_chosen = month_today, ",
+              "                        ( [Fiscal Days] / days_num) * max_result,",
+              "                        // If FT and a previous month, check to see if hours are greater than 160 and - if not - calculate based on hours.",
+              "                            IF( month_chosen <> month_today && [units] < full_time_month, ",
+              "                            IF( ([units] / hours_possible) * max_result /* Determines the full_time_month */ > max_result, max_result, ([units] / hours_possible) * max_result),",
+              "                            // If this is for a previous month and they worked the whole month as a full-time, then make it the max result.",
+              "                            max_result))))))))"
+            ],
+            "lineageTag": "4cdca503-4af2-4deb-b37f-a53915aeaa6e",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "fte_level",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7fe5783b-614b-4fbf-9757-3322098fad2d",
+            "sourceColumn": "fte_level",
+            "sourceProviderType": "float",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "weekdays",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "967d7325-2aff-485c-b6ff-9b2904ad8f6c",
+            "sourceColumn": "weekdays",
+            "sourceProviderType": "int",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "69e444ca-ab25-4c46-969d-539aa8de60c0",
+        "partitions": [
+          {
+            "name": "Staff_FTE",
+            "mode": "directQuery",
+            "queryGroup": "FTE_Calculations",
+            "source": {
+              "expression": [
+                "let",
+                "    // Returns the start of the current month for comparisons in FTE calculations",
+                "    this_month = Date.From(Date.StartOfMonth(DateTime.LocalNow())),",
+                "",
+                "    Source = Sql.Database(\"cn-apps2\\cnapps2\", \"CSP_7952_CooperCS\"),",
+                "    dbo_Staff = Source{[Schema=\"dbo\",Item=\"Staff\"]}[Data],",
+                "    // The date hired and date left columns need to be date instead of datetime",
+                "    #\"Change Date Types\" = Table.TransformColumnTypes(dbo_Staff,{{\"date_hired\", type date}, {\"date_left\", type date}}),",
+                "    #\"Expanded Staff_Level\" = Table.ExpandRecordColumn(#\"Change Date Types\", \"Staff_Level\", {\"staff_level_id\"}, {\"staff_level_id\"}),",
+                "    #\"Expanded Department\" = Table.ExpandRecordColumn(#\"Expanded Staff_Level\", \"Department\", {\"department_id\"}, {\"department_id\"}),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Expanded Department\",{\"staff_KEY\", \"staff_id\", \"description\", \"date_hired\", \"date_left\", \"staff_status_KEY\", \"staff_level_id\", \"department_id\"}),",
+                "    // Indicates the level the staff member is for the fte calculation",
+                "    #\"[fte_level]\" = Table.AddColumn(#\"Removed Other Columns\", \"fte_level\", each if [staff_level_id] = \"OTHER\" or [department_id] = \"OTHER\" then null else if [staff_level_id] = \"PARTTIME\" or [staff_level_id] = \"INTERN\" or [staff_level_id] = \"TERMINATED\" then 0.5 else 1),",
+                "    // changing the month hired column to a start of month to compare to the current month",
+                "    #\"[month_hired]\" = Table.AddColumn(#\"[fte_level]\", \"month_hired\", each Date.StartOfMonth(Date.From([date_hired])), type date),",
+                "    // Changing the date_left column to a start of month for a comparison to the start of the current month",
+                "    #\"[month_left]\" = Table.AddColumn(#\"[month_hired]\", \"month_left\", each Date.StartOfMonth(Date.From([date_left])), type date),",
+                "    // this column will be used to create a cartesian product in the staff table.  The result will be a list of all staff matched with every month from this table",
+                "    #\"Added quick_link\" = Table.AddColumn(#\"[month_left]\", \"quick_link\", each \"link\", type text),",
+                "    // This step will create a cartesian product of the staff table and all start of month values from the valid date table.",
+                "    #\"Merged Valid_date\" = Table.NestedJoin(#\"Added quick_link\", {\"quick_link\"}, Valid_Date, {\"quick_link\"}, \"Valid_Date\", JoinKind.LeftOuter),",
+                "    #\"Expanded Valid_Date\" = Table.ExpandTableColumn(#\"Merged Valid_date\", \"Valid_Date\", {\"start_of_month\", \"weekdays\"}, {\"start_of_month\", \"weekdays\"}),",
+                "    // The sheet entry lookup table is meant to group all time entries from the sheet entry table by start of month and the staff key.  We used those two columns to merge to this table to find the hours the staff member coded in that month.",
+                "    #\"Merged Sheet_Entry_Lookup\" = Table.NestedJoin(#\"Expanded Valid_Date\", {\"staff_KEY\", \"start_of_month\"}, Sheet_Entry_Hour_Lookup, {\"staff_KEY\", \"start_of_month\"}, \"units\", JoinKind.LeftOuter),",
+                "    #\"Expanded units\" = Table.ExpandTableColumn(#\"Merged Sheet_Entry_Lookup\", \"units\", {\"units\"}, {\"units\"})",
+                "in",
+                "    #\"Expanded units\""
               ],
               "type": "m"
             }
